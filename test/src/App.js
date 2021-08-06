@@ -12,7 +12,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <Switch>
+      {/* <Switch>
         <Route exact path="/">
           <Home />
         </Route>
@@ -31,7 +31,7 @@ const App = () => {
         <Route>
           <Error />
         </Route>
-      </Switch>
+      </Switch> */}
     </div>
   );
 };

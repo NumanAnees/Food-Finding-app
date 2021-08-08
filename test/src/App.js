@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Navbar from "./components/navbar";
-// import Home from "./components/home";
-// import About from "./components/about";
+import Home from "./components/Home";
+import Items from "./components/Items";
 // import Contact from "./components/contact";
 // import SignIn from "./components/signin";
 // import SignUp from "./components/signup";
@@ -12,6 +12,12 @@ const App = () => {
   return (
     <div>
       <Navbar />
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route exact path="/Items">
+        <Items />
+      </Route>
       {/* <Switch>
         <Route exact path="/">
           <Home />

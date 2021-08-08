@@ -1,159 +1,3 @@
-body {
-  font-family: "Work Sans", sans-serif;
-  box-sizing: border-box;
-}
-:focus {
-  outline: none;
-}
-.holder {
-  width: 440px;
-  background: #2196f3;
-  height: 700px;
-  margin: 50px auto;
-  outline: 5px solid #f2f2f2;
-}
-.holder .parent {
-  background-color: white;
-  width: calc(100% - 50px);
-  height: calc(100% - 50px);
-  display: inline-block;
-  margin-left: 25px;
-  margin-top: 25px;
-  border-radius: 7px;
-}
-.holder .parent h3 {
-  text-align: center;
-  font-size: 25px;
-  margin-bottom: 0;
-}
-form {
-  display: block;
-  border-bottom: 1px dashed #ccc;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-form > div {
-  margin: 20px;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  position: relative;
-}
-form > div::before {
-  content: "\f007";
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  position: absolute;
-  color: #777;
-  left: -1px;
-}
-form > div:nth-child(2):before {
-  content: "\f2b6";
-}
-form > div:nth-child(3):before {
-  content: "\f023";
-}
-form > div:nth-child(4):before {
-  content: "\f023";
-}
-form div input {
-  border: none;
-  font-family: "Work Sans", sans-serif;
-  font-size: 15px;
-  margin-left: 10px;
-}
-div input + .border {
-  position: absolute;
-  left: 50%;
-  bottom: -1px;
-  background-color: #3498db;
-  height: 1px;
-  width: 0;
-  transition: 0.3s;
-  display: block;
-}
-div input:focus + .border {
-  width: 100%;
-  left: 0;
-}
-form .private-inp {
-  border: none;
-  font-family: "work sans", sans-serif;
-  display: block;
-  margin: auto;
-  background: #2196f3;
-  width: 90%;
-  padding: 10px;
-  border-radius: 7px;
-  margin-bottom: 10px;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-}
-form p {
-  margin: 20px;
-  text-align: center;
-  font-size: 12px;
-  color: #777;
-  padding: 15px;
-}
-form p a {
-  text-decoration: none;
-  font-weight: bold;
-  color: #2196f3ed;
-}
-.parent h4 {
-  text-align: center;
-  color: #777;
-}
-.social {
-  text-align: center;
-  margin-top: -8px;
-}
-.social i {
-  width: 20px;
-  height: 20px;
-  background: #3b5998;
-  display: inline-block;
-  padding: 10px;
-  border-radius: 50%;
-  color: white;
-}
-.social i:nth-child(2) {
-  background: #1da1f2;
-}
-.social i:nth-child(3) {
-  background: #db4437;
-}
-:focus::placeholder {
-  opacity: 0;
-  transition: 0.5s;
-}
-.form-submit {
-  padding: 10px 30px;
-  color: white;
-  background-color: #1d69f6;
-  font-weight: 550;
-  border-radius: 5px;
-}
-.card {
-  height: max-content;
-  width: 200px;
-  background-color: teal;
-  color: black;
-  align-items: center;
-  text-align: center;
-}
-.card-demo {
-  margin: auto;
-}
-.cards {
-  padding-top: 20px;
-  display: flex;
-  flex-direction: row;
-  margin: 0px 10%;
-}
-
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
 * {
   margin: 0;
@@ -308,4 +152,102 @@ div.error-page .content {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+}
+/* ---------------------------------------------Home----------------------------------------------- */
+.head {
+  position: relative;
+  height: 91vh;
+  width: 100%;
+  background-color: #1cdb9b;
+}
+.ceneter {
+  position: absolute;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  top: 30%;
+  left: 23%;
+  font-weight: 900;
+  color: white;
+  font-size: 70px;
+  background-image: linear-gradient(to right #ff23a3, #f03421);
+}
+.sub-centered {
+  position: absolute;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  top: 40%;
+  left: 27%;
+  margin-top: 2.5rem;
+  color: white;
+}
+/* -----------------------------------Items----------------------------------------- */
+.inp-field {
+  width: 33rem;
+  height: 2.7rem;
+  border: 2px solid #1cdb9b;
+  padding: 10px;
+}
+
+.btn-green {
+  height: 3rem;
+  width: 5.5rem;
+  background-color: #1cdb9b;
+  color: white;
+  margin-left: 10px;
+  border-radius: 10%;
+  font-weight: 500;
+  border: 2px solid #1cdb9b;
+}
+
+.btn-green:hover {
+  background-color: white;
+  color: #1cdb9b;
+}
+.item-page-main {
+  height: 20vh;
+  position: relative;
+}
+.form {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  top: 10%;
+  left: 30%;
+}
+/* ----------------------------------------Card---------------------------------------------- */
+.main-card {
+  margin-left: 10%;
+  margin-right: 10%;
+  display: flex;
+  flex-direction: row;
+}
+.full-card {
+  min-height: 75px;
+  padding: 15px;
+  display: flex;
+  border: 1px solid #eeeeee;
+  background-color: #ffffff;
+  margin-bottom: 17px;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px rgb(0 0 0 / 10%);
+  transition: 0.1s linear all;
+  width: 20rem;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  min-width: 20rem;
+}
+.full-card img {
+  height: 3.7rem;
+  width: 4rem;
+}
+.full-card .Recipie-Name {
+  text-align: center;
+  color: black;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-top: 15px;
 }

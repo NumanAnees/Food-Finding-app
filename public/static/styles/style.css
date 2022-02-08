@@ -1,0 +1,10 @@
+.pointer {
+  cursor: pointer;
+}
+#nprogress .bar {
+  height: 3px !important;
+  background-color: rgb(10, 122, 187);
+}
+.nav a:hover {
+  border-radius: 0px;
+}

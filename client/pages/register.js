@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Layout from '../components/Layout';
 import axios from "axios";
+import {API} from "../config"
 
 const Register = () => {
     const [state, setState] = useState({
@@ -21,7 +22,7 @@ const Register = () => {
     const handleSubmit = e => {
         e.preventDefault();
         // console.table({ name, email, password });
-        axios.post(`http://localhost:8000/api/register`,{
+        axios.post(`${API}/register`,{
             name,email,password
         }).then(resp=>console.log(resp)).catch(error=>console.log(error));
     };
@@ -35,6 +36,7 @@ const Register = () => {
                     type="text"
                     className="form-control"
                     placeholder="Type your name"
+                    required
                 />
             </div>
             <div className="form-group">
@@ -44,6 +46,7 @@ const Register = () => {
                     type="email"
                     className="form-control"
                     placeholder="Type your email"
+                    required
                 />
             </div>
             <div className="form-group">
@@ -53,6 +56,7 @@ const Register = () => {
                     type="password"
                     className="form-control"
                     placeholder="Type your password"
+                    required
                 />
             </div>
             <div className="form-group">

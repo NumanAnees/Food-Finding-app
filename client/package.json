@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/NumanAnees/Food-Finding-app#readme",
   "dependencies": {
+    "axios": "^0.25.0",
     "next": "^12.0.10",
     "nprogress": "^0.2.0",
     "react": "^17.0.2",

@@ -1,6 +1,6 @@
 const User = require("../models/user")
 
-exports.register = async (req, res) => {
+exports.register =(req, res) => {
   //console.log("reg con",req.body);
   const {name,email,password,} = req.body;
   User.findOne({email}).exec((err,user)=>{
@@ -9,10 +9,9 @@ exports.register = async (req, res) => {
         error:"Email is taken"
       })
     }
-    })
-     //New user
+     //new user
      const newUser = new User({name,email,password});
-     await newUser.save((err, result) => {
+      newUser.save((err, result) => {
                 if (err) {
                     return res.status(401).json({
                         error: 'Error saving user in database. Try later'
@@ -22,4 +21,6 @@ exports.register = async (req, res) => {
                     message: 'Registration success. Please login.'
                 });
             });
+    })
+    
 } 

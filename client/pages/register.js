@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Layout from '../components/Layout';
-import axios from "axios";
-import {API} from "../config"
+import axios from 'axios';
+import { showSuccessMessage, showErrorMessage } from '../helpers/alerts';
+import { API } from '../config';
 
 const Register = () => {
     const [state, setState] = useState({
@@ -19,12 +20,28 @@ const Register = () => {
         setState({ ...state, [name]: e.target.value, error: '', success: '', buttonText: 'Register' });
     };
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        // console.table({ name, email, password });
-        axios.post(`${API}/register`,{
-            name,email,password
-        }).then(resp=>console.log(resp)).catch(error=>console.log(error));
+        setState({ ...state, buttonText: 'Registering' });
+        try {
+            const response = await axios.post(`${API}/register`, {
+                name,
+                email,
+                password
+            });
+            console.log(response);
+            setState({
+                ...state,
+                name: '',
+                email: '',
+                password: '',
+                buttonText: 'Submitted',
+                success: response.data.message
+            });
+        } catch (error) {
+            console.log(error);
+            setState({ ...state, buttonText: 'Register', error: error.response.data.error });
+        }
     };
 
     const registerForm = () => (
@@ -70,9 +87,9 @@ const Register = () => {
             <div className="col-md-6 offset-md-3">
                 <h1>Register</h1>
                 <br />
+                {success && showSuccessMessage(success)}
+                {error && showErrorMessage(error)}
                 {registerForm()}
-                <hr />
-                {JSON.stringify(state)}
             </div>
         </Layout>
     );

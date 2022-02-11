@@ -2,14 +2,14 @@ const Category = require('../models/category');
 const slugify = require('slugify');
 
 exports.create = (req, res) => {
-    const { name, content } = req.body;
+    const { name, content,url } = req.body;
+    const key = Date.now();
     const slug = slugify(name);
     const image = {
-        url: `https://via.placeholder.com/200x150.png?text=${process.env.CLIENT_URL}`,
-        key: '123'
-    };
-
-    const category = new Category({ name, slug, image });
+        url:`${url}`,
+        key: `${key}`
+    }
+    const category = new Category({ name, slug, image,content });
     category.postedBy = req.user._id;
 
     category.save((err, data) => {

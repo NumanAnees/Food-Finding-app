@@ -15,6 +15,7 @@ mongoose.connect(process.env.DATABASE_CLOUD,{useNewUrlParser:true,useUnifiedTopo
 const authRoutes = require("./routes/auth"); 
 const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/category');
+const linkRoutes = require('./routes/link');
 
 
 //app-middlewares
@@ -26,6 +27,8 @@ app.use(cors({ origin: process.env.CLIENT_URL }));
 app.use("/api",authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', linkRoutes);
+
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`API is running on port ${port}`));

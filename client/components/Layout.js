@@ -18,26 +18,31 @@ const Layout = ({ children }) => {
                 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
                 crossOrigin="anonymous"
             />
-            <link rel="stylesheet" href="/static/css/styles.css" />
+            <link rel="stylesheet" href="/static/styles/style.css" />
         </>
     );
 
     const nav = () => (
         <ul className="nav nav-tabs bg-dark">
-            <li className="nav-item">
+            <li className="nav-item p-1">
                 <Link href="/">
                     <a className="nav-link text-light">Home</a>
                 </Link>
-            </li>
+            </li>   
+            <li className="nav-item p-1">
+                <Link href="/user/link/create">
+                  <a className="nav-link text-light font-italic"> <span className='font-weight-bold link-loc'>&lt;</span>Submit a location<span className='font-weight-bold link-loc'>&gt;</span></a>
+                </Link>
+            </li> 
 
             {!isAuth() && (
                 <>
-                    <li className="nav-item" style={{marginLeft:"auto "  }}>
+                    <li className="nav-item p-1" style={{marginLeft:"auto "  }}>
                         <Link href="/login">
                             <a className="nav-link text-light">Login</a>
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item p-1">
                         <Link href="/register">
                             <a className="nav-link text-light">Register</a>
                         </Link>
@@ -46,7 +51,7 @@ const Layout = ({ children }) => {
             )}
 
             {isAuth() && isAuth().role === 'admin' && (
-                <li className="nav-item" style={{marginLeft:"auto "}}>
+                <li className="nav-item p-1" style={{marginLeft:"auto "}}>
                     <Link href="/admin">
                         <a className="nav-link text-light">{isAuth().name}</a>
                     </Link>
@@ -54,7 +59,7 @@ const Layout = ({ children }) => {
             )}
 
             {isAuth() && isAuth().role === 'subscriber' && (
-                <li className="nav-item " style={{marginLeft:"auto "  }}>
+                <li className="nav-item p-1" style={{marginLeft:"auto "  }}>
                     <Link href="/user">
                         <a className="nav-link text-light">{isAuth().name}</a>
                     </Link>
@@ -62,7 +67,7 @@ const Layout = ({ children }) => {
             )}
 
             {isAuth() && (
-                <li className="nav-item pointer">
+                <li className="nav-item pointer p-1">
                     <a onClick={logout} className="nav-link text-light ">
                         Logout
                     </a>

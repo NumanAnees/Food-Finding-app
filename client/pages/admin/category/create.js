@@ -37,11 +37,11 @@ const Create = ({ user, token }) => {
             setState({
                 ...state,
                 name: '',
-                content: '',
                 url: '',
                 buttonText: 'Created',
                 success: `${response.data.name} is created`
             });
+            setContent("");
         } catch (error) {
             console.log('CATEGORY CREATE ERROR', error);
             setState({ ...state, name: '', buttonText: 'Create', error: error.response.data.error });
@@ -49,7 +49,6 @@ const Create = ({ user, token }) => {
     };
 
       const handleContent = e => {
-        console.log(e);
         setContent(e);
         setState({ ...state, success: '', error: '' });
     };

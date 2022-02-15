@@ -38,7 +38,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
         <Layout>
             <div className="row">
                 <div className="col-md-8">
-                    <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
+                    <h1 className="display-4 font-weight-bold">Some Best - {category.name}</h1>
                     <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
                 </div>
                 <div className="col-md-4">

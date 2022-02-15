@@ -1,5 +1,7 @@
 const Category = require('../models/category');
 const slugify = require('slugify');
+const Link = require('../models/link');
+
 
 exports.create = (req, res) => {
     const { name, content,url } = req.body;
@@ -35,8 +37,36 @@ exports.list = (req, res) => {
 };
 
 exports.read = (req, res) => {
-    //
+    const { slug } = req.params;
+    let limit = req.body.limit ? parseInt(req.body.limit) : 10;
+    let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+
+    Category.findOne({ slug })
+        .populate('postedBy', '_id name')
+        .exec((err, category) => {
+            if (err) {
+                return res.status(400).json({
+                    error: 'Could not load category'
+                });
+            }
+            // res.json(category);
+            Link.find({ category: category })
+                .populate('postedBy', '_id name')
+                .populate('category', 'name')
+                .sort({ upvotes: -1 })
+                .limit(limit)
+                .skip(skip)
+                .exec((err, links) => {
+                    if (err) {
+                        return res.status(400).json({
+                            error: 'Could not load links of a category'
+                        });
+                    }
+                    res.json({ category, links });
+                });
+        });
 };
+
 
 exports.update = (req, res) => {
     //

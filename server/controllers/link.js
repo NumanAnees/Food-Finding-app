@@ -2,16 +2,16 @@ const Link = require('../models/link');
 const slugify = require('slugify');
 
 exports.create = (req, res) => {
-    const { title, url, category,price,gst } = req.body;
-    const slug = url;
-    let link = new Link({ title, url, category,slug, price,gst });
+    const { title, url, category , price, gst } = req.body;
+    const slug = slugify(url);
+    const link = new Link({ title, url, category,slug, price, gst });
     // posted by user
     link.postedBy = req.user._id;
     // save link
     link.save((err, data) => {
         if (err) {
             return res.status(400).json({
-                error: 'Link already exist'
+                error: 'Unexpected error occured'
             });
         }
         res.json(data);

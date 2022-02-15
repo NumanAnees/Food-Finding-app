@@ -109,30 +109,18 @@ const Create = ({ token }) => {
     );
 }
 
-    const handleCategory = e => () => {
-        console.log(e.target.value)
+     const handleCategory = e => {
         setState({ ...state, category: e.target.value, success: '', error: '' });
-
     };
 
     // show categories > checkbox
     const showCategories = () => {
         return (
-            loadedCategories &&
+           loadedCategories &&
             loadedCategories.map((c, i) => (
                 <li className="list-unstyled" key={c._id}>
-                <label className="form-check-label">
-                    <input 
-                        type="radio" 
-                        onChange={handleCategory} 
-                        id={c.name}
-                        value={c.name} 
-                        checked={category === c.name}
-                        className="from-check-input mr-2" 
-                        name="category"
-                        />
-                    {c.name}
-                </label>
+                    <input type="radio" onClick={handleCategory} value={c._id} checked={category === c._id} className="mr-2" name="category" />
+                    <label className="form-check-label">{c.name}</label>
                 </li>
             ))
         );
@@ -171,7 +159,7 @@ const Create = ({ token }) => {
             </div>
             <div className="row">
                 <div className="col-md-4">
-                    <div className="form-group">
+                   <div className="form-group">
                         <label className="text-muted ml-4">Category</label>
                         <ul style={{ maxHeight: '180px', overflowY: 'scroll' }}>{showCategories()}</ul>
                     </div>

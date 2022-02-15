@@ -35,6 +35,10 @@ const linkSchema = new mongoose.Schema(
         price: {
             type: Number,
         },
+         gst: {
+            type: String,
+            default:"Not Applied"
+        },
         clicks: { type: Number, default: 0 },
         upvotes: { type: Number, default: 0 }
     },

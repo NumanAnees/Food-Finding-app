@@ -17,6 +17,10 @@ exports.linkCreateValidator = [
         .not()
         .isEmpty()
         .withMessage('Please mention price'),
+    check('gst')
+        .not()
+        .isEmpty()
+        .withMessage('Please mention GST'),
 ];
 
 exports.linkUpdateValidator = [
@@ -36,4 +40,8 @@ exports.linkUpdateValidator = [
         .not()
         .isEmpty()
         .withMessage('Please mention price'),
+    check('gst')
+        .not()
+        .isEmpty()
+        .withMessage('Please mention GST'),
 ];

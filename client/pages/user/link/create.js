@@ -2,22 +2,24 @@
 import { useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
 import axios from 'axios';
+import { getCookie, isAuth } from '../../../helpers/auth';
 import { API } from '../../../config';
 import { showSuccessMessage, showErrorMessage } from '../../../helpers/alerts';
-const Create = () => {
+
+const Create = ({ token }) => {
     // state
     const [state, setState] = useState({
         title: '',
         url: '',
-        categories: [],
+        category: '',
+        price:'',
         loadedCategories: [],
         success: '',
         error: '',
-        type: '',
-        medium: ''
+        gst: ''
     });
 
-    const { title, url, categories, loadedCategories, success, error, type, medium } = state;
+    const { title, url, category, loadedCategories, success, error, price, gst } = state;
 
     // load categories when component mounts using useEffect
     useEffect(() => {
@@ -29,17 +31,168 @@ const Create = () => {
         setState({ ...state, loadedCategories: response.data });
     };
 
+    const handleTitleChange = e => {
+        setState({ ...state, title: e.target.value, error: '', success: '' });
+    };
+
+    const handleURLChange = e => {
+        setState({ ...state, url: e.target.value, error: '', success: '' });
+    };
+     const handlePriceChange = e => {
+        setState({ ...state, price: e.target.value, error: '', success: '' });
+    };
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        // console.table({ title, url, categories, type, medium });
+        try {
+            const response = await axios.post(
+                `${API}/link`,
+                { title, url, category, price, gst },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            setState({
+                ...state,
+                title: '',
+                url: '',
+                success: 'Link is created',
+                error: '',
+                loadedCategories: [],
+                category: '',
+                price: '',
+                gst: ''
+            });
+        } catch (error) {
+            console.log('LINK SUBMIT ERROR', error);
+            setState({ ...state, error: error.response.data.error });
+        }
+    };
+
+    const handleGstClick = e => {
+        setState({ ...state, gst: e.target.value, success: '', error: '' });
+    };
+
+    const showGst = () => {
+    return(
+        <>
+            <div className="form-check ml-3">
+                <label className="form-check-label">
+                    <input
+                        type="radio"
+                        onClick={handleGstClick}
+                        checked={gst === 'Applicable'}
+                        value="Applicable"
+                        className="from-check-input mr-2"
+                        name="gst"
+                    />{' '}
+                    Applicable
+                </label>
+            </div>
+            <div className="form-check ml-3">
+                <label className="form-check-label">
+                    <input
+                        type="radio"
+                        onClick={handleGstClick}
+                        checked={gst === 'Not Applicable'}
+                        value="Not Applicable"
+                        className="from-check-input mr-2"
+                        name="gst"
+                    />{' '}
+                    Not Applicable
+                </label>
+            </div>
+        </>
+    );
+}
+
+    const handleCategory = e => () => {
+        console.log(e.target.value)
+        setState({ ...state, category: e.target.value, success: '', error: '' });
+
+    };
+
+    // show categories > checkbox
+    const showCategories = () => {
+        return (
+            loadedCategories &&
+            loadedCategories.map((c, i) => (
+                <li className="list-unstyled" key={c._id}>
+                <label className="form-check-label">
+                    <input 
+                        type="radio" 
+                        onChange={handleCategory} 
+                        id={c.name}
+                        value={c.name} 
+                        checked={category === c.name}
+                        className="from-check-input mr-2" 
+                        name="category"
+                        />
+                    {c.name}
+                </label>
+                </li>
+            ))
+        );
+    };
+
+    // link create form
+    const submitLinkForm = () => (
+        <form onSubmit={handleSubmit}>
+            <div className="form-group">
+                <label className="text-muted">Name</label>
+                <input type="text" className="form-control" onChange={handleTitleChange} value={title} />
+            </div>
+            <div className="form-group">
+                <label className="text-muted">Map Location</label>
+                <input type="url" className="form-control" onChange={handleURLChange} value={url} />
+            </div>
+             <div className="form-group">
+                <label className="text-muted">Price</label>
+                <input type="price" className="form-control" onChange={handlePriceChange} value={price} />
+            </div>
+            <div>
+                <button disabled={!token} className="btn btn-outline-dark" type="submit">
+                    {isAuth() || token ? 'Submit' : 'Login to submit'}
+                </button>
+            </div>
+        </form>
+    );
+
     return (
         <Layout>
             <div className="row">
                 <div className="col-md-12">
-                    <h1>Submit Link/URL</h1>
+                    <h1>Submit a Location</h1>
                     <br />
-                    {JSON.stringify(loadedCategories)}
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-4">
+                    <div className="form-group">
+                        <label className="text-muted ml-4">Category</label>
+                        <ul style={{ maxHeight: '180px', overflowY: 'scroll' }}>{showCategories()}</ul>
+                    </div>
+                    <div className="form-group">
+                        <label className="text-muted ml-4">GST</label>
+                        {showGst()}
+                    </div>
+                </div>
+                <div className="col-md-8">
+                    {success && showSuccessMessage(success)}
+                    {error && showErrorMessage(error)}
+                    {submitLinkForm()}
                 </div>
             </div>
         </Layout>
     );
+};
+
+Create.getInitialProps = ({ req }) => {
+    const token = getCookie('token', req);
+    return { token };
 };
 
 export default Create;

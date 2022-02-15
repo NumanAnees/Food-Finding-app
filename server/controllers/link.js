@@ -2,9 +2,9 @@ const Link = require('../models/link');
 const slugify = require('slugify');
 
 exports.create = (req, res) => {
-    const { title, url, category, type, medium,price } = req.body;
+    const { title, url, category,price,gst } = req.body;
     const slug = url;
-    let link = new Link({ title, url, category, type, medium, slug, price });
+    let link = new Link({ title, url, category,slug, price,gst });
     // posted by user
     link.postedBy = req.user._id;
     // save link

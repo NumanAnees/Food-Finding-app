@@ -11,7 +11,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
     const [allLinks, setAllLinks] = useState(links);
     const [limit, setLimit] = useState(linksLimit);
-    const [skip, setSkip] = useState(linkSkip);
+    const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(totalLinks);
 
   const handleCount = async linkId => {
@@ -23,7 +23,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
         setAllLinks(response.data.links);
     };
 
-    const listOfLinks = () =>{        
+    const listOfLinks = () =>{
        return allLinks.map((l, i) => (
             <div className="row alert alert-primary p-2">
                 <div className="col-md-8" onClick={e => handleCount(l._id)}>
@@ -52,12 +52,18 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     const loadMore = async () => {
         let newSkip = skip + limit ;
         const response = await axios.post(`${API}/category/${query.slug}`, { skip: newSkip, limit });
+        console.log("----",response);
+        if(response){    
         setAllLinks([...allLinks, ...response.data.links]);
-        console.log('allLinks', allLinks);
-        console.log('links.length', response.data.links.length);
-        console.log("size",size);
+        }
+        // console.log('allLinks', allLinks);
+        // console.log('links.length', response.data.links.length);
+        // console.log("size",size);
+        // console.log("limit",limit);
+        // console.log("------",response.data.links.length)
         setSize(response.data.links.length);
         setSkip(newSkip);
+        return;
     };
 
     // const loadMoreButton = () => {
@@ -96,7 +102,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                   <InfiniteScroll
                     pageStart={0}
                     loadMore={loadMore}
-                    hasMore={size>0 && size >= limit}
+                    hasMore={size!==0}
                     loader={
                     <img src="/static/images/load.gif" alt="loading" style={{height:"180px",width:"180px"}} />
                     }
@@ -110,7 +116,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
 
 Links.getInitialProps = async ({ query, req }) => {
     let skip = 0;
-    let limit = 2;
+    let limit = 10;
 
     const response = await axios.post(`${API}/category/${query.slug}`, { skip, limit });
     return {

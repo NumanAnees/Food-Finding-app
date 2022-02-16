@@ -25,7 +25,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
 
     const listOfLinks = () =>{
        return allLinks.map((l, i) => (
-            <div className="row alert alert-primary p-2">
+            <div key={i} className="row alert alert-primary p-2">
                 <div className="col-md-8" onClick={e => handleCount(l._id)}>
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
@@ -34,18 +34,20 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                         </h6>
                     </a>
                 </div>
-                <div className="col-md-4 pt-2">
+                <div className="col-md-4 pt-2" >
                     <span className="pull-right">
                         {moment(l.createdAt).fromNow()} by {l.postedBy.name}
                     </span>
                     <br />
-                    <span className="badge text-secondary pull-right">{l.clicks} clicks</span>
+                    {/* <span className="badge text-secondary pull-right">{l.clicks} clicks</span> */}
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-12 mt-2" style={{"display":"flex","flexDirection":"row"}}>
                     <span className="badge text-dark">
                         {l.price}Rs / {l.gst}
                     </span>
                     <span className="badge text-success">{l.category.name}</span>
+                     <span className="badge text-secondary pull-left ml-auto" style={{"marginRight":"10.7rem"}}>{l.clicks} clicks</span>
+
                 </div>
             </div>
         ))}
@@ -56,32 +58,16 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
         if(response){    
         setAllLinks([...allLinks, ...response.data.links]);
         }
-        // console.log('allLinks', allLinks);
-        // console.log('links.length', response.data.links.length);
-        // console.log("size",size);
-        // console.log("limit",limit);
-        // console.log("------",response.data.links.length)
         setSize(response.data.links.length);
         setSkip(newSkip);
         return;
     };
 
-    // const loadMoreButton = () => {
-    //     return (
-    //         size > 0 &&
-    //         size >= limit && (
-    //             <button onClick={loadMore} className="btn btn-outline-primary btn-lg">
-    //                 Load more
-    //             </button>
-    //         )
-    //     );
-    // };
-
     return (
         <Layout>
             <div className="row">
                 <div className="col-md-8">
-                    <h1 className="display-4 font-weight-bold">Some Best - {category.name}</h1>
+                    <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
                     <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
                 </div>
                 <div className="col-md-4">
@@ -89,27 +75,20 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                 </div>
             </div>
             <br />
-            <div className="row">
-                <div className="col-md-8">{listOfLinks()}</div>
-                <div className="col-md-4">
-                    <h2 className="lead">Most popular in {category.name}</h2>
-                    <p>show popular links</p>
+            <InfiniteScroll
+                pageStart={0}
+                loadMore={loadMore}
+                hasMore={size > 0 && size >= limit}
+                loader={<img key={0} src="/static/images/loading.gif" alt="loading" />}
+            >
+                <div className="row">
+                    <div className="col-md-8">{listOfLinks()}</div>
+                    <div className="col-md-4">
+                        <h2 className="lead">Most popular in {category.name}</h2>
+                        <p>show popular links</p>
+                    </div>
                 </div>
-            </div>
-            {/* <div className="text-center pt-4 pb-5">{loadMoreButton()}</div> */}
-            <div className="row">
-                <div className="col-md-12 text-center">
-                  <InfiniteScroll
-                    pageStart={0}
-                    loadMore={loadMore}
-                    hasMore={size!==0}
-                    loader={
-                    <img src="/static/images/load.gif" alt="loading" style={{height:"180px",width:"180px"}} />
-                    }
-                    ></InfiniteScroll>      
-
-                </div>
-            </div>
+            </InfiniteScroll>
         </Layout>
     );
 };

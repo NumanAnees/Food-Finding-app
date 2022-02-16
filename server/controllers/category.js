@@ -53,7 +53,7 @@ exports.read = (req, res) => {
             Link.find({ category: category })
                 .populate('postedBy', '_id name')
                 .populate('category', 'name')
-                .sort({ upvotes: -1 })
+                .sort({upvotes: -1 })
                 .limit(limit)
                 .skip(skip)
                 .exec((err, links) => {

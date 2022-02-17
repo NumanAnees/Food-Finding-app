@@ -69,9 +69,29 @@ exports.read = (req, res) => {
 
 
 exports.update = (req, res) => {
-    //
+    const { slug } = req.params;
+    const { name, image, content } = req.body;
+
+    Category.findOneAndUpdate({ slug }, { name, content,image }, { new: true }).exec((err, updated) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'Could not find category to update'
+            });
+        }
+            res.json(updated);
+    });
 };
 
 exports.remove = (req, res) => {
-    //
+    const { slug } = req.params;
+    Category.findOneAndRemove({ slug }).exec((err, data) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'Could not delete category'
+            });
+        }
+        res.json({
+            message: 'Category deleted successfully'
+        });
+    });
 };

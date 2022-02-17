@@ -1,12 +1,15 @@
 import axios from 'axios';
+import  Router from 'next/router';
 import { API } from '../config';
 import { getCookie } from '../helpers/auth';
+
 
 const withUser = Page => {
     const WithAuthUser = props => <Page {...props} />;
     WithAuthUser.getInitialProps = async context => {
         const token = getCookie('token', context.req);
         let user = null;
+        let userLinks = [];
 
         if (token) {
             try {
@@ -16,7 +19,9 @@ const withUser = Page => {
                         contentType: 'application/json'
                     }
                 });
-                user = response.data;
+                console.log('response in withUser', response);
+                user = response.data.user;
+                userLinks = response.data.links;
             } catch (error) {
                 if (error.response.status === 401) {
                     user = null;
@@ -25,7 +30,15 @@ const withUser = Page => {
         }
 
         if (user === null) {
-            // redirect
+        //   if (context.res) { // server
+        //  return  context.res.writeHead(302, {
+        //         Location: '/'
+        //     });
+        
+        //     } else { // client
+        //    return Router.push('/');
+        //     }
+           // redirect
             context.res.writeHead(302, {
                 Location: '/'
             });
@@ -34,7 +47,8 @@ const withUser = Page => {
             return {
                 ...(Page.getInitialProps ? await Page.getInitialProps(context) : {}),
                 user,
-                token
+                token,
+                userLinks
             };
         }
     };

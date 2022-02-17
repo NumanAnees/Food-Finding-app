@@ -14,7 +14,7 @@ router.post('/link', linkCreateValidator, runValidation, requireSignin, authMidd
 router.get('/links', list);
 router.put("/click-count",clickCount);
 router.put("/upvote-count",upvoteCount);
-router.get('/link/:slug', read);
+router.get('/link/:id', read);
 router.put('/link/:id', linkUpdateValidator, runValidation, requireSignin, authMiddleware, update);
 router.delete('/link/:id', requireSignin, authMiddleware, remove);
 

@@ -58,7 +58,7 @@ const User = ({ user, userLinks, token }) => {
                             {l.category.name}
                     </span>
                     </div>
-                    <Link href={`/user/link/${l.slug}`}>
+                    <Link href={`/user/link/${l._id}`}>
                         <button style={{'fontSize':"13px"}} className="btn btn-success text-light ml-4 mr-2 pl-2 pr-2 pull-right">
                         <span >Update</span>
                         </button>

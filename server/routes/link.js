@@ -6,12 +6,12 @@ const { linkCreateValidator, linkUpdateValidator } = require('../validators/link
 const { runValidation } = require('../validators');
 
 // controllers
-const { requireSignin, authMiddleware } = require('../controllers/auth');
+const { requireSignin, authMiddleware,adminMiddleware } = require('../controllers/auth');
 const { create, list, read, update, remove,clickCount,upvoteCount } = require('../controllers/link');
 
 // routes
 router.post('/link', linkCreateValidator, runValidation, requireSignin, authMiddleware, create);
-router.get('/links', list);
+router.post('/links/:category',list);
 router.put("/click-count",clickCount);
 router.put("/upvote-count",upvoteCount);
 router.get('/link/:id', read);

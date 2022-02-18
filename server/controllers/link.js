@@ -11,7 +11,7 @@ exports.create = (req, res) => {
     link.save((err, data) => {
         if (err) {
             return res.status(400).json({
-                error: 'Unexpected error occured'
+                error: 'Link already present'
             });
         }
         res.json(data);
@@ -19,14 +19,23 @@ exports.create = (req, res) => {
 };
 
 exports.list = (req, res) => {
-    Link.find({}).exec((err, data) => {
-        if (err) {
-            return res.status(400).json({
-                error: 'Could not list links'
-            });
-        }
-        res.json(data);
-    });
+    let limit = req.body.limit ? parseInt(req.body.limit) : 10;
+    let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+    const { category } = req.params;
+    Link.find({category})
+        .populate('postedBy', 'name')
+        .populate('category', 'name, slug')
+        .sort({ clicks: -1 })
+        .skip(skip)
+        .limit(limit)
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({
+                    error: 'Could not list links'
+                });
+            }
+            res.json(data);
+        });
 };
 
 exports.read = (req, res) => {

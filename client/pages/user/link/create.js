@@ -131,15 +131,15 @@ const Create = ({ token }) => {
         <form onSubmit={handleSubmit}>
             <div className="form-group">
                 <label className="text-muted">Name</label>
-                <input type="text" className="form-control" onChange={handleTitleChange} value={title} />
+                <input type="text" className="form-control" onChange={handleTitleChange} value={title} placeholder="Enter the name..." />
             </div>
             <div className="form-group">
                 <label className="text-muted">Map Location</label>
-                <input type="url" className="form-control" onChange={handleURLChange} value={url} />
+                <input type="url" className="form-control" onChange={handleURLChange} value={url} placeholder="Enter the location 's URL..." />
             </div>
              <div className="form-group">
                 <label className="text-muted">Price</label>
-                <input type="price" className="form-control" onChange={handlePriceChange} value={price} />
+                <input type="number" className="form-control" onChange={handlePriceChange} value={price} placeholder="Enter the price..."/>
             </div>
             <div>
                 <button disabled={!token} className="btn btn-outline-dark" type="submit">

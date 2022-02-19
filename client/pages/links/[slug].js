@@ -1,12 +1,12 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect,Fragment } from 'react';
 import Layout from '../../components/Layout';
 import Link from 'next/link';
 import axios from 'axios';
 import renderHTML from 'react-render-html';
 import moment from 'moment';
-import { API } from '../../config';
+import { API,APP_NAME } from '../../config';
 import InfiniteScroll from 'react-infinite-scroller';
-
+import Head from 'next/head';
 
 const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
     const [allLinks, setAllLinks] = useState(links);
@@ -14,6 +14,20 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(totalLinks);
     const [popular, setPopular] = useState([]);
+    const stripHTML = data => data.replace(/<\/?[^>]+(>|$)/g, '');
+    const head = () => (
+        <Head>
+            <title>
+                {category.name} | {APP_NAME}
+            </title>
+            <meta name="description" content={stripHTML(`top ${category.name},${category.name},best ${category.name},${category.name} 's ratings,Best ${category.name},top 10 best ${category.name},Best restaurant for ${category.name},best ${category.name} in pakistan,best ${category.name} in lahore`)} />
+            <meta property="og:title" content={category.name} />
+            <meta property="og:description" content={stripHTML(category.content.substring(0, 160))} />
+            <meta property="og:image" content={category.image.url} />
+            <meta property="og:image:secure_url" content={category.image.url} />
+        </Head>
+    );
+
       useEffect(() => {
         loadPopular();
     }, []);
@@ -37,8 +51,8 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                 <div className="col-md-8" onClick={() => handleCount(l._id)}>
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
-                        <h6 className="pt-2 text-danger" style={{ fontSize: '12px',height:"auto",overflowX:"hidden",overflowY:"hidden" }}>
-                            {l.url}
+                        <h6 className="pt-2 text-danger" style={{ fontSize: '12px' }}>
+                            {l.url.substring(0, 30)}
                         </h6>
                     </a>
                 </div>
@@ -67,8 +81,8 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                 <div className="col-md-8" onClick={e => handleCount(l._id)}>
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
-                        <h6 className="pt-2 text-danger" style={{ fontSize: '12px',height:"auto",overflowX:"hidden",overflowY:"hidden" }}>
-                            {l.url}
+                        <h6 className="pt-2 text-danger" style={{ fontSize: '12px' }}>
+                            {l.url.substring(0, 50)}
                         </h6>
                     </a>
                 </div>
@@ -102,13 +116,15 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     };
 
     return (
+        <Fragment>
+        {head()}
         <Layout>
             <div className="row">
                 <div className="col-md-8">
                     <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
                     <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
                 </div>
-                <div className="col-md-4 mt-4">
+                <div className="col-md-4 mt-4 d-flex">
                     <img src={category.image.url}alt={category.name} style={{ width: 'auto', maxHeight: '280px' }} />
                 </div>
             </div>
@@ -127,7 +143,8 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                     </div>
                 </div>
             </InfiniteScroll>
-        </Layout>
+            </Layout>
+        </Fragment>
     );
 };
 

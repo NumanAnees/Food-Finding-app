@@ -95,8 +95,8 @@ const Admin = ({token}) => {
                 <div className="col-md-8">
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
-                        <h6 className=" text-danger" style={{ fontSize: '12px',height:"auto",overflowX:"hidden",overflowY:"hidden" }}>
-                            {l.url}
+                        <h6 className=" text-danger" style={{ fontSize: '12px'}}>
+                            {l.url.substring(0, 42)}
                         </h6>
                     </a>
                 </div>

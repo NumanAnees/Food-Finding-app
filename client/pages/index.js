@@ -1,11 +1,26 @@
 import Layout from '../components/Layout';
 import axios from 'axios';
 import Link from 'next/link';
-import { API } from '../config';
-import { useState,useEffect } from 'react';
+import { useState,useEffect, Fragment } from 'react';
+import { API,APP_NAME } from '../config';
 import moment from 'moment';
+import Head from 'next/head';
+
 
 const Home = ({ categories }) => {
+    const head = () => (
+        <Head>
+            <title>
+                {APP_NAME}
+            </title>
+            <meta name="description" content={`top meal,meal,best meal,meal 's ratings,Best meal,top 10 best meal,Best restaurant for meal,best meal in pakistan,best meal in lahore`} />
+            <meta property="og:title" content={APP_NAME} />
+            <meta property="title" content={APP_NAME} />
+            <meta property="og:description" content={`Find best meal in your area`}/>
+            {/* logo here */}
+        </Head>
+    );
+
     const [state,setState]= useState({
         links:[]
     })
@@ -26,16 +41,14 @@ const Home = ({ categories }) => {
     const loadUpdatedLinks = async () => {
         loadLinks();
     };
-
-   
     const listOfLinks = () =>{
        return links.map((l, i) => (
             <div key={i} className="row alert alert-primary p-2">
                 <div className="col-md-8" onClick={e => handleCount(l._id)}>
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
-                        <h6 className="pt-2 text-danger"style={{ fontSize: '12px',height:"auto",overflowX:"hidden",overflowY:"hidden",width:"35rem" }}>
-                            {l.url}
+                        <h6 className="pt-2 text-danger"style={{ fontSize: '12px' }}>
+                            {l.url.substring(0, 110)}
                         </h6>
                     </a>
                 </div>
@@ -81,6 +94,8 @@ const Home = ({ categories }) => {
         ));
 
     return (
+        <Fragment>
+            {head()}
         <Layout>
             <div className="row">
                 <div className="col-md-12">
@@ -97,6 +112,7 @@ const Home = ({ categories }) => {
                 </div>
             </div>
         </Layout>
+       </Fragment> 
     );
 };
 

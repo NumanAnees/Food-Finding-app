@@ -38,7 +38,7 @@ const User = ({ user, userLinks, token }) => {
                 <div className="col-md-8">
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
-                        <h6 className="pt-2 text-danger" style={{ fontSize: '12px' }}>
+                        <h6 className="pt-2 text-danger" style={{ fontSize: '12px',height:"auto",overflowX:"hidden",overflowY:"hidden" }}>
                             {l.url}
                         </h6>
                     </a>

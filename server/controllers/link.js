@@ -13,8 +13,9 @@ exports.create = (req, res) => {
     // save link
     link.save((err, data) => {
         if (err) {
+            console.log(err);
             return res.status(400).json({
-                error: 'Link already present'
+                error: 'Could not add new Location'
             });
         }
         res.json(data);
@@ -111,7 +112,7 @@ exports.upvoteCount = (req, res) => {
 exports.popular = (req, res) => {
     Link.find()
         .populate('postedBy', 'name')
-        .sort({ clicks: -1 })
+        .populate('category', 'name, slug').sort({ clicks: -1 })
         .limit(3)
         .exec((err, links) => {
             if (err) {

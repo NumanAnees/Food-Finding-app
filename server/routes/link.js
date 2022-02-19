@@ -11,7 +11,7 @@ const { create, list, read, update, remove,clickCount,upvoteCount } = require('.
 
 // routes
 router.post('/link', linkCreateValidator, runValidation, requireSignin, authMiddleware, create);
-router.post('/links/:category',list);
+router.post('/links/:category',requireSignin, adminMiddleware,list);
 router.put("/click-count",clickCount);
 router.put("/upvote-count",upvoteCount);
 router.get('/link/:id', read);

@@ -27,7 +27,7 @@ const Admin = ({token}) => {
     };
       const loadLinks = async () => {
           try{
-            const response = await axios.post(`${API}/links/${category}`,{
+            const response = await axios.post(`${API}/links/${category}`,{limit:1000,skip:0},{
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -146,11 +146,16 @@ const Admin = ({token}) => {
                             <a className="nav-link">All category</a>
                         </Link>
                     </li>
+                      <li className="nav-item">
+                        <Link href="/user/profile/update">
+                            <a className="nav-link">Profile update</a>
+                        </Link>
+                    </li>
                 </ul>
             </div>
             <div className="col-md-8">
                     <form className="form-group" onSubmit={handleSubmit}>
-                        <h1>Create category</h1>
+                        <h1>Update Links based on category</h1>
                              <br />
                             {success && showSuccessMessage(success)}
                             {error && showErrorMessage(error)}

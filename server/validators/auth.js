@@ -22,3 +22,9 @@ exports.userLoginValidator = [
 ];
 
 
+exports.userUpdateValidator = [
+    check('name')
+        .not()
+        .isEmpty()
+        .withMessage('Name is required')
+];

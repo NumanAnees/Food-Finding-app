@@ -4,10 +4,23 @@ import Layout from '../../../components/Layout';
 import axios from 'axios';
 import withUser from '../../withUser';
 import { getCookie, isAuth } from '../../../helpers/auth';
-import { API } from '../../../config';
+import { API,APP_NAME } from '../../../config';
 import { showSuccessMessage, showErrorMessage } from '../../../helpers/alerts';
+import Head from 'next/head';
 
 const Update = ({ oldLink, token }) => {
+      const head = () => (
+        <Head>
+            <title>
+             {"Update Location"} |  {APP_NAME}
+            </title>
+            <meta name="description" content={`top meal,meal,best meal,meal 's ratings,Best meal,top 10 best meal,Best restaurant for meal,best meal in pakistan,best meal in lahore`} />
+            <meta property="og:title" content={APP_NAME} />
+            <meta property="title" content={APP_NAME} />
+            <meta property="og:description" content={`Find best meal in your area`}/>
+            {/* logo here */}
+        </Head>
+    );
     // state
     const [state, setState] = useState({
         title: oldLink.title,
@@ -80,6 +93,7 @@ const Update = ({ oldLink, token }) => {
     const showGst = () => {
     return(
         <>
+        {head()}
             <div className="form-check ml-3">
                 <label className="form-check-label">
                     <input

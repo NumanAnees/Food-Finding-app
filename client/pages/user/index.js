@@ -3,11 +3,24 @@ import Link from 'next/link';
 import Router from 'next/router';
 import axios from 'axios';
 import moment from 'moment';
-import { API } from '../../config';
+import { API,APP_NAME } from '../../config';
 import { getCookie } from '../../helpers/auth';
 import withUser from '../withUser';
+import Head from 'next/head';
 
 const User = ({ user, userLinks, token }) => {
+    const head = () => (
+        <Head>
+            <title>
+             {"User Dashboard"} |  {APP_NAME}
+            </title>
+            <meta name="description" content={`top meal,meal,best meal,meal 's ratings,Best meal,top 10 best meal,Best restaurant for meal,best meal in pakistan,best meal in lahore`} />
+            <meta property="og:title" content={APP_NAME} />
+            <meta property="title" content={APP_NAME} />
+            <meta property="og:description" content={`Find best meal in your area`}/>
+            {/* logo here */}
+        </Head>
+    );    
     const confirmDelete = (e, id) => {
         e.preventDefault();
         // console.log('delete > ', slug);
@@ -74,6 +87,8 @@ const User = ({ user, userLinks, token }) => {
         ));
 
     return (
+        <>
+        {head()}
         <Layout>
             <h1>
                 {user.name}'s dashboard <span className="text-danger">/{user.role}</span>
@@ -103,6 +118,7 @@ const User = ({ user, userLinks, token }) => {
                 </div>
             </div>
         </Layout>
+        </>
     );
 };
 

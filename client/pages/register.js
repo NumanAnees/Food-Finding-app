@@ -2,11 +2,23 @@ import { useState,useEffect } from 'react';
 import Layout from '../components/Layout';
 import axios from 'axios';
 import { showSuccessMessage, showErrorMessage } from '../helpers/alerts';
-import { API } from '../config';
+import { API,APP_NAME} from '../config';
 import {authenticate, isAuth} from "../helpers/auth"
 import Router from 'next/router';
-
+import Head from 'next/head';
 const Register = () => {
+     const head = () => (
+        <Head>
+            <title>
+             {"Register"} |  {APP_NAME}
+            </title>
+            <meta name="description" content={`top meal,meal,best meal,meal 's ratings,Best meal,top 10 best meal,Best restaurant for meal,best meal in pakistan,best meal in lahore`} />
+            <meta property="og:title" content={APP_NAME} />
+            <meta property="title" content={APP_NAME} />
+            <meta property="og:description" content={`Find best meal in your area`}/>
+            {/* logo here */}
+        </Head>
+    );
     const [state, setState] = useState({
         name: '',
         email: '',
@@ -83,6 +95,8 @@ const Register = () => {
     );
 
     return (
+    <>
+        {head()}
         <Layout>
             <div className="col-md-6 offset-md-3">
                 <h1>Register</h1>
@@ -92,6 +106,7 @@ const Register = () => {
                 {registerForm()}
             </div>
         </Layout>
+        </>
     );
 };
 

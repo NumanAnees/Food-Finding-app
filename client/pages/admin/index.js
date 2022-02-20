@@ -3,12 +3,25 @@ import withAdmin from '../withAdmin';
 import Link from 'next/link';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-import { API } from '../../config';
+import { API,APP_NAME } from '../../config';
 import moment from 'moment';
 import  Router  from 'next/router';
 import { showSuccessMessage, showErrorMessage } from '../../helpers/alerts';
+import Head from 'next/head';
 
 const Admin = ({token}) => {
+    const head = () => (
+        <Head>
+            <title>
+             {"Admin Dashboard"} |  {APP_NAME}
+            </title>
+            <meta name="description" content={`top meal,meal,best meal,meal 's ratings,Best meal,top 10 best meal,Best restaurant for meal,best meal in pakistan,best meal in lahore`} />
+            <meta property="og:title" content={APP_NAME} />
+            <meta property="title" content={APP_NAME} />
+            <meta property="og:description" content={`Find best meal in your area`}/>
+            {/* logo here */}
+        </Head>
+    );
      const [state, setState] = useState({
         loadedCategories: [],
         success:"",
@@ -130,7 +143,9 @@ const Admin = ({token}) => {
             </div>
         ));
 
-    return   <Layout>
+    return  <>
+    <Layout>
+        {head()}
         <h1>Admin Dashboard</h1>
         <br />
         <div className="row">
@@ -176,6 +191,7 @@ const Admin = ({token}) => {
           </div>
         </div>
     </Layout>
+    </>
 }
 
 export default withAdmin(Admin);

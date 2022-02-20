@@ -2,14 +2,27 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(()=>import("react-quill"),{ssr:false});
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API } from '../../../config';
+import { API,APP_NAME} from '../../../config';
 import { showSuccessMessage, showErrorMessage } from '../../../helpers/alerts';
 import Layout from '../../../components/Layout';
 import withAdmin from '../../withAdmin';
 import 'react-quill/dist/quill.snow.css';
+import Head from 'next/head';
 
 
 const Create = ({ user, token }) => {
+    const head = () => (
+        <Head>
+            <title>
+             {"Create Category"} |  {APP_NAME}
+            </title>
+            <meta name="description" content={`top meal,meal,best meal,meal 's ratings,Best meal,top 10 best meal,Best restaurant for meal,best meal in pakistan,best meal in lahore`} />
+            <meta property="og:title" content={APP_NAME} />
+            <meta property="title" content={APP_NAME} />
+            <meta property="og:description" content={`Find best meal in your area`}/>
+            {/* logo here */}
+        </Head>
+    );
     const [state, setState] = useState({
         name: '',
         url: "",
@@ -80,6 +93,8 @@ const Create = ({ user, token }) => {
     );
 
     return (
+        <>
+        {head()}
         <Layout>
             <div className="row">
                 <div className="col-md-6 offset-md-3">
@@ -91,6 +106,8 @@ const Create = ({ user, token }) => {
                 </div>
             </div>
         </Layout>
+        </>
+
     );
 };
 

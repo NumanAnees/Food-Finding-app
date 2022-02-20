@@ -3,10 +3,23 @@ import { useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
 import axios from 'axios';
 import { getCookie, isAuth } from '../../../helpers/auth';
-import { API } from '../../../config';
+import { API,APP_NAME } from '../../../config';
 import { showSuccessMessage, showErrorMessage } from '../../../helpers/alerts';
+import Head from 'next/head';
 
 const Create = ({ token }) => {
+     const head = () => (
+        <Head>
+            <title>
+             {"New Location"} |  {APP_NAME}
+            </title>
+            <meta name="description" content={`top meal,meal,best meal,meal 's ratings,Best meal,top 10 best meal,Best restaurant for meal,best meal in pakistan,best meal in lahore`} />
+            <meta property="og:title" content={APP_NAME} />
+            <meta property="title" content={APP_NAME} />
+            <meta property="og:description" content={`Find best meal in your area`}/>
+            {/* logo here */}
+        </Head>
+    ); 
     // state
     const [state, setState] = useState({
         title: '',
@@ -150,6 +163,8 @@ const Create = ({ token }) => {
     );
 
     return (
+    <>
+        {head()}
         <Layout>
             <div className="row">
                 <div className="col-md-12">
@@ -175,6 +190,7 @@ const Create = ({ token }) => {
                 </div>
             </div>
         </Layout>
+        </>
     );
 };
 

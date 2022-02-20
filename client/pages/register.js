@@ -12,6 +12,7 @@ const Register = () => {
             <title>
              {"Register"} |  {APP_NAME}
             </title>
+            <link rel="shortcut icon" href="/static/icons/favicon.ico" />
             <meta name="description" content={`top meal,meal,best meal,meal 's ratings,Best meal,top 10 best meal,Best restaurant for meal,best meal in pakistan,best meal in lahore`} />
             <meta property="og:title" content={APP_NAME} />
             <meta property="title" content={APP_NAME} />

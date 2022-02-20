@@ -20,6 +20,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
             <title>
                 {category.name} | {APP_NAME}
             </title>
+            <link rel="shortcut icon" href="/static/icons/favicon.ico" />
             <meta name="description" content={stripHTML(`top ${category.name},${category.name},best ${category.name},${category.name} 's ratings,Best ${category.name},top 10 best ${category.name},Best restaurant for ${category.name},best ${category.name} in pakistan,best ${category.name} in lahore`)} />
             <meta property="og:title" content={category.name} />
             <meta property="og:description" content={stripHTML(category.content.substring(0, 160))} />

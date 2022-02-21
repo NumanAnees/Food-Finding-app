@@ -5,6 +5,8 @@ import { useState,useEffect, Fragment } from 'react';
 import { API,APP_NAME } from '../config';
 import moment from 'moment';
 import Head from 'next/head';
+import {CaretUpFilled} from "@ant-design/icons";
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 
 const Home = ({ categories }) => {
@@ -19,6 +21,7 @@ const Home = ({ categories }) => {
             <meta property="title" content={APP_NAME} />
             <meta property="og:description" content={`Find best meal in your area`}/>
             {/* logo here */}
+
         </Head>
     );
 

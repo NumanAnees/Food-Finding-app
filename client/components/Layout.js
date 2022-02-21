@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { isAuth, logout } from '../helpers/auth';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();

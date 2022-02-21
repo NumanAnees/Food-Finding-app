@@ -37,7 +37,8 @@ const linkSchema = new mongoose.Schema(
             type: String,
         },
         clicks: { type: Number, default: 0 },
-        upvotes: { type: Number, default: 0 }
+        upvotes: {type: Number, default: 0 },
+        upvoteIDs: [{ type: ObjectId, ref: "User" }]
     },
     { timestamps: true }
 );

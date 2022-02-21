@@ -7,6 +7,9 @@ import moment from 'moment';
 import { API,APP_NAME } from '../../config';
 import InfiniteScroll from 'react-infinite-scroller';
 import Head from 'next/head';
+import {CaretUpFilled} from "@ant-design/icons";
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import { Button } from 'antd';
 
 const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
     const [allLinks, setAllLinks] = useState(links);
@@ -66,44 +69,48 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
 
                 <div className="col-md-12">
                     <span className="badge text-dark">
-                        {l.type} {l.medium}
+                        {l.price}Rs / {l.gst}
                     </span>
-                        <span className="badge text-success">
-                            {l.category.name}
-                        </span>
                     <span className="badge text-secondary pull-right">{l.clicks} clicks</span>
                 </div>
             </div>
         ));
 
     const listOfLinks = () =>{
-       return allLinks.map((l, i) => (
-            <div key={i} className="row alert alert-primary p-2">
-                <div className="col-md-8" onClick={e => handleCount(l._id)}>
-                    <a href={l.url} target="_blank">
-                        <h5 className="pt-2">{l.title}</h5>
-                        <h6 className="pt-2 text-danger" style={{ fontSize: '12px' }}>
-                            {l.url.substring(0, 50)}
-                        </h6>
-                    </a>
+       return allLinks.map((l, i) => {
+         return <div key={i} className="row alert alert-primary p-2">
+                <div className="col-md-8 d-flex" onClick={e => handleCount(l._id)}>
+                    <div className="col-md-2 mt-auto">
+                        <Button style={{    "height": "4.7rem","width": "4.5rem", "margin-left": "-2rem", "backgroundColor":"#f5f5f5","marginBottom":"0.3rem"}} >
+                        <CaretUpFilled  style={{"fontSize":"27px","color":"gray"}}/>   
+                         <h6>400</h6>       
+                        </Button>
+                    </div>
+                    <div>
+                        <div>
+                        <a href={l.url} target="_blank">
+                            <h5 className="">{l.title}</h5>
+                            <h6 className=" text-danger" style={{ fontSize: '12px' }}>
+                                {l.url.substring(0, 50)}
+                            </h6>
+                        </a>
+                        </div>    
+                        <div className="mt-2" style={{"display":"flex","flexDirection":"row"}}>
+                            <span className="badge text-info">
+                                 {l.price} Rupees / GST {l.gst}
+                            </span>
+                            <span className="badge text-success">{l.category.name}</span>
+                        </div>
+                    </div>
                 </div>
-                <div className="col-md-4 pt-2" >
-                    <span className="pull-right">
+                <div className="col-md-4 d-flex flex-column" >
+                    <span className="pull-right text-center">
                         {moment(l.createdAt).fromNow()} by {l.postedBy.name}
                     </span>
-                    <br />
-                    {/* <span className="badge text-secondary pull-right">{l.clicks} clicks</span> */}
-                </div>
-                <div className="col-md-12 mt-2" style={{"display":"flex","flexDirection":"row"}}>
-                    <span className="badge text-dark">
-                        {l.price}Rs / {l.gst}
-                    </span>
-                    <span className="badge text-success">{l.category.name}</span>
-                     <span className="badge text-secondary pull-left ml-auto" style={{"marginRight":"10.7rem"}}>{l.clicks} clicks</span>
-
+                    <span className="badge text-secondary" style={{"marginTop":"auto","marginRight":"10rem"}}>{l.clicks} clicks</span>
                 </div>
             </div>
-        ))}
+            })}
     const loadMore = async () => {
         let newSkip = skip + limit ;
         const response = await axios.post(`${API}/category/${query.slug}`, { skip: newSkip, limit });
@@ -139,7 +146,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                <div className="row">
                     <div className="col-md-8">{listOfLinks()}</div>
                     <div className="col-md-4">
-                        <h2 className="lead">Most popular in {category.name}</h2>
+                        <h2 className="lead">Trending in {category.name}</h2>
                         <div className="p-3">{listOfPopularLinks()}</div>
                     </div>
                 </div>

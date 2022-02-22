@@ -5,8 +5,7 @@ import { useState,useEffect, Fragment } from 'react';
 import { API,APP_NAME } from '../config';
 import moment from 'moment';
 import Head from 'next/head';
-import {CaretUpFilled} from "@ant-design/icons";
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+
 
 
 const Home = ({ categories }) => {
@@ -76,7 +75,7 @@ const Home = ({ categories }) => {
 
     const listCategories = () =>
         categories.map((c, i) => (
-            <Link href={`/links/${c.slug}`}>
+            <Link key={i} href={`/links/${c.slug}`}>
                 <a style={{ border: '1px solid black',margin: "4px 0px" }} className="bg-light p-3 col-md-4">
                     <div>
                         <div className="row">

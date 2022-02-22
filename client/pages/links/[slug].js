@@ -10,6 +10,8 @@ import Head from 'next/head';
 import {CaretUpFilled} from "@ant-design/icons";
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import { Button } from 'antd';
+import  Router  from 'next/router';
+
 
 const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
     const [allLinks, setAllLinks] = useState(links);
@@ -17,6 +19,8 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(totalLinks);
     const [popular, setPopular] = useState([]);
+    const [uid, setUid] = useState("");
+
     const stripHTML = data => data.replace(/<\/?[^>]+(>|$)/g, '');
     const head = () => (
         <Head>
@@ -34,6 +38,10 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
 
       useEffect(() => {
         loadPopular();
+        const user = JSON.parse(localStorage.getItem('user'));
+        if(user){
+        setUid(user._id);
+        }
     }, []);
      const loadPopular = async () => {
         const response = await axios.get(`${API}/link/popular/${category.slug}`);
@@ -75,20 +83,42 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                 </div>
             </div>
         ));
-
+    const handleUpvote= async(linkId,upvArray)=>{
+       const user = JSON.parse(localStorage.getItem('user'));
+       if(user){
+        const userId = user._id;
+        if(!(upvArray.includes(userId))){
+        const response = await axios.put(`${API}/upvote`, { linkId,userId });
+        loadUpdatedLinks();
+        }else{
+        const response = await axios.put(`${API}/downvote`, { linkId,userId });
+        loadUpdatedLinks();
+        }
+        }
+        else{
+            Router.push("/login")
+        }
+    }
     const listOfLinks = () =>{
        return allLinks.map((l, i) => {
          return <div key={i} className="row alert alert-primary p-2">
-                <div className="col-md-8 d-flex" onClick={e => handleCount(l._id)}>
+                <div className="col-md-8 d-flex">
                     <div className="col-md-2 mt-auto">
-                        <Button style={{    "height": "4.7rem","width": "4.5rem", "margin-left": "-2rem", "backgroundColor":"#f5f5f5","marginBottom":"0.3rem"}} >
-                        <CaretUpFilled  style={{"fontSize":"27px","color":"gray"}}/>   
-                         <h6>400</h6>       
+                        {l.upvoteIDs.includes(uid) ?
+                        <Button style={{"height": "4.7rem","width": "4.5rem", "margin-left": "-2rem", "backgroundColor":"#4daf4e","marginBottom":"0.3rem","borderRadius":"5px"}} onClick={e => handleUpvote(l._id,l.upvoteIDs)} >
+                         <CaretUpFilled  style={{"fontSize":"34px","color":"white",}}/> 
+                         <h6 style={{"color":"white"}}>{l.upvotes}</h6>       
                         </Button>
+                        :
+                        <Button style={{"height": "4.7rem","width": "4.5rem", "margin-left": "-2rem", "backgroundColor":"#f5f5f5","marginBottom":"0.3rem","borderRadius":"5px"}} onClick={e => handleUpvote(l._id,l.upvoteIDs)} >
+                         <CaretUpFilled  style={{"fontSize":"27px","color":"gray",}}/> 
+                         <h6>{l.upvotes}</h6>       
+                        </Button>
+                        }
                     </div>
                     <div>
                         <div>
-                        <a href={l.url} target="_blank">
+                        <a href={l.url} target="_blank" onClick={e => handleCount(l._id)}>
                             <h5 className="">{l.title}</h5>
                             <h6 className=" text-danger" style={{ fontSize: '12px' }}>
                                 {l.url.substring(0, 50)}
@@ -107,7 +137,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                     <span className="pull-right text-center">
                         {moment(l.createdAt).fromNow()} by {l.postedBy.name}
                     </span>
-                    <span className="badge text-secondary" style={{"marginTop":"auto","marginRight":"10rem"}}>{l.clicks} clicks</span>
+                    <span className="badge text-secondary text-center" style={{"marginTop":"auto"}}>{l.clicks} clicks</span>
                 </div>
             </div>
             })}
@@ -167,7 +197,7 @@ Links.getInitialProps = async ({ query, req }) => {
         links: response.data.links,
         totalLinks: response.data.links.length,
         linksLimit: limit,
-        linkSkip: skip
+        linkSkip: skip,
     };
 };
 

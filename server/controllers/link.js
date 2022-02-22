@@ -86,7 +86,7 @@ exports.remove = (req, res) => {
 
 exports.clickCount = (req, res) => {
     const { linkId } = req.body;
-    Link.findByIdAndUpdate(linkId, { $inc: { clicks: 1 } }, { upsert: true, new: true }).exec((err, result) => {
+    Link.findByIdAndUpdate(linkId, { $inc: { clicks: 1 } }, {  new: true }).exec((err, result) => {
         if (err) {
             console.log(err);
             return res.status(400).json({
@@ -96,17 +96,31 @@ exports.clickCount = (req, res) => {
         res.json(result);
     });
 };
-exports.upvoteCount = (req, res) => {
-    const { linkId } = req.body;
-    Link.findByIdAndUpdate(linkId, { $inc: { upvotes: 1 } }, { upsert: true, new: true }).exec((err, result) => {
+
+exports.upvote = (req, res) => {
+    const { linkId,userId } = req.body;
+    Link.findByIdAndUpdate(linkId, {$inc: { upvotes: 1 },$push:{upvoteIDs:userId}}, { upsert: true ,new: true }).exec((err,result)=>{
         if (err) {
-            console.log(err);
-            return res.status(400).json({
+                return res.status(400).json({
                 error: 'Could not update upvote count'
-            });
-        }
+                });
+            }
         res.json(result);
-    });
+
+    })
+};
+
+exports.downvote = (req, res) => {
+    const { linkId,userId } = req.body;
+    Link.findByIdAndUpdate(linkId, { $inc: { upvotes: -1 },$pull:{upvoteIDs:userId}}, { upsert: true, new: true }).exec((err,result)=>{
+        if (err) {
+                return res.status(400).json({
+                error: 'Could not update upvote count'
+                });
+            }
+        res.json(result);
+
+    })
 };
 
 exports.popular = (req, res) => {

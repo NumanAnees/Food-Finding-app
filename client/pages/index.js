@@ -19,6 +19,7 @@ const Home = ({ categories }) => {
             <meta property="og:title" content={APP_NAME} />
             <meta property="title" content={APP_NAME} />
             <meta property="og:description" content={`Find best meal in your area`}/>
+            <link rel="stylesheet" href="/static/styles/style.css" />
             {/* logo here */}
 
         </Head>
@@ -99,9 +100,10 @@ const Home = ({ categories }) => {
     return (
         <Fragment>
             {head()}
-        <Layout>
+        <Layout>  
+        
             <div className="row">
-                <div className="col-md-12">
+                <div className="col-md-12 home-upper">
                     <h1 className="font-weight-bold">Browse Your Favourite Food</h1>
                     <br />
                 </div>
@@ -114,7 +116,7 @@ const Home = ({ categories }) => {
                 {listOfLinks()}
                 </div>
             </div>
-        </Layout>
+            </Layout>
        </Fragment> 
     );
 };

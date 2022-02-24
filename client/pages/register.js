@@ -99,12 +99,14 @@ const Register = () => {
     <>
         {head()}
         <Layout>
+            <div className="container pt-5 pb-5">
             <div className="col-md-6 offset-md-3">
                 <h1>Register</h1>
                 <br />
                 {success && showSuccessMessage(success)}
                 {error && showErrorMessage(error)}
                 {registerForm()}
+            </div>
             </div>
         </Layout>
         </>

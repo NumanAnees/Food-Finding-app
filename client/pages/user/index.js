@@ -91,6 +91,7 @@ const User = ({ user, userLinks, token }) => {
         <>
         {head()}
         <Layout>
+            <div className="container pt-5 pb-5">
             <h1>
                 {user.name}'s dashboard <span className="text-danger">/{user.role}</span>
             </h1>
@@ -117,6 +118,7 @@ const User = ({ user, userLinks, token }) => {
                     <br />
                     {listOfLinks()}
                 </div>
+            </div>
             </div>
         </Layout>
         </>

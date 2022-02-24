@@ -103,6 +103,7 @@ const Update = ({ oldCategory, token }) => {
         <>
         {head()}
         <Layout>
+            <div className="container pt-5 pb-5">
             <div className="row">
                 <div className="col-md-6 offset-md-3">
                     <h1>Update category</h1>
@@ -111,6 +112,7 @@ const Update = ({ oldCategory, token }) => {
                     {error && showErrorMessage(error)}
                     {UpdateCategoryForm()}
                 </div>
+            </div>
             </div>
         </Layout>
         </>

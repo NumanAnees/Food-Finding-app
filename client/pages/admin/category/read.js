@@ -99,14 +99,15 @@ const Read = ({ user, token }) => {
         <>
         {head()}
         <Layout>
+            <div className="container pt-5 pb-5">
             <div className="row">
                 <div className="col">
                     <h1>List of categories</h1>
                     <br />
                 </div>
             </div>
-
             <div className="row">{listCategories()}</div>
+            </div>
         </Layout>
         </>
     );

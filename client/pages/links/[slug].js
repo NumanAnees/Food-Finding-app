@@ -157,6 +157,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
         <Fragment>
         {head()}
         <Layout>
+            <div className="container pt-5 pb-5">
             <div className="row">
                 <div className="col-md-8">
                     <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
@@ -180,7 +181,9 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                         <div className="p-3">{listOfPopularLinks()}</div>
                     </div>
                 </div>
+
             </InfiniteScroll>
+            </div>
             </Layout>
         </Fragment>
     );

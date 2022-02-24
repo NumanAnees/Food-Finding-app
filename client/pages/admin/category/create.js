@@ -97,6 +97,7 @@ const Create = ({ user, token }) => {
         <>
         {head()}
         <Layout>
+            <div className="container pt-5 pb-5">
             <div className="row">
                 <div className="col-md-6 offset-md-3">
                     <h1>Create category</h1>
@@ -105,6 +106,7 @@ const Create = ({ user, token }) => {
                     {error && showErrorMessage(error)}
                     {createCategoryForm()}
                 </div>
+            </div>
             </div>
         </Layout>
         </>

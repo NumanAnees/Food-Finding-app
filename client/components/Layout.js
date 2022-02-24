@@ -79,7 +79,7 @@ const Layout = ({ children }) => {
 
     return (
         <>
-            {head()} {nav()} <div className="container pt-5 pb-5">{children}</div>
+            {head()} {nav()} <div>{children}</div>
         </>
     );
 };

@@ -145,8 +145,9 @@ const Admin = ({token}) => {
         ));
 
     return  <>
+    {head()}
     <Layout>
-        {head()}
+        <div className="container pt-5 pb-5">
         <h1>Admin Dashboard</h1>
         <br />
         <div className="row">
@@ -191,6 +192,7 @@ const Admin = ({token}) => {
             {loadedLinks && listOfLinks()}
           </div>
         </div>
+       </div> 
     </Layout>
     </>
 }

@@ -167,6 +167,7 @@ const Create = ({ token }) => {
     <>
         {head()}
         <Layout>
+           <div className="container pt-5 pb-5"> 
             <div className="row">
                 <div className="col-md-12">
                     <h1>Submit a Location</h1>
@@ -189,6 +190,7 @@ const Create = ({ token }) => {
                     {error && showErrorMessage(error)}
                     {submitLinkForm()}
                 </div>
+            </div>
             </div>
         </Layout>
         </>

@@ -106,6 +106,7 @@ const Update = ({token,user}) => {
         <>
         {head()}
         <Layout>
+            <div className="container pt-5 pb-5">
             <div className="col-md-6 offset-md-3">
                 <h1>Update</h1>
                 <br />
@@ -113,6 +114,7 @@ const Update = ({token,user}) => {
                 {error && showErrorMessage(error)}
                 {UpdateForm()}
             </div>
+        </div>
         </Layout>
         </>
     );

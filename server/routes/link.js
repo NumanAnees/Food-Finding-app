@@ -6,7 +6,7 @@ const { linkCreateValidator, linkUpdateValidator } = require('../validators/link
 const { runValidation } = require('../validators');
 
 // controllers
-const { requireSignin, authMiddleware,adminMiddleware } = require('../controllers/auth');
+const { requireSignin, authMiddleware,adminMiddleware} = require('../controllers/auth');
 const { create, list, read, update, remove,clickCount,upvote,downvote,popular,popularInCategory } = require('../controllers/link');
 
 // routes

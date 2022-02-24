@@ -4,9 +4,27 @@ const Category = require('../models/category');
 const User = require('../models/user');
 
 
-exports.create = (req, res) => {
+exports.create = async(req, res) => {
     const { title, url, category , price, gst } = req.body;
     const slug = slugify(url);
+    var check = false;
+   await Link.find({category})
+    .populate('category', 'name, slug')
+    .exec((err,resp)=>{
+          if (err) {
+            console.log(err);
+            return res.status(400).json({
+                error: 'Could not add new Location'
+            });
+        }
+        if(resp.length>0){
+            resp.map((e)=>{
+                if(e.title == title || e.url == url){
+                    check = true;
+                } 
+            })
+        }
+    if (!check){
     const link = new Link({ title, url, category,slug, price, gst });
     // posted by user
     link.postedBy = req.user._id;
@@ -20,6 +38,12 @@ exports.create = (req, res) => {
         }
         res.json(data);
     });
+}else{
+    return res.status(400).json({
+                error: 'Location already present'
+            });
+}
+})
 };
 
 exports.list = (req, res) => {
@@ -126,7 +150,7 @@ exports.downvote = (req, res) => {
 exports.popular = (req, res) => {
     Link.find()
         .populate('postedBy', 'name')
-        .populate('category', 'name, slug').sort({ clicks: -1 })
+        .populate('category', 'name').sort({ upvotes: -1 })
         .limit(3)
         .exec((err, links) => {
             if (err) {

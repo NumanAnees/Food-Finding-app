@@ -78,23 +78,10 @@ const Home = ({ categories }) => {
 
     const listCategories = () =>
         allCategories.filter((i)=>i.name.toLowerCase().includes(query)).map((c, i) => (
-            <Link key={i} href={`/links/${c.slug}`}>
-                <a style={{ border: '1px solid black',margin: "4px 0px" }} className="bg-light p-3 col-md-4">
-                    <div>
-                        <div className="row">
-                            <div className="col-md-4">
-                                <img
-                                    src={c.image && c.image.url}
-                                    alt={c.name}
-                                    style={{ width: '100px', height: 'auto' }}
-                                    className="pr-3"
-                                />
-                            </div>
-                            <div className="col-md-8">
-                                <h3>{c.name}</h3>
-                            </div>
-                        </div>
-                    </div>
+           <Link key={i} href={`/links/${c.slug}`}>
+                <a className='list-categories'>
+                    <img src={c.image && c.image.url} alt={c.name} className="category-image" />
+                    <p className='category-name'>{c.name}</p>
                 </a>
             </Link>
         ));
@@ -112,9 +99,11 @@ const Home = ({ categories }) => {
             <div className='row d-flex justify-content-center'>
               <input type="text" className='form-inp' placeholder='Search here...' onChange={e=>setQuery(e.target.value)} />
             </div>
-            <div className='container'>
-            <div className="row mt-2">{listCategories()}</div>
-            </div>
+           <div className='container'> 
+                <div className="row mt-2">
+                    {listCategories()}
+                </div> 
+            </div>   
             <div className='container'>
             <div className="row mt-4">
                 <h1 className='ml-4'>Most Popular</h1>

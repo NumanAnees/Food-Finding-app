@@ -33,6 +33,8 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
             <meta property="og:description" content={stripHTML(category.content.substring(0, 160))} />
             <meta property="og:image" content={category.image.url} />
             <meta property="og:image:secure_url" content={category.image.url} />
+            <link rel="stylesheet" href="/static/styles/style.css" />
+
         </Head>
     );
 
@@ -110,7 +112,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                          <h6 style={{"color":"white"}}>{l.upvotes}</h6>       
                         </Button>
                         :
-                        <Button style={{"height": "4.7rem","width": "4.5rem", "margin-left": "-2rem", "backgroundColor":"#f5f5f5","marginBottom":"0.3rem","borderRadius":"5px"}} onClick={e => handleUpvote(l._id,l.upvoteIDs)} >
+                        <Button style={{"height": "4.7rem","width": "4.5rem", "marginLeft": "-2rem", "backgroundColor":"#f5f5f5","marginBottom":"0.3rem","borderRadius":"5px"}} onClick={e => handleUpvote(l._id,l.upvoteIDs)} >
                          <CaretUpFilled  style={{"fontSize":"27px","color":"gray",}}/> 
                          <h6>{l.upvotes}</h6>       
                         </Button>
@@ -157,7 +159,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
         <Fragment>
         {head()}
         <Layout>
-            <div className="container pt-5 pb-5">
+            <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col-md-8">
                     <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>

@@ -19,6 +19,8 @@ const User = ({ user, userLinks, token }) => {
             <meta property="og:title" content={APP_NAME} />
             <meta property="title" content={APP_NAME} />
             <meta property="og:description" content={`Find best meal in your area`}/>
+            <link rel="stylesheet" href="/static/styles/style.css" />
+
             {/* logo here */}
         </Head>
     );    
@@ -91,7 +93,7 @@ const User = ({ user, userLinks, token }) => {
         <>
         {head()}
         <Layout>
-            <div className="container pt-5 pb-5">
+            <div className="container pt-5 pb-5 bg-col">
             <h1>
                 {user.name}'s dashboard <span className="text-danger">/{user.role}</span>
             </h1>

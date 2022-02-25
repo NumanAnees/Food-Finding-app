@@ -5,6 +5,7 @@ import { useState,useEffect, Fragment } from 'react';
 import { API,APP_NAME } from '../config';
 import moment from 'moment';
 import Head from 'next/head';
+import {SearchOutlined} from "@ant-design/icons";
 
 
 
@@ -24,7 +25,7 @@ const Home = ({ categories }) => {
 
         </Head>
     );
-
+   const [allCategories,SetCategories] = useState(categories);
     const [state,setState]= useState({
         links:[]
     })
@@ -75,7 +76,7 @@ const Home = ({ categories }) => {
         ))}
 
     const listCategories = () =>
-        categories.map((c, i) => (
+        allCategories.map((c, i) => (
             <Link key={i} href={`/links/${c.slug}`}>
                 <a style={{ border: '1px solid black',margin: "4px 0px" }} className="bg-light p-3 col-md-4">
                     <div>
@@ -96,20 +97,29 @@ const Home = ({ categories }) => {
                 </a>
             </Link>
         ));
+    const handleSearch = (e) =>{   
+       if(e.target.value.length > 0){
+       SetCategories(allCategories.filter((i)=>{
+           return i.name.includes(e.target.value);
+        }));
+      console.log(allCategories);
+        }
+    }
 
     return (
         <Fragment>
             {head()}
         <Layout>  
-        
             <div className="row">
-                <div className="col-md-12 home-upper">
-                    <h1 className="font-weight-bold">Browse Your Favourite Food</h1>
+                <div className="col-md-12 mt-5 mb-2">
+                    <h1 className="font-weight-bold text-center text-light">Browse Your Favourite Food</h1>
                     <br />
                 </div>
             </div>
-
-            <div className="row">{listCategories()}</div>
+            <div className='row d-flex justify-content-center'>
+              <input type="text" className='form-inp' placeholder='Search here...' onChange={handleSearch} />
+            </div>
+            <div className="row mt-2">{listCategories()}</div>
             <div className="row mt-4">
                 <h1 className='ml-4'>Most Popular</h1>
                 <div className='col-md-12'>

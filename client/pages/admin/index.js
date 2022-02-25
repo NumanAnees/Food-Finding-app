@@ -20,6 +20,8 @@ const Admin = ({token}) => {
             <meta property="og:title" content={APP_NAME} />
             <meta property="title" content={APP_NAME} />
             <meta property="og:description" content={`Find best meal in your area`}/>
+            <link rel="stylesheet" href="/static/styles/style.css" />
+
             {/* logo here */}
         </Head>
     );
@@ -147,7 +149,7 @@ const Admin = ({token}) => {
     return  <>
     {head()}
     <Layout>
-        <div className="container pt-5 pb-5">
+        <div className="container pt-5 pb-5 bg-col">
         <h1>Admin Dashboard</h1>
         <br />
         <div className="row">

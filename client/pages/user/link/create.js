@@ -18,6 +18,8 @@ const Create = ({ token }) => {
             <meta property="og:title" content={APP_NAME} />
             <meta property="title" content={APP_NAME} />
             <meta property="og:description" content={`Find best meal in your area`}/>
+            <link rel="stylesheet" href="/static/styles/style.css" />
+
             {/* logo here */}
         </Head>
     ); 
@@ -167,7 +169,7 @@ const Create = ({ token }) => {
     <>
         {head()}
         <Layout>
-           <div className="container pt-5 pb-5"> 
+           <div className="container pt-5 pb-5 bg-col"> 
             <div className="row">
                 <div className="col-md-12">
                     <h1>Submit a Location</h1>

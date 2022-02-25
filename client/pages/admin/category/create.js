@@ -21,6 +21,8 @@ const Create = ({ user, token }) => {
             <meta property="og:title" content={APP_NAME} />
             <meta property="title" content={APP_NAME} />
             <meta property="og:description" content={`Find best meal in your area`}/>
+            <link rel="stylesheet" href="/static/styles/style.css" />
+
             {/* logo here */}
         </Head>
     );
@@ -97,7 +99,7 @@ const Create = ({ user, token }) => {
         <>
         {head()}
         <Layout>
-            <div className="container pt-5 pb-5">
+            <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col-md-6 offset-md-3">
                     <h1>Create category</h1>

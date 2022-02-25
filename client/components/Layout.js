@@ -79,7 +79,7 @@ const Layout = ({ children }) => {
 
     return (
         <>
-            {head()} {nav()} <div>{children}</div>
+            {head()} {nav()} <div className='bg-col'>{children}</div>
         </>
     );
 };

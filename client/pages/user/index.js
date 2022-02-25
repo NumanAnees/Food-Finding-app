@@ -50,7 +50,7 @@ const User = ({ user, userLinks, token }) => {
 
     const listOfLinks = () =>
         userLinks.map((l, i) => (
-            <div key={i} className="row alert alert-primary p-2">
+            <div key={i} className="row alert alert-primary p-2 primary-link">
                 <div className="col-md-8">
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
@@ -68,7 +68,7 @@ const User = ({ user, userLinks, token }) => {
                 <div className="col-md-12 mt-1" style={{"display":"flex","flexDirection":"row"}}>
                    <div className='text-center'>
                     <span className="badge text-dark">
-                        {l.price}Rs / {l.gst}
+                        {l.price} Rupees / GST {l.gst}
                     </span>
                      <span className="badge text-success">
                             {l.category.name}
@@ -94,8 +94,8 @@ const User = ({ user, userLinks, token }) => {
         {head()}
         <Layout>
             <div className="container pt-5 pb-5 bg-col">
-            <h1>
-                {user.name}'s dashboard <span className="text-danger">/{user.role}</span>
+            <h1 className='text-light'>
+                {user.name}'s dashboard <span className="text-success">/{user.role}</span>
             </h1>
             <hr />
 
@@ -104,20 +104,19 @@ const User = ({ user, userLinks, token }) => {
                     <ul className="nav flex-column">
                         <li className="nav-item">
                             <Link href="/user/link/create">
-                                <a className="nav link">Submit a link</a>
+                                <a className="nav link text-light">• Submit a link</a>
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link href="/user/profile/update">
-                                <a className="nav link">Update profile</a>
+                                <a className="nav link text-light">• Update profile</a>
                             </Link>
                         </li>
                     </ul>
                 </div>
 
                 <div className="col-md-8">
-                    <h2>Your links</h2>
-                    <br />
+                    <h2 className='text-light'>Your links</h2>
                     {listOfLinks()}
                 </div>
             </div>

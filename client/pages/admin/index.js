@@ -157,17 +157,17 @@ const Admin = ({token}) => {
                 <ul className="nav flex-column">
                     <li className="nav-item">
                         <Link href="/admin/category/create">
-                            <a className="nav-link text-light">• Create category</a>
+                            <a className="nav link text-light">• Create category</a>
                         </Link>
                     </li>
                      <li className="nav-item">
                         <Link href="/admin/category/read">
-                            <a className="nav-link text-light">• All category</a>
+                            <a className="nav link text-light">• All category</a>
                         </Link>
                     </li>
                       <li className="nav-item">
                         <Link href="/user/profile/update">
-                            <a className="nav-link text-light">• Profile update</a>
+                            <a className="nav link text-light">• Profile update</a>
                         </Link>
                     </li>
                 </ul>

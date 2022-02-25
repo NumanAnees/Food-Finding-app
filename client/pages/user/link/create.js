@@ -96,7 +96,7 @@ const Create = ({ token }) => {
     return(
         <>
             <div className="form-check ml-3">
-                <label className="form-check-label">
+                <label className="form-check-label text-info">
                     <input
                         type="radio"
                         onClick={handleGstClick}
@@ -109,7 +109,7 @@ const Create = ({ token }) => {
                 </label>
             </div>
             <div className="form-check ml-3">
-                <label className="form-check-label">
+                <label className="form-check-label text-info">
                     <input
                         type="radio"
                         onClick={handleGstClick}
@@ -136,7 +136,7 @@ const Create = ({ token }) => {
             loadedCategories.map((c, i) => (
                 <li className="list-unstyled" key={c._id}>
                     <input type="radio" onClick={handleCategory} value={c._id} checked={category === c._id} className="mr-2" name="category" />
-                    <label className="form-check-label">{c.name}</label>
+                    <label className="form-check-label text-info">{c.name}</label>
                 </li>
             ))
         );
@@ -146,19 +146,19 @@ const Create = ({ token }) => {
     const submitLinkForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label className="text-muted">Name</label>
+                <label className="text-light">Name</label>
                 <input type="text" className="form-control" onChange={handleTitleChange} value={title} placeholder="Enter the name..." />
             </div>
             <div className="form-group">
-                <label className="text-muted">Map Location</label>
+                <label className="text-light">Map Location</label>
                 <input type="url" className="form-control" onChange={handleURLChange} value={url} placeholder="Enter the location 's URL..." />
             </div>
              <div className="form-group">
-                <label className="text-muted">Price</label>
+                <label className="text-light">Price</label>
                 <input type="number" className="form-control" onChange={handlePriceChange} value={price} placeholder="Enter the price..."/>
             </div>
-            <div>
-                <button disabled={!token} className="btn btn-outline-dark" type="submit">
+            <div className='text-center'>
+                <button disabled={!token} className="btn btn-success" type="submit">
                     {isAuth() || token ? 'Submit' : 'Login to submit'}
                 </button>
             </div>
@@ -172,14 +172,14 @@ const Create = ({ token }) => {
            <div className="container pt-5 pb-5 bg-col"> 
             <div className="row">
                 <div className="col-md-12">
-                    <h1>Submit a Location</h1>
+                    <h1 className='text-light'>Submit a Location</h1>
                     <br />
                 </div>
             </div>
             <div className="row">
                 <div className="col-md-4">
                    <div className="form-group">
-                        <label className="text-muted ml-4">Category</label>
+                        <label className="ml-4 text-light">Category</label>
                         <ul style={{ maxHeight: '180px', overflowY: 'scroll' }}>{showCategories()}</ul>
                     </div>
                     <div className="form-group">

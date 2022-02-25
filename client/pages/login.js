@@ -96,7 +96,7 @@ const Login = () => {
         <Layout>
             <div className="container pt-5 pb-5 bg-col">
             <div className="col-md-6 offset-md-3">
-                <h1 className='text-light text-center'>Login <span className='text-span'>Here</span></h1>
+                <h1 className='text-light text-center m-nav2 text-uppercase'>Login <span className='text-span'>Here</span></h1>
                 {success && showSuccessMessage(success)}
                 {error && showErrorMessage(error)}
                 {loginForm()}

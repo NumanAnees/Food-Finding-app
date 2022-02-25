@@ -150,24 +150,24 @@ const Admin = ({token}) => {
     {head()}
     <Layout>
         <div className="container pt-5 pb-5 bg-col">
-        <h1 className='text-light'>Admin <span className='text-span'>Dashboard</span></h1>
+        <h1 className='text-light m-nav3'>Admin <span className='text-span'>Dashboard</span></h1>
         <br />
         <div className="row">
             <div className="col-md-4">
                 <ul className="nav flex-column">
                     <li className="nav-item">
                         <Link href="/admin/category/create">
-                            <a className="nav link text-light">• Create category</a>
+                            <a className="nav link text-light">• Create New Category</a>
                         </Link>
                     </li>
                      <li className="nav-item">
                         <Link href="/admin/category/read">
-                            <a className="nav link text-light">• All category</a>
+                            <a className="nav link text-light">• All Categories</a>
                         </Link>
                     </li>
                       <li className="nav-item">
                         <Link href="/user/profile/update">
-                            <a className="nav link text-light">• Profile update</a>
+                            <a className="nav link text-light">• Profile Update</a>
                         </Link>
                     </li>
                 </ul>

@@ -94,7 +94,7 @@ const User = ({ user, userLinks, token }) => {
         {head()}
         <Layout>
             <div className="container pt-5 pb-5 bg-col">
-            <h1 className='text-light'>
+            <h1 className='text-light m-nav2'>
                <span className='text-span'>{user.name}</span> 's Dashboard <span className="text-span">/{user.role}</span>
             </h1>
             <hr />
@@ -104,19 +104,19 @@ const User = ({ user, userLinks, token }) => {
                     <ul className="nav flex-column">
                         <li className="nav-item">
                             <Link href="/user/link/create">
-                                <a className="nav link text-light">• Submit a link</a>
+                                <a className="nav link text-light">• Submit a Location</a>
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link href="/user/profile/update">
-                                <a className="nav link text-light">• Update profile</a>
+                                <a className="nav link text-light">• Update Profile</a>
                             </Link>
                         </li>
                     </ul>
                 </div>
 
                 <div className="col-md-8">
-                    <h2 className='text-light'>Your links</h2>
+                    <h2 className='text-light'>Your Locations</h2>
                     {listOfLinks()}
                 </div>
             </div>

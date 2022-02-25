@@ -171,8 +171,8 @@ const Update = ({ oldLink, token }) => {
         <Layout>
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
-                <div className="col-md-12">
-                    <h1 className='text-uppercase text-light'>Update <span className='text-span'>A</span> Location</h1>
+                <div className="col-md-12 ">
+                    <h1 className='text-uppercase text-light m-nav3'>Update <span className='text-span'>A</span> Location</h1>
                     <br />
                 </div>
             </div>

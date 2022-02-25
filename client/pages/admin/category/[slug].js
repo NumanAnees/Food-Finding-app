@@ -108,7 +108,7 @@ const Update = ({ oldCategory, token }) => {
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col-md-6 offset-md-3">
-                    <h1 className='text-uppercase text-light'>Update <span className='text-span'>Category</span></h1>
+                    <h1 className='text-uppercase text-light text-center m-nav3'>Update <span className='text-span'>Category</span></h1>
                     {success && showSuccessMessage(success)}
                     {error && showErrorMessage(error)}
                     {UpdateCategoryForm()}

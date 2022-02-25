@@ -93,7 +93,7 @@ const Home = ({ categories }) => {
             <div className='container'>
             <div className="row">
                 <div className="col-md-12 mt-5 mb-2">
-                    <h1 className="font-weight-bold text-center heading-awesome">Browse Your <span className='text-span2'>Favourite</span> Food</h1>
+                    <h1 className="font-weight-bold text-center heading-awesome m-nav">Browse Your <span className='text-span2'>Favourite</span> Food</h1>
                     <br />
                 </div>
             </div>

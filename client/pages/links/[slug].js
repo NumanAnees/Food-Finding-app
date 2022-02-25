@@ -163,7 +163,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col-md-8">
-                    <h1 className="display-6 font-weight-bold text-light">{category.name} - <span className='text-span'>Locations</span></h1>
+                    <h1 className="display-6 font-weight-bold text-light m-nav3 text-uppercase">{category.name} - <span className='text-span'>Locations</span></h1>
                     <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
                 </div>
                 <div className="col-md-4 mt-4 d-flex">

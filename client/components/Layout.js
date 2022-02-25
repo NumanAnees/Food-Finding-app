@@ -24,15 +24,19 @@ const Layout = ({ children }) => {
     );
 
     const nav = () => (
-        <ul className="nav nav-tabs bg-dark">
+        <ul className="nav navb bg-light">
             <li className="nav-item p-1">
                 <Link href="/">
-                    <a className="nav-link text-light">Home</a>
+                    {/* <a className="nav-link text-light">Home</a> */}
+                   <div>
+                    <img src="/static/icons/1.png" alt="logo" height="50px" width="50px" className='logo'/> 
+                    <label className='logo-label text-center'><span className='text-span3 text-center'>Top Dish</span></label>   
+                </div>
                 </Link>
             </li>   
             <li className="nav-item p-1">
                 <Link href="/user/link/create">
-                  <a className="nav-link text-light font-italic"> <span className='font-weight-bold link-loc'>&lt;</span>Submit a location<span className='font-weight-bold link-loc'>&gt;</span></a>
+                  <a className="nav-link text-dark font-italic text-center text-top"> <span className='text-span4'><span className='font-weight-bold link-loc'>&lt;</span>Submit a location<span className='font-weight-bold link-loc'>&gt;</span></span></a>
                 </Link>
             </li> 
 
@@ -40,12 +44,12 @@ const Layout = ({ children }) => {
                 <>
                     <li className="nav-item p-1" style={{marginLeft:"auto "  }}>
                         <Link href="/login">
-                            <a className="nav-link text-light">Login</a>
+                            <a className="nav-link text-dark  text-center text-top"><span className='text-span4'>Login</span></a>
                         </Link>
                     </li>
                     <li className="nav-item p-1">
                         <Link href="/register">
-                            <a className="nav-link text-light">Register</a>
+                            <a className="nav-link text-dark  text-center text-top"><span className='text-span4'>Register</span></a>
                         </Link>
                     </li>
                 </>
@@ -54,7 +58,7 @@ const Layout = ({ children }) => {
             {isAuth() && isAuth().role === 'admin' && (
                 <li className="nav-item p-1" style={{marginLeft:"auto "}}>
                     <Link href="/admin">
-                        <a className="nav-link text-light">{isAuth().name}</a>
+                        <a className="nav-link text-dark  text-center text-top"> <span className='text-span4'>{isAuth().name}</span></a>
                     </Link>
                 </li>
             )}
@@ -62,15 +66,15 @@ const Layout = ({ children }) => {
             {isAuth() && isAuth().role === 'subscriber' && (
                 <li className="nav-item p-1" style={{marginLeft:"auto "  }}>
                     <Link href="/user">
-                        <a className="nav-link text-light">{isAuth().name}</a>
+                        <a className="nav-link text-dark  text-center text-top"><span className='text-span4'>{isAuth().name}</span></a>
                     </Link>
                 </li>
             )}
 
             {isAuth() && (
                 <li className="nav-item pointer p-1">
-                    <a onClick={logout} className="nav-link text-light ">
-                        Logout
+                    <a onClick={logout} className="nav-link text-dark  text-center text-top">
+                      <span className='text-span4'>Logout</span>
                     </a>
                 </li>
             )}

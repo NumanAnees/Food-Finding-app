@@ -172,7 +172,7 @@ const Create = ({ token }) => {
            <div className="container pt-5 pb-5 bg-col"> 
             <div className="row">
                 <div className="col-md-12">
-                    <h1 className='text-light text-uppercase'>Submit a <span className='text-span'>Location</span></h1>
+                    <h1 className='text-light text-uppercase m-nav2'>Submit a <span className='text-span'>Location</span></h1>
                     <br />
                 </div>
             </div>

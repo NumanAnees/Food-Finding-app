@@ -78,25 +78,25 @@ const Update = ({ oldCategory, token }) => {
     const UpdateCategoryForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label className="text-muted">Name</label>
+                <label className="text-light">Name</label>
                 <input onChange={handleChange('name')} value={name} type="text" className="form-control" required />
             </div>
             <div className="form-group">
-                <label className="text-muted">Content</label>
+                <label className="text-light">Content</label>
                  <ReactQuill
                     value={content}
                     onChange={handleContent}
                     placeholder="Write something..."
                     theme="snow"
-                    className="pb-5 mb-3"
+                    className="pb-5 mb-3 text-dark bg-light"
                     style={{ border: '1px solid #666' }}
                 />            </div>
               <div className="form-group">
-                <label className="text-muted">Image Url</label>
+                <label className="text-light">Image Url</label>
                 <input onChange={handleChange('url')} value={url} className="form-control" required />
             </div>
-            <div>
-                <button className="btn btn-outline-dark">{buttonText}</button>
+            <div className='text-center'>
+                <button className="btn btn1">{buttonText}</button>
             </div>
         </form>
     );
@@ -108,8 +108,7 @@ const Update = ({ oldCategory, token }) => {
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col-md-6 offset-md-3">
-                    <h1>Update category</h1>
-                    <br />
+                    <h1 className='text-uppercase text-light'>Update category</h1>
                     {success && showSuccessMessage(success)}
                     {error && showErrorMessage(error)}
                     {UpdateCategoryForm()}

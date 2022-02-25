@@ -178,10 +178,10 @@ const Admin = ({token}) => {
                              <br />
                             {success && showSuccessMessage(success)}
                             {error && showErrorMessage(error)}
-                        <label className="text-light ml-4">Category</label>
+                        <label className="text-light ml-4">‣ Category</label>
                         <ul style={{ maxHeight: '180px', overflowY: 'scroll' }}>{showCategories()}</ul>
                         <div className='text-center'>
-                        <button className='btn btn-info' type='submit'>Choose</button>
+                        <button className='btn btn1' type='submit'>Choose</button>
                         </div>
                     </form>
             </div>

@@ -63,27 +63,29 @@ const Login = () => {
     const loginForm = () => (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
+                <label className='text-light'>Email</label>
                 <input
                     value={email}
                     onChange={handleChange('email')}
                     type="email"
                     className="form-control"
-                    placeholder="Type your email"
+                    placeholder="Type your email..."
                     required
                 />
             </div>
             <div className="form-group">
+                <label className='text-light'>Password</label>
                 <input
                     value={password}
                     onChange={handleChange('password')}
                     type="password"
                     className="form-control"
-                    placeholder="Type your password"
+                    placeholder="Type your password..."
                     required
                 />
             </div>
-            <div className="form-group">
-                <button className="btn btn-outline-dark">{buttonText}</button>
+            <div className="form-group text-center">
+                <button className="btn btn1">{buttonText}</button>
             </div>
         </form>
     );
@@ -94,8 +96,7 @@ const Login = () => {
         <Layout>
             <div className="container pt-5 pb-5 bg-col">
             <div className="col-md-6 offset-md-3">
-                <h1>Login</h1>
-                <br />
+                <h1 className='text-light text-center'>Login</h1>
                 {success && showSuccessMessage(success)}
                 {error && showErrorMessage(error)}
                 {loginForm()}

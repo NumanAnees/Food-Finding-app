@@ -158,7 +158,7 @@ const Create = ({ token }) => {
                 <input type="number" className="form-control" onChange={handlePriceChange} value={price} placeholder="Enter the price..."/>
             </div>
             <div className='text-center'>
-                <button disabled={!token} className="btn btn-success" type="submit">
+                <button disabled={!token} className="btn btn1" type="submit">
                     {isAuth() || token ? 'Submit' : 'Login to submit'}
                 </button>
             </div>
@@ -179,11 +179,11 @@ const Create = ({ token }) => {
             <div className="row">
                 <div className="col-md-4">
                    <div className="form-group">
-                        <label className="ml-4 text-light">Category</label>
+                        <label className="ml-4 text-light">• Category</label>
                         <ul style={{ maxHeight: '180px', overflowY: 'scroll' }}>{showCategories()}</ul>
                     </div>
                     <div className="form-group">
-                        <label className="text-muted ml-4">GST</label>
+                        <label className=" ml-4 text-light">• GST</label>
                         {showGst()}
                     </div>
                 </div>

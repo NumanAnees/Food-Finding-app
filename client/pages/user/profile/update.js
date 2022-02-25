@@ -98,8 +98,8 @@ const Update = ({token,user}) => {
                 
                 />
             </div>
-            <div className="form-group">
-                <button className="btn btn-outline-dark">{buttonText}</button>
+            <div className="form-group text-center">
+                <button className="btn btn1">{buttonText}</button>
             </div>
         </form>
     );
@@ -110,7 +110,7 @@ const Update = ({token,user}) => {
         <Layout>
             <div className="container pt-5 pb-5 bg-col">
             <div className="col-md-6 offset-md-3">
-                <h1>Update</h1>
+                <h1  className='text-light'>Update Profile</h1>
                 <br />
                 {success && showSuccessMessage(success)}
                 {error && showErrorMessage(error)}

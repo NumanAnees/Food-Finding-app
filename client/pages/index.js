@@ -49,7 +49,8 @@ const Home = ({ categories }) => {
     };
     const listOfLinks = () =>{
        return links.map((l, i) => (
-            <div key={i} className="row alert alert-primary p-2">
+            <div key={i} className="row alert alert-light p-2 primary-link">
+                              <div class="ribbon ribbon-top-right"><span>Top item</span></div>
                 <div className="col-md-8" onClick={e => handleCount(l._id)}>
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
@@ -67,7 +68,7 @@ const Home = ({ categories }) => {
                 </div>
                 <div className="col-md-12 mt-2" style={{"display":"flex","flexDirection":"row"}}>
                     <span className="badge text-dark">
-                        {l.price}Rs / {l.gst}
+                        {l.price} Rupees / GST {l.gst}
                     </span>
                     <span className="badge text-success">{l.category.name}</span>
                      <span className="badge text-secondary pull-left ml-auto" style={{"marginRight":"18.6rem"}}>{l.clicks} clicks</span>
@@ -90,14 +91,18 @@ const Home = ({ categories }) => {
         <Fragment>
             {head()}
         <Layout>  
+            <div className='container'>
             <div className="row">
                 <div className="col-md-12 mt-5 mb-2">
                     <h1 className="font-weight-bold text-center heading-awesome">Browse Your Favourite Food</h1>
                     <br />
                 </div>
             </div>
+            </div>
+            <div className='container'>
             <div className='row d-flex justify-content-center'>
               <input type="text" className='form-inp' placeholder='Search here...' onChange={e=>setQuery(e.target.value)} />
+            </div>
             </div>
            <div className='container'> 
                 <div className="row mt-2">
@@ -105,9 +110,9 @@ const Home = ({ categories }) => {
                 </div> 
             </div>   
             <div className='container'>
-            <div className="row mt-4">
-                <h1 className='ml-4'>Most Popular</h1>
-                <div className='col-md-12'>
+            <div className="row low-heading">
+                <h1 className='ml-4 heading-awesome-small'>Most Popular</h1>
+                <div className='col-md-12 mt-2'>
                 {listOfLinks()}
                 </div>
             </div>

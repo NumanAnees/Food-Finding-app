@@ -5,7 +5,6 @@ import { useState,useEffect, Fragment } from 'react';
 import { API,APP_NAME } from '../config';
 import moment from 'moment';
 import Head from 'next/head';
-import {SearchOutlined} from "@ant-design/icons";
 
 
 
@@ -50,7 +49,7 @@ const Home = ({ categories }) => {
     const listOfLinks = () =>{
        return links.map((l, i) => (
             <div key={i} className="row alert alert-light p-2 primary-link">
-                              <div class="ribbon ribbon-top-right"><span>Top item</span></div>
+              <div class="ribbon ribbon-top-right"><span>Top item</span></div>
                 <div className="col-md-8" onClick={e => handleCount(l._id)}>
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>

@@ -95,12 +95,12 @@ body {
   margin-top: 5rem;
 }
 .primary-link {
-  transition: 0.8s;
+  transition: 0.4s;
   border: 2px solid #04e9ae;
 }
 
 .primary-link:hover {
-  transform: translate(0, -14px);
+  transform: translate(0, -8px);
   box-shadow: 3px 8px 13px 1px rgba(0, 0, 0, 0.38);
   -webkit-box-shadow: 3px 8px 13px 1px rgba(0, 0, 0, 0.38);
   -moz-box-shadow: 3px 8px 13px 1px rgba(0, 0, 0, 0.38);
@@ -158,3 +158,4 @@ body {
   top: 30px;
   transform: rotate(45deg);
 }
+/* -------------------------home page end------------------------- */

@@ -61,7 +61,8 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     };
     const listOfPopularLinks = () =>
         popular.map((l, i) => (
-            <div key={i} className="row alert alert-secondary p-2">
+            <div key={i} className="row alert alert-info primary-link p-2">
+                  <div class="ribbon ribbon-top-right"><span>Top item</span></div>
                 <div className="col-md-8" onClick={() => handleCount(l._id)}>
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
@@ -79,7 +80,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
 
                 <div className="col-md-12">
                     <span className="badge text-dark">
-                        {l.price}Rs / {l.gst}
+                        {l.price} Rupees / GST {l.gst}
                     </span>
                     <span className="badge text-secondary pull-right">{l.clicks} clicks</span>
                 </div>
@@ -103,17 +104,17 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
     }
     const listOfLinks = () =>{
        return allLinks.map((l, i) => {
-         return <div key={i} className="row alert alert-primary p-2">
+         return <div key={i} className="row alert alert-light primary-link p-2">
                 <div className="col-md-8 d-flex">
                     <div className="col-md-2 mt-auto">
                         {l.upvoteIDs.includes(uid) ?
                         <Button style={{"height": "4.7rem","width": "4.5rem", "margin-left": "-2rem", "backgroundColor":"#4daf4e","marginBottom":"0.3rem","borderRadius":"5px"}} onClick={e => handleUpvote(l._id,l.upvoteIDs)} >
-                         <CaretUpFilled  style={{"fontSize":"34px","color":"white",}}/> 
+                         <CaretUpFilled  style={{"fontSize":"34px","color":"white",}} className="up-icon"/> 
                          <h6 style={{"color":"white"}}>{l.upvotes}</h6>       
                         </Button>
                         :
                         <Button style={{"height": "4.7rem","width": "4.5rem", "marginLeft": "-2rem", "backgroundColor":"#f5f5f5","marginBottom":"0.3rem","borderRadius":"5px"}} onClick={e => handleUpvote(l._id,l.upvoteIDs)} >
-                         <CaretUpFilled  style={{"fontSize":"27px","color":"gray",}}/> 
+                         <CaretUpFilled  style={{"fontSize":"27px","color":"gray",}}  className="up-icon"/> 
                          <h6>{l.upvotes}</h6>       
                         </Button>
                         }
@@ -162,7 +163,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col-md-8">
-                    <h1 className="display-4 font-weight-bold">{category.name} - URL/Links</h1>
+                    <h1 className="display-4 font-weight-bold heading-awesome-small">{category.name} - Links</h1>
                     <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
                 </div>
                 <div className="col-md-4 mt-4 d-flex">
@@ -179,7 +180,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                <div className="row">
                     <div className="col-md-8">{listOfLinks()}</div>
                     <div className="col-md-4">
-                        <h2 className="lead">Trending in {category.name}</h2>
+                        <h2 className="lead text-light">Most Clicked items in {category.name}</h2>
                         <div className="p-3">{listOfPopularLinks()}</div>
                     </div>
                 </div>

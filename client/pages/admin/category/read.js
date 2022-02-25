@@ -65,21 +65,20 @@ const Read = ({ user, token }) => {
     const listCategories = () =>
         categories.map((c, i) => (
             <Link key={i} href={`/links/${c.slug}`}>
-                <a style={{ border: '1px solid red' }} className="bg-light p-3 col-md-6">
+                <a className="list-categories mb-auto">
                     <div>
                         <div className="row">
                             <div className="col-md-3">
                                 <img
                                     src={c.image && c.image.url}
                                     alt={c.name}
-                                    style={{ width: '100px', height: 'auto' }}
-                                    className="pr-3"
+                                    className="category-image"
                                 />
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 category-name">
                                 <h3>{c.name}</h3>
                             </div>
-                            <div className="col-md-3">
+                            <div className="col-md-3 d-flex flex-column ml-auto">
                                 <Link href={`/admin/category/${c.slug}`}>
                                     <button className="btn btn-sm btn-outline-success btn-block mb-1">Update</button>
                                 </Link>
@@ -104,7 +103,7 @@ const Read = ({ user, token }) => {
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col">
-                    <h1>List of categories</h1>
+                    <h1 className='heading-awesome'>List of categories</h1>
                     <br />
                 </div>
             </div>

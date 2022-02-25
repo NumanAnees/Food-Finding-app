@@ -69,7 +69,7 @@ const Admin = ({token}) => {
             loadedCategories.map((c, i) => (
                 <li className="list-unstyled" key={c._id}>
                     <input type="radio" onClick={handleCategory} value={c._id} checked={category === c._id} className="mr-2" name="category" />
-                    <label className="form-check-label">{c.name}</label>
+                    <label className="form-check-label text-info ">{c.name}</label>
                 </li>
             ))
         );
@@ -107,7 +107,7 @@ const Admin = ({token}) => {
     };
      const listOfLinks = () =>
         loadedLinks.map((l, i) => (
-            <div key={i} className="row alert alert-primary p-2">
+            <div key={i} className="row alert alert-primary p-2 primary-link">
                 <div className="col-md-8">
                     <a href={l.url} target="_blank">
                         <h5 className="pt-2">{l.title}</h5>
@@ -125,7 +125,7 @@ const Admin = ({token}) => {
                 <div className="col-md-12 mt-1" style={{"display":"flex","flexDirection":"row"}}>
                    <div className='text-center'>
                     <span className="badge text-dark">
-                        {l.price}Rs / {l.gst}
+                        {l.price} Rupees / GST {l.gst}
                     </span>
                      <span className="badge text-success">
                             {l.category.name}
@@ -150,35 +150,35 @@ const Admin = ({token}) => {
     {head()}
     <Layout>
         <div className="container pt-5 pb-5 bg-col">
-        <h1>Admin Dashboard</h1>
+        <h1 className='text-light'>Admin Dashboard</h1>
         <br />
         <div className="row">
             <div className="col-md-4">
                 <ul className="nav flex-column">
                     <li className="nav-item">
                         <Link href="/admin/category/create">
-                            <a className="nav-link">Create category</a>
+                            <a className="nav-link text-light">• Create category</a>
                         </Link>
                     </li>
                      <li className="nav-item">
                         <Link href="/admin/category/read">
-                            <a className="nav-link">All category</a>
+                            <a className="nav-link text-light">• All category</a>
                         </Link>
                     </li>
                       <li className="nav-item">
                         <Link href="/user/profile/update">
-                            <a className="nav-link">Profile update</a>
+                            <a className="nav-link text-light">• Profile update</a>
                         </Link>
                     </li>
                 </ul>
             </div>
             <div className="col-md-8">
                     <form className="form-group" onSubmit={handleSubmit}>
-                        <h1>Update Links based on category</h1>
+                        <h1 className='text-light'>Update Links based on category</h1>
                              <br />
                             {success && showSuccessMessage(success)}
                             {error && showErrorMessage(error)}
-                        <label className="text-muted ml-4">Category</label>
+                        <label className="text-light ml-4">Category</label>
                         <ul style={{ maxHeight: '180px', overflowY: 'scroll' }}>{showCategories()}</ul>
                         <div className='text-center'>
                         <button className='btn btn-info' type='submit'>Choose</button>

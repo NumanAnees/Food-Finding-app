@@ -150,7 +150,7 @@ const Admin = ({token}) => {
     {head()}
     <Layout>
         <div className="container pt-5 pb-5 bg-col">
-        <h1 className='text-light'>Admin Dashboard</h1>
+        <h1 className='text-light'>Admin <span className='text-span'>Dashboard</span></h1>
         <br />
         <div className="row">
             <div className="col-md-4">
@@ -174,7 +174,7 @@ const Admin = ({token}) => {
             </div>
             <div className="col-md-8">
                     <form className="form-group" onSubmit={handleSubmit}>
-                        <h1 className='text-light'>Update Links based on category</h1>
+                        <h1 className='text-light'>Update <span className='text-span'>Locations</span> based on Category</h1>
                              <br />
                             {success && showSuccessMessage(success)}
                             {error && showErrorMessage(error)}

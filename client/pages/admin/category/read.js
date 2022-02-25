@@ -103,7 +103,7 @@ const Read = ({ user, token }) => {
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col">
-                    <h1 className='heading-awesome'>List of categories</h1>
+                    <h1 className='heading-awesome'>List of All <span className='text-span2'>Categories</span></h1>
                     <br />
                 </div>
             </div>

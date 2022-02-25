@@ -174,4 +174,12 @@ body {
 }
 .text-span {
   color: #04e9ae;
+  text-shadow: 2.2px 2.2px 0 #212b44, -1px -1px 0 transparent,
+    1px -1px 0 rgb(33 43 68 / 0%), -1px 1px 0 transparent,
+    1px 1px 0 rgb(33 43 68 / 0%);
+}
+.text-span2 {
+  color: #04e9ae;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.205);
+  -webkit-text-stroke-width: 2px;
 }

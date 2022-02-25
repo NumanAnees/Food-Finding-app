@@ -95,7 +95,7 @@ const User = ({ user, userLinks, token }) => {
         <Layout>
             <div className="container pt-5 pb-5 bg-col">
             <h1 className='text-light'>
-                {user.name}'s dashboard <span className="text-success">/{user.role}</span>
+               <span className='text-span'>{user.name}</span> 's Dashboard <span className="text-span">/{user.role}</span>
             </h1>
             <hr />
 

@@ -110,7 +110,7 @@ const Update = ({token,user}) => {
         <Layout>
             <div className="container pt-5 pb-5 bg-col">
             <div className="col-md-6 offset-md-3">
-                <h1  className='text-light m-nav2 text-uppercase text-center'>Update <span className='text-span'>Profile</span> Info</h1>
+                <h1  className='text-light m-nav2 text-uppercase text-center text-span5'>Update <span className='text-span'>Profile</span> Info</h1>
                 <br />
                 {success && showSuccessMessage(success)}
                 {error && showErrorMessage(error)}

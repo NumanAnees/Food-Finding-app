@@ -163,7 +163,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col-md-8">
-                    <h1 className="display-6 font-weight-bold text-light m-nav3 text-uppercase">{category.name} - <span className='text-span'>Locations</span></h1>
+                    <h1 className="display-6 font-weight-bold text-light m-nav3 text-uppercase text-span5">{category.name} - <span className='text-span'>Locations</span></h1>
                     <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
                 </div>
                 <div className="col-md-4 mt-4 d-flex">
@@ -180,7 +180,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                <div className="row">
                     <div className="col-md-8">{listOfLinks()}</div>
                     <div className="col-md-4">
-                        <h2 className="lead text-light">Most Clicked items in <span className='text-span'>{category.name}</span></h2>
+                        <h2 className="lead text-light text-span5">Most Clicked items in <span className='text-span'>{category.name}</span></h2>
                         <div className="p-3">{listOfPopularLinks()}</div>
                     </div>
                 </div>

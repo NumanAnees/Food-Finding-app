@@ -93,12 +93,12 @@ const Home = ({ categories }) => {
             <div className='container'>
             <div className="row">
                 <div className="col-md-12 mt-5 mb-2">
-                    <h1 className="font-weight-bold text-center heading-awesome m-nav">Browse Your <span className='text-span2'>Favourite</span> Food</h1>
+                    <h1 className="font-weight-bold text-center heading-awesome m-nav text-span5">Browse Your <span className='text-span'>Favourite</span> Food</h1>
                     <br />
                 </div>
             </div>
             </div>
-            <div className='container'>
+            <div className='container marg-2'>
             <div className='row d-flex justify-content-center'>
               <input type="text" className='form-inp' placeholder='Search here...' onChange={e=>setQuery(e.target.value)} />
             </div>
@@ -110,7 +110,7 @@ const Home = ({ categories }) => {
             </div>   
             <div className='container'>
             <div className="row low-heading">
-                <h1 className='ml-2 heading-awesome-small'>Most <span className='text-span2'>Popular</span> Brands</h1>
+                <h1 className='ml-2 heading-awesome-small text-span5'>Most <span className='text-span'>Voted Items</span> in all categories</h1>
                 <div className='col-md-12 mt-2'>
                 {listOfLinks()}
                 </div>

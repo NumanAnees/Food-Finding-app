@@ -76,7 +76,7 @@ const Read = ({ user, token }) => {
                                 />
                             </div>
                             <div className="col-md-6 category-name">
-                                <h3>{c.name}</h3>
+                                <h3 style={{"color":"#04e9ae"}}>{c.name}</h3>
                             </div>
                             <div className="col-md-3 d-flex flex-column ml-auto">
                                 <Link href={`/admin/category/${c.slug}`}>
@@ -103,7 +103,7 @@ const Read = ({ user, token }) => {
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col">
-                    <h1 className='heading-awesome m-nav3'>List of All <span className='text-span2'>Categories</span></h1>
+                    <h1 className='heading-awesome m-nav3 text-span5'>List of All <span className='text-span2'>Categories</span></h1>
                     <br />
                 </div>
             </div>

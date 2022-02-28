@@ -103,7 +103,7 @@ const Create = ({ user, token }) => {
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
                 <div className="col-md-6 offset-md-3">
-                    <h1 className='text-light m-nav3 text-center'>Create <span className='text-span'>New</span> Category</h1>
+                    <h1 className='text-light m-nav3 text-center text-span5'>Create <span className='text-span'>New</span> Category</h1>
                     {success && showSuccessMessage(success)}
                     {error && showErrorMessage(error)}
                     {createCategoryForm()}

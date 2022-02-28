@@ -94,7 +94,7 @@ const User = ({ user, userLinks, token }) => {
         {head()}
         <Layout>
             <div className="container pt-5 pb-5 bg-col">
-            <h1 className='text-light m-nav2'>
+            <h1 className='text-light m-nav2 text-span5'>
                <span className='text-span'>{user.name}</span> 's Dashboard <span className="text-span">/{user.role}</span>
             </h1>
             <hr />
@@ -116,7 +116,7 @@ const User = ({ user, userLinks, token }) => {
                 </div>
 
                 <div className="col-md-8">
-                    <h2 className='text-light'>Your Locations</h2>
+                    <h2 className='text-light marg-2 text-span5 text-uppercase'>All Locations you have added</h2>
                     {listOfLinks()}
                 </div>
             </div>

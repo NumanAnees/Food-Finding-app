@@ -6,6 +6,7 @@ import axios from 'axios';
 import { API,APP_NAME } from '../../config';
 import moment from 'moment';
 import  Router  from 'next/router';
+import {EyeFilled } from "@ant-design/icons";
 import { showSuccessMessage, showErrorMessage } from '../../helpers/alerts';
 import Head from 'next/head';
 
@@ -141,7 +142,7 @@ const Admin = ({token}) => {
                         Delete
                     </span>
                     </button>
-                    <span className="badge text-secondary pull-left ml-auto" style={{"marginRight":"10.7rem"}}>{l.clicks} clicks</span>
+                    <span className="text-secondary pull-left ml-auto" style={{"marginRight":"10.7rem","fontSize":"14px"}}><EyeFilled /> {l.clicks}</span>
                 </div>
             </div>
         ));

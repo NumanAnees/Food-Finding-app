@@ -11,6 +11,8 @@ import {CaretUpFilled} from "@ant-design/icons";
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import { Button } from 'antd';
 import  Router  from 'next/router';
+import {EyeFilled } from "@ant-design/icons";
+
 
 
 const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => {
@@ -82,7 +84,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                     <span className="badge text-dark">
                         {l.price} Rupees / GST {l.gst}
                     </span>
-                    <span className="badge text-secondary pull-right">{l.clicks} clicks</span>
+                    <span className="text-secondary pull-right" style={{"fontSize":"13px","marginLeft":"10px"}}><EyeFilled /> {l.clicks}</span>
                 </div>
             </div>
         ));
@@ -140,7 +142,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                     <span className="pull-right text-center">
                         {moment(l.createdAt).fromNow()} by {l.postedBy.name}
                     </span>
-                    <span className="badge text-secondary text-center" style={{"marginTop":"auto"}}>{l.clicks} clicks</span>
+                    <span className="text-secondary text-center" style={{"marginTop":"auto","fontSize":"14px"}}><EyeFilled /> {l.clicks}</span>
                 </div>
             </div>
             })}
@@ -180,7 +182,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                <div className="row">
                     <div className="col-md-8">{listOfLinks()}</div>
                     <div className="col-md-4">
-                        <h2 className="lead text-light text-span5">Most Clicked items in <span className='text-span'>{category.name}</span></h2>
+                        <h2 className="lead text-light text-span5">Most Viewed items in <span className='text-span'>{category.name}</span></h2>
                         <div className="p-3">{listOfPopularLinks()}</div>
                     </div>
                 </div>

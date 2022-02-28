@@ -6,6 +6,7 @@ import moment from 'moment';
 import { API,APP_NAME } from '../../config';
 import { getCookie } from '../../helpers/auth';
 import withUser from '../withUser';
+import {EyeFilled } from "@ant-design/icons";
 import Head from 'next/head';
 
 const User = ({ user, userLinks, token }) => {
@@ -84,7 +85,7 @@ const User = ({ user, userLinks, token }) => {
                         Delete
                     </span>
                     </button>
-                    <span className="badge text-secondary pull-left ml-auto" style={{"marginRight":"10.7rem"}}>{l.clicks} clicks</span>
+                    <span className="text-secondary pull-left ml-auto" style={{"marginRight":"10.7rem","fontSize":"14px"}}><EyeFilled /> {l.clicks}</span>
                 </div>
             </div>
         ));

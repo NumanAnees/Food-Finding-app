@@ -5,7 +5,7 @@ import { useState,useEffect, Fragment } from 'react';
 import { API,APP_NAME } from '../config';
 import moment from 'moment';
 import Head from 'next/head';
-
+import {EyeFilled } from "@ant-design/icons";
 
 
 const Home = ({ categories }) => {
@@ -70,7 +70,7 @@ const Home = ({ categories }) => {
                         {l.price} Rupees / GST {l.gst}
                     </span>
                     <span className="badge text-success">{l.category.name}</span>
-                     <span className="badge text-secondary pull-left ml-auto" style={{"marginRight":"18.6rem"}}>{l.clicks} clicks</span>
+                     <span className="text-secondary pull-left ml-auto d-flex flex-row" style={{"marginRight":"18.6rem","fontSize":"14px"}}><div><EyeFilled /> {l.clicks}</div></span>
 
                 </div>
             </div>

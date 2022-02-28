@@ -230,7 +230,7 @@ body {
 }
 .navb {
   position: fixed;
-  z-index: 100;
+  z-index: 200;
   width: 100%;
   max-width: 100%;
 }

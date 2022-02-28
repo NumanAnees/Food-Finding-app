@@ -85,7 +85,7 @@ const User = ({ user, userLinks, token }) => {
                         Delete
                     </span>
                     </button>
-                    <span className="text-secondary pull-left ml-auto" style={{"marginRight":"10.7rem","fontSize":"14px"}}><EyeFilled /> {l.clicks}</span>
+                    <span className="text-secondary pull-left ml-auto" style={{"marginRight":"10.7rem","fontSize":"13px"}}><EyeFilled /> {l.clicks}</span>
                 </div>
             </div>
         ));

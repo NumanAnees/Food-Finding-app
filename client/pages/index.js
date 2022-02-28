@@ -48,7 +48,7 @@ const Home = ({ categories }) => {
     };
     const listOfLinks = () =>{
        return links.map((l, i) => (
-            <div key={i} className="row alert alert-light p-2 primary-link">
+            <div key={i} className="row alert alert-light p-2 primary-link ">
               <div class="ribbon ribbon-top-right"><span>Top item</span></div>
                 <div className="col-md-8" onClick={e => handleCount(l._id)}>
                     <a href={l.url} target="_blank">
@@ -65,14 +65,15 @@ const Home = ({ categories }) => {
                     <br />
                     {/* <span className="badge text-secondary pull-right">{l.clicks} clicks</span> */}
                 </div>
-                <div className="col-md-12 mt-2" style={{"display":"flex","flexDirection":"row"}}>
+                <div className="col-md-8 mt-2" style={{"display":"flex","flexDirection":"row"}}>
                     <span className="badge text-dark">
                         {l.price} Rupees / GST {l.gst}
                     </span>
                     <span className="badge text-success">{l.category.name}</span>
-                     <span className="text-secondary pull-left ml-auto d-flex flex-row" style={{"marginRight":"18.6rem","fontSize":"14px"}}><div><EyeFilled /> {l.clicks}</div></span>
-
                 </div>
+                 <div className='col-md-4'>
+                     <span className="text-secondary pull-left ml-auto" style={{"marginRight":"18.6rem","fontSize":"14px"}}><div><EyeFilled /> {l.clicks}</div></span>
+                 </div> 
             </div>
         ))}
 

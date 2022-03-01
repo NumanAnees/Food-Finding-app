@@ -102,7 +102,7 @@ const Home = ({ categories }) => {
             </div>
             <div className='container marg-2'>
             <div className='row d-flex justify-content-center'>
-              <input type="text" className='form-inp' placeholder='Search here...' onChange={e=>setQuery(e.target.value)} />
+              <input type="text" className='form-inp' placeholder='Search your favourite food here...' onChange={e=>setQuery(e.target.value)} />
             </div>
             </div>
            <div className='container'> 

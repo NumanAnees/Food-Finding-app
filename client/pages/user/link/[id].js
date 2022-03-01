@@ -98,7 +98,7 @@ const Update = ({ oldLink, token }) => {
     return(
         <>
             <div className="form-check ml-3">
-                <label className="form-check-label text-info">
+                <label className="form-check-label text-light p-1">
                     <input
                         type="radio"
                         onClick={handleGstClick}
@@ -111,7 +111,7 @@ const Update = ({ oldLink, token }) => {
                 </label>
             </div>
             <div className="form-check ml-3">
-                <label className="form-check-label text-info">
+                <label className="form-check-label text-light p-1">
                     <input
                         type="radio"
                         onClick={handleGstClick}
@@ -136,9 +136,9 @@ const Update = ({ oldLink, token }) => {
         return (
            loadedCategories &&
             loadedCategories.map((c, i) => (
-                <li className="list-unstyled" key={c._id}>
+                <li className="list-unstyled p-1" key={c._id}>
                     <input type="radio" onClick={handleCategory} value={c._id} checked={category === c._id} className="mr-2" name="category" />
-                    <label className="form-check-label text-info">{c.name}</label>
+                    <label className="form-check-label text-light">{c.name}</label>
                 </li>
             ))
         );

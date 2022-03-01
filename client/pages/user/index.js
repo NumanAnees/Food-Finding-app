@@ -101,7 +101,7 @@ const User = ({ user, userLinks, token }) => {
             <hr />
 
             <div className="row">
-                <div className="col-md-4">
+                <div className="col-md-4 marg-b-pages">
                     <ul className="nav flex-column">
                         <li className="nav-item">
                             <Link href="/user/link/create">

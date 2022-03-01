@@ -12,6 +12,8 @@ import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import { Button } from 'antd';
 import  Router  from 'next/router';
 import {EyeFilled } from "@ant-design/icons";
+import Footer from '../../components/Footer';
+
 
 
 
@@ -190,6 +192,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
             </InfiniteScroll>
             </div>
             </Layout>
+            <Footer/>
         </Fragment>
     );
 };

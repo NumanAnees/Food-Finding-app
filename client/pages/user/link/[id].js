@@ -1,6 +1,7 @@
 // imports
 import { useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
+import Footer from '../../../components/Footer';
 import axios from 'axios';
 import withUser from '../../withUser';
 import { getCookie, isAuth } from '../../../helpers/auth';
@@ -96,7 +97,6 @@ const Update = ({ oldLink, token }) => {
     const showGst = () => {
     return(
         <>
-        {head()}
             <div className="form-check ml-3">
                 <label className="form-check-label text-info">
                     <input
@@ -168,6 +168,8 @@ const Update = ({ oldLink, token }) => {
     );
 
     return (
+        <>
+        {head()}
         <Layout>
             <div className="container pt-5 pb-5 bg-col">
             <div className="row">
@@ -195,6 +197,8 @@ const Update = ({ oldLink, token }) => {
             </div>
             </div>
         </Layout>
+        <Footer/>
+        </>
     );
 };
 Update.getInitialProps = async ({ req, token, query }) => {

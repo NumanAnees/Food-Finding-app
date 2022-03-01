@@ -6,6 +6,7 @@ import { API,APP_NAME } from '../config';
 import moment from 'moment';
 import Head from 'next/head';
 import {EyeFilled } from "@ant-design/icons";
+import Footer from '../components/Footer';
 
 
 const Home = ({ categories }) => {
@@ -118,6 +119,7 @@ const Home = ({ categories }) => {
             </div>
             </div>
             </Layout>
+            <Footer/>
        </Fragment> 
     );
 };

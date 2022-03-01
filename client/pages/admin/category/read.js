@@ -6,6 +6,8 @@ import { showSuccessMessage, showErrorMessage } from '../../../helpers/alerts';
 import Layout from '../../../components/Layout';
 import withAdmin from '../../withAdmin';
 import Head from 'next/head';
+import Footer from "../../../components/Footer"
+
 
 const Read = ({ user, token }) => {
     const head = () => (
@@ -110,6 +112,7 @@ const Read = ({ user, token }) => {
             <div className="row">{listCategories()}</div>
             </div>
         </Layout>
+        <Footer/>
         </>
     );
 };

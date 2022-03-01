@@ -9,6 +9,7 @@ import {authenticate, isAuth} from "../helpers/auth"
 import Head from 'next/head';
 
 
+
 const Login = () => {
       const head = () => (
         <Head>

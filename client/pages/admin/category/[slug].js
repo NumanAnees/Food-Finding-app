@@ -8,7 +8,7 @@ import Layout from '../../../components/Layout';
 import withAdmin from '../../withAdmin';
 import 'react-quill/dist/quill.snow.css';
 import Head from 'next/head';
-
+import Footer from "../../../components/Footer"
 
 const Update = ({ oldCategory, token }) => {
     const head = () => (
@@ -116,6 +116,7 @@ const Update = ({ oldCategory, token }) => {
             </div>
             </div>
         </Layout>
+        <Footer/>
         </>
     );
 };

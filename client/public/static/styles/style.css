@@ -7,7 +7,9 @@ body {
 }
 #nprogress .bar {
   height: 3px !important;
-  background-color: #04e9ae;
+  width: 100%;
+  background-color: #79b8ff;
+  transition: width 0.4s ease 0s;
 }
 .bg-col {
   background-color: #334062;
@@ -245,4 +247,24 @@ body {
 }
 .marg-2 {
   margin-bottom: 2rem;
+}
+
+.upper-f {
+  background-color: #009688;
+}
+.lower-f {
+  background-color: #00786d;
+}
+.marg-f {
+  margin-top: 5rem;
+}
+.footer-link {
+  text-decoration: none;
+  color: #04e9ae;
+}
+.footer-link:hover {
+  color: #fff;
+}
+.marg-b-pages {
+  margin-bottom: 4.5rem;
 }

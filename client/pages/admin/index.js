@@ -9,6 +9,8 @@ import  Router  from 'next/router';
 import { showSuccessMessage, showErrorMessage } from '../../helpers/alerts';
 import Head from 'next/head';
 import {EyeFilled } from "@ant-design/icons";
+import Footer from '../../components/Footer';
+
 
 const Admin = ({token}) => {
     const head = () => (
@@ -154,7 +156,7 @@ const Admin = ({token}) => {
         <h1 className='text-light m-nav3 text-span5'>Admin <span className='text-span'>Dashboard</span></h1>
         <br />
         <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-4 marg-b-pages">
                 <ul className="nav flex-column">
                     <li className="nav-item">
                         <Link href="/admin/category/create">
@@ -197,6 +199,7 @@ const Admin = ({token}) => {
         </div>
        </div> 
     </Layout>
+    <Footer/>
     </>
 }
 

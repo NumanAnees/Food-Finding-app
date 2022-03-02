@@ -21,7 +21,7 @@ body::-webkit-scrollbar {
   width: 12px;
 }
 body::-webkit-scrollbar-track {
-  background: #000000;
+  background: rgba(0, 0, 0, 0.5);
 }
 body::-webkit-scrollbar-thumb {
   background-color: rgb(192, 192, 192);
@@ -320,4 +320,29 @@ input[type="radio"]:before {
 input[type="radio"]:checked:before {
   background: #04e9ae;
 }
-/* ------------------------------------------------------------------------------- */
+.locaction-btn-nav {
+  display: none;
+}
+.locaction-btn {
+  display: block;
+  margin-left: 0.4rem;
+}
+.MenuOutlined {
+  color: #04e9ae;
+}
+.MenuOutline {
+  border: 1px solid #04e9ae;
+  outline: none;
+}
+.MenuOutline:focus {
+  border: 1px solid #04e9ae;
+  outline: none;
+}
+@media all and (max-width: 991px) {
+  .locaction-btn-nav {
+    display: block;
+  }
+  .locaction-btn {
+    display: none;
+  }
+}

@@ -79,7 +79,7 @@ const Home = ({ categories }) => {
         ))}
 
     const listCategories = () =>
-        allCategories.filter((i)=>i.name.toLowerCase().includes(query)).map((c, i) => (
+        allCategories.filter((i)=>i.name.toUpperCase().includes(query)).map((c, i) => (
            <Link key={i} href={`/links/${c.slug}`}>
                 <a className='list-categories'>
                     <img src={c.image && c.image.url} alt={c.name} className="category-image" />
@@ -102,7 +102,7 @@ const Home = ({ categories }) => {
             </div>
             <div className='container marg-2'>
             <div className='row d-flex justify-content-center'>
-              <input type="text" className='form-inp' placeholder='Search your favourite food here...' onChange={e=>setQuery(e.target.value)} />
+              <input type="text" className='form-inp' placeholder='Search your favourite food here...' onChange={e=>setQuery(e.target.value.toUpperCase())} />
             </div>
             </div>
            <div className='container'> 

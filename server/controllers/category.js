@@ -70,8 +70,12 @@ exports.read = (req, res) => {
 
 exports.update = (req, res) => {
     const { slug } = req.params;
-    const { name, image, content } = req.body;
-
+    const { name,content,url } = req.body;
+    const key = Date.now();
+    const image = {
+        url:`${url}`,
+        key: `${key}`
+    }
     Category.findOneAndUpdate({ slug }, { name, content,image }, { new: true }).exec((err, updated) => {
         if (err) {
             return res.status(400).json({

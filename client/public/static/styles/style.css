@@ -338,11 +338,34 @@ input[type="radio"]:checked:before {
   border: 1px solid #04e9ae;
   outline: none;
 }
+.home-btn {
+  display: none;
+}
+.slug-img {
+  max-height: 260px;
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+  width: inherit;
+}
+
 @media all and (max-width: 991px) {
   .locaction-btn-nav {
     display: block;
   }
   .locaction-btn {
+    display: none;
+  }
+  .home-btn {
+    display: block;
+  }
+}
+@media all and (max-width: 500px) {
+  .category-image {
+    display: none;
+  }
+}
+@media all and (max-width: 370px) {
+  .category-slug {
     display: none;
   }
 }

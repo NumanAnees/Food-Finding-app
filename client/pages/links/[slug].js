@@ -128,7 +128,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                         <a href={l.url} target="_blank" onClick={e => handleCount(l._id)}>
                             <h5 className="">{l.title}</h5>
                             <h6 className=" text-danger" style={{ fontSize: '12px' }}>
-                                {l.url.substring(0, 50)}
+                                {l.url.substring(0, 38)}
                             </h6>
                         </a>
                         </div>    
@@ -136,7 +136,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                             <span className="badge text-info">
                                  {l.price} Rupees / GST {l.gst}
                             </span>
-                            <span className="badge text-success">{l.category.name}</span>
+                            <span className="badge text-success category-slug">{l.category.name}</span>
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                     <div className="lead alert alert-secondary pt-4">{renderHTML(category.content || '')}</div>
                 </div>
                 <div className="col-md-4 mt-4 d-flex">
-                    <img src={category.image.url}alt={category.name} style={{ width: 'auto', maxHeight: '280px' }} />
+                    <img src={category.image.url}alt={category.name} className="slug-img" />
                 </div>
             </div>
             <br />
@@ -179,7 +179,7 @@ const Links = ({ query, category, links, totalLinks, linksLimit, linkSkip }) => 
                 pageStart={0}
                 loadMore={loadMore}
                 hasMore={size > 0 && size >= limit}
-                loader={<img key={0} src="/static/images/loading.gif" alt="loading" />}
+                loader={<img key={0} src="/static/images/load.gif" alt="loading" style={{"height":"60px","width":"60px"}} />}
             >
                <div className="row">
                     <div className="col-md-8">{listOfLinks()}</div>

@@ -37,12 +37,12 @@ const nav = ()=>{
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-         <li className="nav-item p-1">
+        <li className="nav-item p-1">
                 <Link href="/">
-                  <a className="nav-link text-dark font-italic text-center text-top home-btn"> <span className='text-span4'>Home</span></a>
+                  <a className="nav-link text-dark text-center text-top home-btn"> <span className='text-span4'>Home</span></a>
                 </Link>
             </li> 
-            <li className="nav-item p-1">
+         <li className="nav-item p-1">
                 <Link href="/user/link/create">
                   <a className="nav-link text-dark font-italic text-center text-top locaction-btn-nav"> <span className='text-span4'><span className='font-weight-bold link-loc'>&lt;</span>Submit a location<span className='font-weight-bold link-loc'>&gt;</span></span></a>
                 </Link>
@@ -63,7 +63,7 @@ const nav = ()=>{
                 </>
             )}
 
-            {isAuth() && isAuth().role === 'Admin' && (
+            {isAuth() && isAuth().role === 'admin' && (
                 <li className="nav-item p-1">
                     <Link href="/admin">
                         <a className="nav-link text-dark  text-center text-top"> <span className='text-span4'>Admin 's Dashboard</span></a>

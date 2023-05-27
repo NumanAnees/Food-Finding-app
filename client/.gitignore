@@ -1,3 +1,7 @@
 /node_modules
 /.next
 .vercel
+
+#pwa
+public/sw.js
+public/workbox-*.js

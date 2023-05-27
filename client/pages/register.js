@@ -6,6 +6,9 @@ import { showSuccessMessage, showErrorMessage } from "../helpers/alerts";
 import { authenticate, isAuth } from "../helpers/auth";
 import Router from "next/router";
 import Head from "next/head";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+
 const Register = () => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
   const API = "http://localhost:8000/api";
@@ -32,11 +35,14 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
+    phone: "",
+    address: "",
     error: "",
     success: "",
     buttonText: "Register",
   });
-  const { name, email, password, error, success, buttonText } = state;
+  const { name, email, password, phone, address, error, success, buttonText } =
+    state;
   const handleChange = (name) => (e) => {
     setState({
       ...state,
@@ -49,12 +55,15 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(e);
     setState({ ...state, buttonText: "Registering" });
     try {
       const response = await axios.post(`${API}/register`, {
         name,
         email,
         password,
+        phone,
+        address,
       });
       console.log(response);
       setState({
@@ -62,6 +71,8 @@ const Register = () => {
         name: "",
         email: "",
         password: "",
+        phone: "",
+        address: "",
         buttonText: "Submitted",
         success: "Registered Successfully",
       });
@@ -110,6 +121,25 @@ const Register = () => {
           type="password"
           className="form-control"
           placeholder="Type your password..."
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label className="text-light">Phone</label>
+        <PhoneInput
+          country={"pk"}
+          value={phone}
+          onChange={(phone) => setState({ ...state, phone })}
+        />
+      </div>
+      <div className="form-group">
+        <label className="text-light">Address</label>
+        <input
+          value={address}
+          onChange={handleChange("address")}
+          type="text"
+          className="form-control"
+          placeholder="Type your Address..."
           required
         />
       </div>

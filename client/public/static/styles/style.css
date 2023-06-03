@@ -368,3 +368,17 @@ input[type="radio"]:checked:before {
     display: none;
   }
 }
+
+.form-set{
+  width: 40%;
+  position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: auto;
+        margin-left: auto;
+        transform: translate(-50%, -50%);
+  background:  #4b5675;
+  border-radius: 3%;
+  box-shadow: 3px 3px  #5e6a8b;
+    
+}

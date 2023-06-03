@@ -112,8 +112,8 @@ const Login = () => {
     <Fragment>
       {head()}
       <Layout>
-        <div className="container pt-5 pb-5 bg-col">
-          <div className="col-md-6 offset-md-3">
+        <div className="container pt-5 pb-5 bg-col" >
+          <div className="col-md-6 offset-md-3 form-set" >
             <h1 className="text-light text-center m-nav2 text-uppercase text-span">
               Login <span className="text-span">Here</span>
             </h1>

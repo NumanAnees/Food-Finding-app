@@ -161,8 +161,8 @@ const Update = ({ oldLink, token }) => {
 
   // link Update form
   const submitLinkForm = () => (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
+    <form onSubmit={handleSubmit} className="form-set w-75 p-4 mr-5">
+      <div className="form-group ">
         <label className="text-light">Name</label>
         <input
           type="text"

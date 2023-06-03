@@ -7,6 +7,7 @@ import { getCookie, isAuth } from "../../../helpers/auth";
 // import { API,APP_NAME } from '../../../config';
 import { showSuccessMessage, showErrorMessage } from "../../../helpers/alerts";
 import Head from "next/head";
+import React from 'react'
 
 const Create = ({ token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -160,7 +161,7 @@ const Create = ({ token }) => {
 
   // link create form
   const submitLinkForm = () => (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form-set w-75 p-4 mr-5">
       <div className="form-group">
         <label className="text-light">Name</label>
         <input

@@ -126,7 +126,8 @@ const Register = () => {
       </div>
       <div className="form-group">
         <label className="text-light">Phone</label>
-        <PhoneInput
+        <PhoneInput 
+        inputClass='w-100'
           country={"pk"}
           value={phone}
           onChange={(phone) => setState({ ...state, phone })}
@@ -154,7 +155,7 @@ const Register = () => {
       {head()}
       <Layout>
         <div className="container pt-5 pb-5 bg-col">
-          <div className="col-md-6 offset-md-3">
+          <div className="col-md-6 offset-md-3 form-set">
             <h1 className="text-center text-light m-nav2 text-uppercase text-span5">
               <span className="text-span">Register</span> Here
             </h1>

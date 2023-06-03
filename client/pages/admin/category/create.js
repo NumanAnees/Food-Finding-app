@@ -131,7 +131,7 @@ const Create = ({ user, token }) => {
       <Layout>
         <div className="container pt-5 pb-5 bg-col">
           <div className="row">
-            <div className="col-md-6 offset-md-3">
+            <div className="col-md-6 offset-md-3 form-set">
               <h1 className="text-light m-nav3 text-center text-span5">
                 Create <span className="text-span">New</span> Category
               </h1>

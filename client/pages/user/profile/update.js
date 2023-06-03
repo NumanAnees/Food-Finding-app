@@ -127,7 +127,7 @@ const Update = ({ token, user }) => {
       {head()}
       <Layout>
         <div className="container pt-5 pb-5 bg-col">
-          <div className="col-md-6 offset-md-3">
+          <div className="col-md-6 offset-md-3 form-set">
             <h1 className="text-light m-nav2 text-uppercase text-center text-span5">
               Update <span className="text-span">Profile</span> Info
             </h1>

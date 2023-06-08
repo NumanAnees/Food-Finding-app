@@ -7,6 +7,9 @@ import { showSuccessMessage, showErrorMessage } from "../helpers/alerts";
 // import { API,APP_NAME} from '../config';
 import { authenticate, isAuth } from "../helpers/auth";
 import Head from "next/head";
+//google auth....
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = () => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -52,6 +55,27 @@ const Login = () => {
       success: "",
       buttonText: "Login",
     });
+  };
+  const handleSuccess = async (Response) => {
+    const jwt_credentials = Response.credential;
+    try {
+      const response = await axios.post(`${API}/user/google-auth`, {
+        jwt_credentials,
+      });
+      console.log(response);
+      authenticate(response, () => {
+        return isAuth() && isAuth().role === "admin"
+          ? Router.push("/admin")
+          : Router.push("/user");
+      });
+    } catch (error) {
+      console.log(error);
+      setState({
+        ...state,
+        buttonText: "Login",
+        error: error.response.data.error,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -109,21 +133,30 @@ const Login = () => {
   );
 
   return (
-    <Fragment>
+    <GoogleOAuthProvider clientId="945436301366-0q01dq64p28n4nuv7t4k7qd7q0cs6ipt.apps.googleusercontent.com">
       {head()}
       <Layout>
-        <div className="container pt-5 pb-5 bg-col" >
-          <div className="col-md-6 offset-md-3 form-set" >
+        <div className="container pt-5 pb-5 bg-col">
+          <div className="col-md-6 offset-md-3 form-set">
             <h1 className="text-light text-center m-nav2 text-uppercase text-span">
               Login <span className="text-span">Here</span>
             </h1>
+            <div className="google-signIn">
+              <GoogleLogin
+                onSuccess={(Response) => handleSuccess(Response)}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </div>
+
             {success && showSuccessMessage(success)}
             {error && showErrorMessage(error)}
             {loginForm()}
           </div>
         </div>
       </Layout>
-    </Fragment>
+    </GoogleOAuthProvider>
   );
 };
 

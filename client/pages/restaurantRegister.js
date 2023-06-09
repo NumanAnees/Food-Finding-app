@@ -10,14 +10,14 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Link from "next/link";
 
-const Register = () => {
+const restaurantRegister = () => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
   const API = "http://localhost:8000/api";
   const APP_NAME = "Top Dish";
   const head = () => (
     <Head>
       <title>
-        {"Register"} | {APP_NAME}
+        {"Restaurant Register"} | {APP_NAME}
       </title>
       <link rel="shortcut icon" href="/static/icons/favicon.ico" />
       <meta
@@ -175,4 +175,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default restaurantRegister;

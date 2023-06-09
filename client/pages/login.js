@@ -126,7 +126,7 @@ const Login = () => {
           required
         />
       </div>
-      <div className="form-group text-center">
+      <div className="form-group text-center mt-4 mb-4">
         <button className="btn btn1">{buttonText}</button>
       </div>
     </form>

@@ -390,3 +390,15 @@ input[type="radio"]:checked:before {
   margin-top: 4px;
   margin-bottom: 4px;
 }
+.form-group-1 {
+  margin-bottom: 0.5rem;
+}
+.forget-password-container {
+  cursor: pointer;
+  color: #04e9ae;
+  text-decoration: underline;
+  display: grid;
+}
+.forget-password {
+  justify-self: end;
+}

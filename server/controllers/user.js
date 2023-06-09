@@ -84,7 +84,6 @@ exports.googleAuth = async (req, res) => {
     const userWithEmail = await User.findOne({ email });
     console.log(userWithEmail);
     if (userWithEmail) {
-      console.log("if");
       //if user already exists
       // generate token and send to client
       // generate token and send to client
@@ -101,7 +100,6 @@ exports.googleAuth = async (req, res) => {
         user: { _id, name, email, role },
       });
     } else {
-      console.log("else");
       // if user not exists
       // create new user and save
       const password = "qniqvnq123@";

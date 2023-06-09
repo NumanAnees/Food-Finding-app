@@ -10,6 +10,10 @@ import { showSuccessMessage, showErrorMessage } from "../../helpers/alerts";
 import Head from "next/head";
 import { EyeFilled } from "@ant-design/icons";
 import Footer from "../../components/Footer";
+import Button from '@mui/material/Button';
+import UpdateIcon from '@mui/icons-material/Update';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 
 const Admin = ({ token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -187,22 +191,22 @@ const Admin = ({ token }) => {
           </h1>
           <br />
           <div className="row">
-            <div className="col-md-4 marg-b-pages">
+            <div className="col-md-4 marg-b-pages" style={{borderRight : '2px solid grey'}}>
               <ul className="nav flex-column">
                 <li className="nav-item">
-                  <Link href="/admin/category/create">
-                    <a className="nav link text-light">• Create New Category</a>
-                  </Link>
+                  <Button href="/user/link/create" endIcon={<NoteAddIcon />} variant="contained" color="success" sx={{width : '60%' , ':hover': {color: 'white'}}}>
+                    New Category
+                  </Button>
                 </li>
                 <li className="nav-item">
-                  <Link href="/admin/category/read">
-                    <a className="nav link text-light">• All Categories</a>
-                  </Link>
+                  <Button href="/user/link/create" endIcon={<VisibilityIcon />} variant="contained" color="success" sx={{width : '60%' , ':hover': {color: 'white'}}}>
+                    All Categories
+                  </Button>
                 </li>
                 <li className="nav-item">
-                  <Link href="/user/profile/update">
-                    <a className="nav link text-light">• Profile Update</a>
-                  </Link>
+                  <Button href="/user/link/create" endIcon={<UpdateIcon />} variant="contained" color="error" sx={{width : '60%' , ':hover': {color: 'white'}}}>
+                    Profile Update
+                  </Button>
                 </li>
               </ul>
             </div>

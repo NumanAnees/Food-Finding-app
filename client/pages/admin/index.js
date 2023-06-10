@@ -192,23 +192,25 @@ const Admin = ({ token }) => {
           <br />
           <div className="row">
             <div className="col-md-4 marg-b-pages" style={{borderRight : '2px solid grey'}}>
-              <ul className="nav flex-column">
-                <li className="nav-item">
-                  <Button href="/user/link/create" endIcon={<NoteAddIcon />} variant="contained" color="success" sx={{width : '60%' , ':hover': {color: 'white'}}}>
-                    New Category
-                  </Button>
-                </li>
-                <li className="nav-item">
-                  <Button href="/user/link/create" endIcon={<VisibilityIcon />} variant="contained" color="success" sx={{width : '60%' , ':hover': {color: 'white'}}}>
-                    All Categories
-                  </Button>
-                </li>
-                <li className="nav-item">
-                  <Button href="/user/link/create" endIcon={<UpdateIcon />} variant="contained" color="error" sx={{width : '60%' , ':hover': {color: 'white'}}}>
-                    Profile Update
-                  </Button>
-                </li>
-              </ul>
+              <div className="col-md-4 marg-b-pages" style={{borderRight : '2px solid grey'}}>
+                <ul className="nav flex-column">
+                  <li className="nav-item">
+                    <Button href="/user/link/create" endIcon={<NoteAddIcon />} variant="contained" color="success" sx={{width : '60%' , ':hover': {color: 'white'}}}>
+                      New Category
+                    </Button>
+                  </li>
+                  <li className="nav-item">
+                    <Button href="/user/link/create" endIcon={<VisibilityIcon />} variant="contained" color="success" sx={{width : '60%' , ':hover': {color: 'white'}}}>
+                      All Categories
+                    </Button>
+                  </li>
+                  <li className="nav-item">
+                    <Button href="/user/link/create" endIcon={<UpdateIcon />} variant="contained" color="error" sx={{width : '60%' , ':hover': {color: 'white'}}}>
+                      Profile Update
+                    </Button>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div className="col-md-8">
               <form className="form-group" onSubmit={handleSubmit}>

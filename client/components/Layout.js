@@ -6,11 +6,57 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { MenuOutlined } from "@ant-design/icons";
-// import UserNotification from "./UserNotification";
+import UserNotification from "./UserNotification";
+import user from "../public/static/images/user.jpg";
+import { DownOutlined, SmileOutlined } from "@ant-design/icons";
+import { Dropdown, Menu, Space } from "antd";
 
 Router.onRouteChangeStart = (url) => NProgress.start();
 Router.onRouteChangeComplete = (url) => NProgress.done();
 Router.onRouteChangeError = (url) => NProgress.done();
+
+const menu = (
+  <Menu
+    items={[
+      {
+        key: "1",
+        label:
+          isAuth() && isAuth().role === "Subscriber" ? (
+            <li className="nav-item p-1">
+              <Link href="/user">
+                <a className="nav-link text-dark  text-center text-top">
+                  <span className="text-span4">Dashboard</span>
+                </a>
+              </Link>
+            </li>
+          ) : (
+            <li className="nav-item p-1">
+              <Link href="/admin">
+                <a className="nav-link text-dark  text-center text-top">
+                  {" "}
+                  <span className="text-span4">Dashboard</span>
+                </a>
+              </Link>
+            </li>
+          ),
+      },
+      {
+        key: "2",
+        danger: true,
+        label: (
+          <li className="nav-item pointer p-1">
+            <a
+              onClick={logout}
+              className="nav-link text-dark  text-center text-top"
+            >
+              <span className="text-span4">Logout</span>
+            </a>
+          </li>
+        ),
+      },
+    ]}
+  />
+);
 
 const Layout = ({ children }) => {
   const head = () => (
@@ -85,7 +131,6 @@ const Layout = ({ children }) => {
                 </a>
               </Link>
             </li>
-
             {!isAuth() && (
               <>
                 <li className="nav-item p-1">
@@ -104,8 +149,7 @@ const Layout = ({ children }) => {
                 </li>
               </>
             )}
-
-            {isAuth() && isAuth().role === "admin" && (
+            {/* {isAuth() && isAuth().role === "admin" && (
               <li className="nav-item p-1">
                 <Link href="/admin">
                   <a className="nav-link text-dark  text-center text-top">
@@ -115,7 +159,6 @@ const Layout = ({ children }) => {
                 </Link>
               </li>
             )}
-
             {isAuth() && isAuth().role === "Subscriber" && (
               <li className="nav-item p-1">
                 <Link href="/user">
@@ -126,30 +169,31 @@ const Layout = ({ children }) => {
                   </a>
                 </Link>
               </li>
-            )}
-            {/* <UserNotification /> */}
-            {/* <div className="log-out-popUp">
-              <ActionDropDownPopUp
-                userInfo
-                userImage={
-                  <img
-                    className="header-dp-icon"
-                    src={getProfile().profileImage}
-                  />
-                }
-                userEmail={getProfile().email}
-                userName={getProfile().name}
-                items={menuItems}
-                visibleIcon={
-                  <img
-                    className="header-dp-icon"
-                    src={getProfile().profileImage}
-                  />
-                }
-              />
-            </div> */}
-
+            )} */}
             {isAuth() && (
+              <div className="nav-item p-1 nav-component">
+                <div className="nav-link text-dark  text-center text-top">
+                  <UserNotification />
+                </div>
+              </div>
+            )}
+            {isAuth() && (
+              <li className="nav-item pointer p-1">
+                <Dropdown overlay={menu} className="nav-component">
+                  <a onClick={(e) => e.preventDefault()}>
+                    <img
+                      src="https://toppng.com/uploads/preview/donna-picarro-dummy-avatar-115633298255iautrofxa.png"
+                      style={{
+                        borderRadius: "50%",
+                        height: "50px",
+                        width: "50px",
+                      }}
+                    ></img>
+                  </a>
+                </Dropdown>
+              </li>
+            )}
+            {/* {isAuth() && (
               <li className="nav-item pointer p-1">
                 <a
                   onClick={logout}
@@ -158,7 +202,7 @@ const Layout = ({ children }) => {
                   <span className="text-span4">Logout</span>
                 </a>
               </li>
-            )}
+            )} */}
           </ul>
         </div>
       </nav>

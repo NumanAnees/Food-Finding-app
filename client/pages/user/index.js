@@ -8,9 +8,9 @@ import { getCookie } from "../../helpers/auth";
 import withUser from "../withUser";
 import { EyeFilled } from "@ant-design/icons";
 import Head from "next/head";
-import Button from '@mui/material/Button';
-import UpdateIcon from '@mui/icons-material/Update';
-import PublishIcon from '@mui/icons-material/Publish';
+import Button from "@mui/material/Button";
+import UpdateIcon from "@mui/icons-material/Update";
+import PublishIcon from "@mui/icons-material/Publish";
 
 const User = ({ user, userLinks, token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -122,15 +122,30 @@ const User = ({ user, userLinks, token }) => {
           <hr />
 
           <div className="row">
-            <div className="col-md-4 marg-b-pages" style={{borderRight : '2px solid grey'}}>
+            <div
+              className="col-md-4 marg-b-pages"
+              style={{ borderRight: "2px solid grey" }}
+            >
               <ul className="nav flex-column">
                 <li className="nav-item">
-                  <Button href="/user/link/create" endIcon={<PublishIcon />} variant="contained" color="success" sx={{width : '60%' , ':hover': {color: 'white'}}}>
+                  <Button
+                    href="/user/link/create"
+                    endIcon={<PublishIcon />}
+                    variant="contained"
+                    color="success"
+                    sx={{ width: "60%", ":hover": { color: "white" } }}
+                  >
                     Submit a Location
                   </Button>
                 </li>
                 <li className="nav-item">
-                  <Button href="/user/profile/update" endIcon={<UpdateIcon />} variant="contained" color="error" sx={{width : '60%' , ':hover': {color: 'white'}}}>
+                  <Button
+                    href="/user/profile/update"
+                    endIcon={<UpdateIcon />}
+                    variant="contained"
+                    color="error"
+                    sx={{ width: "60%", ":hover": { color: "white" } }}
+                  >
                     Update Profile
                   </Button>
                 </li>

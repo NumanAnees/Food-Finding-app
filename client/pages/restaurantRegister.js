@@ -1,53 +1,47 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
 import { showSuccessMessage, showErrorMessage } from "../helpers/alerts";
-// import { API,APP_NAME} from '../config';
-import { authenticate, isAuth } from "../helpers/auth";
 import Router from "next/router";
 import Head from "next/head";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
 import Link from "next/link";
 
-const restaurantRegister = () => {
-  // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
+const RestaurantRegister = () => {
   const API = "http://localhost:8000/api";
   const APP_NAME = "Top Dish";
-  const head = () => (
-    <Head>
-      <title>
-        {"Restaurant Register"} | {APP_NAME}
-      </title>
-      <link rel="shortcut icon" href="/static/icons/favicon.ico" />
-      <meta
-        name="description"
-        content={`top meal,meal,best meal,meal 's ratings,Best meal,top 10 best meal,Best restaurant for meal,best meal in pakistan,best meal in lahore`}
-      />
-      <meta property="og:title" content={APP_NAME} />
-      <meta property="title" content={APP_NAME} />
-      <meta property="og:description" content={`Find best meal in your area`} />
-      <link rel="stylesheet" href="/static/styles/style.css" />
 
-      {/* logo here */}
-    </Head>
-  );
   const [state, setState] = useState({
-    name: "",
+    restaurantName: "",
     email: "",
     password: "",
-    phone: "",
-    address: "",
+    location: "",
+    picture: null,
+    document: null,
     error: "",
     success: "",
     buttonText: "Register",
   });
-  const { name, email, password, phone, address, error, success, buttonText } =
-    state;
+
+  const {
+    restaurantName,
+    email,
+    password,
+    location,
+    picture,
+    document,
+    error,
+    success,
+    buttonText,
+  } = state;
+
   const handleChange = (name) => (e) => {
+    const value =
+      name === "picture" || name === "document"
+        ? e.target.files[0]
+        : e.target.value;
     setState({
       ...state,
-      [name]: e.target.value,
+      [name]: value,
       error: "",
       success: "",
       buttonText: "Register",
@@ -56,24 +50,25 @@ const restaurantRegister = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
+    const formData = new FormData();
+    formData.append("restaurantName", restaurantName);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("location", location);
+    formData.append("picture", picture);
+    formData.append("document", document);
     setState({ ...state, buttonText: "Registering" });
+
     try {
-      const response = await axios.post(`${API}/register`, {
-        name,
-        email,
-        password,
-        phone,
-        address,
-      });
-      console.log(response);
+      const response = await axios.post(`${API}/registerRestaurant`, formData);
       setState({
         ...state,
-        name: "",
+        restaurantName: "",
         email: "",
         password: "",
-        phone: "",
-        address: "",
+        location: "",
+        picture: null,
+        document: null,
         buttonText: "Submitted",
         success: "Registered Successfully",
       });
@@ -81,7 +76,6 @@ const restaurantRegister = () => {
         Router.push("/login");
       }, 1200);
     } catch (error) {
-      console.log(error);
       setState({
         ...state,
         buttonText: "Register",
@@ -93,13 +87,13 @@ const restaurantRegister = () => {
   const registerForm = () => (
     <form onSubmit={handleSubmit}>
       <div className="form-group-1">
-        <label className="text-light">Name</label>
+        <label className="text-light">Restaurant Name</label>
         <input
-          value={name}
-          onChange={handleChange("name")}
+          value={restaurantName}
+          onChange={handleChange("restaurantName")}
           type="text"
           className="form-control"
-          placeholder="Type your name..."
+          placeholder="Type the name of your restaurant..."
           required
         />
       </div>
@@ -126,28 +120,47 @@ const restaurantRegister = () => {
         />
       </div>
       <div className="form-group-1">
-        <label className="text-light">Phone</label>
-        <PhoneInput
-          inputClass="w-100"
-          country={"pk"}
-          value={phone}
-          onChange={(phone) => setState({ ...state, phone })}
-        />
-      </div>
-      <div className="form-group-1">
-        <label className="text-light">Address</label>
+        <label className="text-light">Location</label>
         <input
-          value={address}
-          onChange={handleChange("address")}
+          value={location}
+          onChange={handleChange("location")}
           type="text"
           className="form-control"
-          placeholder="Type your Address..."
+          placeholder="Type the Google Maps location URL of your restaurant..."
           required
         />
       </div>
+      <div className="form-group-1">
+        <label className="text-light">Picture</label>
+        <input
+          onChange={handleChange("picture")}
+          type="file"
+          accept="image/*"
+          className="form-control"
+          required
+        />
+        {picture && (
+          <img
+            src={URL.createObjectURL(picture)}
+            alt="Restaurant Picture"
+            className="uploaded-image"
+          />
+        )}
+      </div>
+      <div className="form-group-1">
+        <label className="text-light">Document</label>
+        <input
+          onChange={handleChange("document")}
+          type="file"
+          accept=".doc, .docx, .pdf"
+          className="form-control"
+          required
+        />
+        {document && <p className="uploaded-file">{document.name}</p>}
+      </div>
       <div className="forget-password-container">
-        <Link href="/restaurantRegister">
-          <h6 className="forget-password">Register a Restaurant</h6>
+        <Link href="/register">
+          <h6 className="forget-password">Register a user</h6>
         </Link>
       </div>
       <div className="form-group text-center">
@@ -158,7 +171,23 @@ const restaurantRegister = () => {
 
   return (
     <>
-      {head()}
+      <Head>
+        <title>
+          {"Restaurant Register"} | {APP_NAME}
+        </title>
+        <link rel="shortcut icon" href="/static/icons/favicon.ico" />
+        <meta
+          name="description"
+          content={`top meal,meal,best meal,meal's ratings,Best meal,top 10 best meal,Best restaurant for meal,best meal in pakistan,best meal in lahore`}
+        />
+        <meta property="og:title" content={APP_NAME} />
+        <meta property="title" content={APP_NAME} />
+        <meta
+          property="og:description"
+          content={`Find the best meal in your area`}
+        />
+        <link rel="stylesheet" href="/static/styles/style.css" />
+      </Head>
       <Layout>
         <div className="container pt-5 pb-5 bg-col">
           <div className="col-md-6 offset-md-3 form-set">
@@ -175,4 +204,4 @@ const restaurantRegister = () => {
   );
 };
 
-export default restaurantRegister;
+export default RestaurantRegister;

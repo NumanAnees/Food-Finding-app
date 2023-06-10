@@ -436,3 +436,8 @@ input[type="radio"]:checked:before {
     left: 50%;
   }
 }
+.uploaded-image {
+  height: 124px;
+  width: 200px;
+  margin-left: 1rem;
+}

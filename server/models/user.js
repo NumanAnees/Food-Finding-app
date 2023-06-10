@@ -39,6 +39,24 @@ const userSchema = new mongoose.Schema(
       data: String,
       default: "",
     },
+    isConfirm: {
+      type: Boolean,
+      default: true,
+    },
+    location: {
+      type: String,
+      trim: true,
+      max: 256,
+    },
+    picture: {
+      type: String,
+      default:
+        "https://free.toppng.com/uploads/preview/donna-picarro-dummy-avatar-115633298255iautrofxa.png",
+    },
+    document: {
+      type: String,
+      default: "https://via.placeholder.com/150x150.png?text=Document",
+    },
   },
   { timestamps: true }
 );

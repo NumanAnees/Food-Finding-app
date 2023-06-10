@@ -5,6 +5,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const path = require("path");
+const fileUpload = require("express-fileupload");
 
 const app = express();
 
@@ -26,6 +27,7 @@ const linkRoutes = require("./routes/link");
 app.use(cors());
 app.use(morgan("dev"));
 app.use(bodyParser.json());
+app.use(fileUpload({ useTempFiles: true }));
 // app.use(cors({ origin: process.env.CLIENT_URL }));
 
 //middlewares

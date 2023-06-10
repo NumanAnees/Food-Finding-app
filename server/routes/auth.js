@@ -1,23 +1,25 @@
 const express = require("express");
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-
+const jwt = require("jsonwebtoken");
 
 //validators
-const {userRegisterValidator,userLoginValidator} = require("../validators/auth");
-const {runValidation} = require("../validators")
+const {
+  userRegisterValidator,
+  userLoginValidator,
+} = require("../validators/auth");
+const { runValidation } = require("../validators");
 
 //controllers
-const {register,login,requireSignin} = require("../controllers/auth")
+const { register, login, registerRestaurant } = require("../controllers/auth");
 
-router.post('/register',userRegisterValidator,runValidation,register);
-router.post('/login',userLoginValidator,runValidation,login);
+router.post("/register", userRegisterValidator, runValidation, register);
+router.post("/login", userLoginValidator, runValidation, login);
+router.post("/registerRestaurant", registerRestaurant);
+
 // router.get('/secret', requireSignin, (req, res) => {
 //     res.json({
 //         data: 'This is secret page for logged in users only'
 //     });
 // });
 
-
-
-module.exports = router; 
+module.exports = router;

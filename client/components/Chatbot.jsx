@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
-import "./chatbot.css";
 import {
   MainContainer,
   ChatContainer,
@@ -17,12 +16,12 @@ import {
 //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 kashir
 //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 moeez2
 
-const API_KEY = "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";
+const API_KEY = "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";
 const systemMessage = {
   //  Explain things like you're talking to a software professional with 5 years of experience.
   role: "system",
   content:
-    "Explain things like you're a tour guide or tour assistant with a name of SUFAR. And respond to only questions that a tour guide is responsible for .",
+    "Explain things like you're a food guide or food assistant know all callories. Your name is TopDish And respond to only questions that are related to food.",
 };
 
 const Chatbot = () => {
@@ -37,9 +36,9 @@ const Chatbot = () => {
   const [typing, setTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I'm SUFAR! Ask me anything!",
+      message: "Hello, I'm TopDish! Ask me anything!",
       sentTime: "just now",
-      sender: "Sufar",
+      sender: "TopDish",
     },
   ]);
 
@@ -59,12 +58,12 @@ const Chatbot = () => {
   };
 
   async function processMessageToSufar(chatMessages) {
-    // chatMessages {sender:"user" or "Sufar", message:"Any Message"}
+    // chatMessages {sender:"user" or "TopDish", message:"Any Message"}
     //apiMessages {role:"user" or "assistant", content:"Any Message"}
 
     let apiMessages = chatMessages.map((messageObject) => {
       let role = "";
-      if (messageObject.sender === "Sufar") {
+      if (messageObject.sender === "TopDish") {
         role = "assistant";
       } else {
         role = "user";
@@ -106,7 +105,7 @@ const Chatbot = () => {
       {values.map((v, idx) => (
         <Button
           key={idx}
-          className="me-2 mb-2 button"
+          className="me-2 mb-2 button1"
           onClick={() => handleShow(v)}
         >
           <i class="ri-robot-fill"></i>
@@ -117,7 +116,7 @@ const Chatbot = () => {
         <Modal.Header closeButton>
           <Modal.Title>
             <h1>
-              <b>Sufar</b>
+              <b>TopDish</b>
             </h1>
           </Modal.Title>
         </Modal.Header>
@@ -130,7 +129,7 @@ const Chatbot = () => {
                     scrollBehavior="smooth"
                     typingIndicator={
                       typing ? (
-                        <TypingIndicator content="Sufar is typing" />
+                        <TypingIndicator content="TopDish is typing" />
                       ) : null
                     }
                   >

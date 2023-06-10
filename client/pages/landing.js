@@ -31,18 +31,15 @@ const Landing = () => {
     </Head>
   );
 
-
-
-
   return (
     <Fragment>
       {head()}
       <Layout>
         <div className="container pt-5 pb-5 bg-col">
-        <div className="col-md-6 offset-md-3">
+          <div className="col-md-6 offset-md-3">
             <h1 className="text-light text-center m-nav2 text-uppercase text-span">
               Landing <span className="text-span">Page</span>
-            </h1>   
+            </h1>
           </div>
         </div>
       </Layout>

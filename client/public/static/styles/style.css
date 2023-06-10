@@ -402,3 +402,30 @@ input[type="radio"]:checked:before {
 .forget-password {
   justify-self: end;
 }
+
+.button1 {
+  position: fixed;
+  bottom: 15px;
+  right: 9px;
+  z-index: 9999;
+}
+.button1 i {
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.gpt {
+  position: "absolute";
+  height: 850px;
+  width: 100%;
+}
+@media only screen and (max-width: 1300px) {
+  .gpt {
+    height: 700px;
+  }
+}
+
+.chatbot-container {
+  height: 19vh;
+  width: 20vh;
+}

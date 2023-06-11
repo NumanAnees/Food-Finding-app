@@ -52,6 +52,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "https://via.placeholder.com/150x150.png?text=Document",
     },
+    followers: [{ type: mongoose.Schema.ObjectId, ref: "User" }],
+    following: [{ type: mongoose.Schema.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

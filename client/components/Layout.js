@@ -5,7 +5,7 @@ import Router from "next/router";
 import { isAuth, logout } from "../helpers/auth";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
-import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
+// import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { MenuOutlined } from "@ant-design/icons";
 import UserNotification from "./UserNotification";
 import user from "../public/static/images/user.jpg";

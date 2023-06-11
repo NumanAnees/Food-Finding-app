@@ -161,3 +161,65 @@ exports.confirmRestaurant = async (req, res) => {
     res.status(400).json({ msg: "unexpected error occured" });
   }
 };
+
+// Controller function for following a user
+exports.followUser = async (req, res) => {
+  try {
+    const { userIdToFollow } = req.body;
+    const loggedInUserId = req.user._id; // Assuming the logged-in user's ID is available in req.user._id
+    // Check if the logged-in user is already following the user being followed
+    const userToFollow = await User.findById(userIdToFollow);
+    if (userToFollow.followers.includes(loggedInUserId)) {
+      return res
+        .status(400)
+        .json({ error: "You are already following this user" });
+    }
+
+    // Update the followers array of the user being followed
+    await User.findByIdAndUpdate(
+      userIdToFollow,
+      { $addToSet: { followers: loggedInUserId } },
+      { new: true }
+    );
+
+    // Update the following array of the logged-in user
+    const updatedUser = await User.findByIdAndUpdate(
+      loggedInUserId,
+      { $addToSet: { following: userIdToFollow } },
+      { new: true }
+    );
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+// Controller function for unfollowing a user
+exports.unfollowUser = async (req, res) => {
+  try {
+    const { userIdToUnfollow } = req.body;
+    const loggedInUserId = req.user._id; // Assuming the logged-in user's ID is available in req.user._id
+    // Check if the logged-in user is already following the user to be unfollowed
+    const userToUnfollow = await User.findById(userIdToUnfollow);
+    if (!userToUnfollow.followers.includes(loggedInUserId)) {
+      return res.status(400).json({ error: "You are not following this user" });
+    }
+
+    // Remove the logged-in user from the followers array of the user being unfollowed
+    await User.findByIdAndUpdate(userIdToUnfollow, {
+      $pull: { followers: loggedInUserId },
+    });
+
+    // Remove the user being unfollowed from the following array of the logged-in user
+    const updatedUser = await User.findByIdAndUpdate(loggedInUserId, {
+      $pull: { following: userIdToUnfollow },
+    });
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};

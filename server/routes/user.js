@@ -18,6 +18,8 @@ const {
   googleAuth,
   Pendingrestaurants,
   confirmRestaurant,
+  followUser,
+  unfollowUser,
 } = require("../controllers/user");
 
 // routes
@@ -34,5 +36,7 @@ router.put(
 router.post("/user/google-auth", googleAuth);
 router.get("/user/Pendingrestaurants", Pendingrestaurants);
 router.put("/user/confirmRestaurant/:id", confirmRestaurant);
+router.put("/user/follow", requireSignin, followUser);
+router.put("/user/unfollow", requireSignin, unfollowUser);
 
 module.exports = router;

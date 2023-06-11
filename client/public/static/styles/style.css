@@ -441,3 +441,45 @@ input[type="radio"]:checked:before {
   width: 200px;
   margin-left: 1rem;
 }
+.category-heading {
+  color: white !important;
+}
+.profile-card-inf {
+  display: flex;
+  /* justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start; */
+  margin-top: 25px;
+}
+
+.profile-card-inf__item {
+  padding: 5px 22px;
+  min-width: 130px;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px 18px;
+    min-width: 120px;
+  }
+}
+
+.profile-card-inf__title {
+  font-weight: 700;
+  font-size: 27px;
+  color: white;
+}
+
+.profile-card-inf__txt {
+  font-weight: 500;
+  margin-top: 7px;
+  color: #04e9ae;
+}
+.follow-row {
+  display: flex;
+  margin-top: 20px;
+}
+.follow-button {
+  margin-left: 15px;
+}
+.message-button {
+  margin-left: 24px;
+}

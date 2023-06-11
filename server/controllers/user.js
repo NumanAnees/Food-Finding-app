@@ -128,3 +128,29 @@ exports.googleAuth = async (req, res) => {
     res.status(400).json({ msg: "unexpected error occured" });
   }
 };
+
+//get all users where isConfirm is false
+exports.Pendingrestaurants = async (req, res) => {
+  try {
+    const users = await User.find({ isConfirm: false });
+    res.json(users);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({ msg: "unexpected error occured" });
+  }
+};
+
+//update isConfirm to true
+exports.confirmRestaurant = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findOne({ _id: id });
+    user.isConfirm = true;
+    await user.save();
+    const users = await User.find({ isConfirm: false });
+    res.json(users);
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({ msg: "unexpected error occured" });
+  }
+};

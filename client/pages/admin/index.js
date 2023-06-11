@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import UpdateIcon from "@mui/icons-material/Update";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import FlakyIcon from "@mui/icons-material/Flaky";
 
 const Admin = ({ token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -195,46 +196,52 @@ const Admin = ({ token }) => {
               className="col-md-4 marg-b-pages"
               style={{ borderRight: "2px solid grey" }}
             >
-              <div
-                className="col-md-4 marg-b-pages"
-                style={{ borderRight: "2px solid grey" }}
-              >
-                <ul className="nav flex-column">
-                  <li className="nav-item">
-                    <Button
-                      href="/user/link/create"
-                      endIcon={<NoteAddIcon />}
-                      variant="contained"
-                      color="success"
-                      sx={{ width: "60%", ":hover": { color: "white" } }}
-                    >
-                      New Category
-                    </Button>
-                  </li>
-                  <li className="nav-item">
-                    <Button
-                      href="/user/link/create"
-                      endIcon={<VisibilityIcon />}
-                      variant="contained"
-                      color="success"
-                      sx={{ width: "60%", ":hover": { color: "white" } }}
-                    >
-                      All Categories
-                    </Button>
-                  </li>
-                  <li className="nav-item">
-                    <Button
-                      href="/user/link/create"
-                      endIcon={<UpdateIcon />}
-                      variant="contained"
-                      color="error"
-                      sx={{ width: "60%", ":hover": { color: "white" } }}
-                    >
-                      Profile Update
-                    </Button>
-                  </li>
-                </ul>
-              </div>
+              <ul className="nav flex-column">
+                <li className="nav-item">
+                  <Button
+                    href="/admin/category/create"
+                    endIcon={<NoteAddIcon />}
+                    variant="contained"
+                    color="success"
+                    sx={{ width: "60%", ":hover": { color: "white" } }}
+                  >
+                    New Category
+                  </Button>
+                </li>
+                <li className="nav-item">
+                  <Button
+                    href="/admin/category/read"
+                    endIcon={<VisibilityIcon />}
+                    variant="contained"
+                    color="success"
+                    sx={{ width: "60%", ":hover": { color: "white" } }}
+                  >
+                    All Categories
+                  </Button>
+                </li>
+                <li className="nav-item">
+                  <Button
+                    href="/admin/requests"
+                    endIcon={<FlakyIcon />}
+                    variant="contained"
+                    color="success"
+                    sx={{ width: "60%", ":hover": { color: "white" } }}
+                  >
+                    See Requests
+                  </Button>
+                </li>
+                <li className="nav-item">
+                  <Button
+                    href="/user/profile/update"
+                    endIcon={<UpdateIcon />}
+                    variant="contained"
+                    color="error"
+                    sx={{ width: "60%", ":hover": { color: "white" } }}
+                  >
+                    Profile Update
+                  </Button>
+                </li>
+              </ul>
             </div>
             <div className="col-md-8">
               <form className="form-group" onSubmit={handleSubmit}>

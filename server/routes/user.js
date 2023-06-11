@@ -12,7 +12,13 @@ const { userUpdateValidator } = require("../validators/auth");
 const { runValidation } = require("../validators");
 
 // import controllers
-const { read, update, googleAuth } = require("../controllers/user");
+const {
+  read,
+  update,
+  googleAuth,
+  Pendingrestaurants,
+  confirmRestaurant,
+} = require("../controllers/user");
 
 // routes
 router.get("/user", requireSignin, authMiddleware, read);
@@ -26,5 +32,7 @@ router.put(
   update
 );
 router.post("/user/google-auth", googleAuth);
+router.get("/user/Pendingrestaurants", Pendingrestaurants);
+router.put("/user/confirmRestaurant/:id", confirmRestaurant);
 
 module.exports = router;

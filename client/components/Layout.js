@@ -178,9 +178,9 @@ const Layout = ({ children }) => {
               </div>
             )}
             {isAuth() && (
-              <li className="nav-item pointer p-1">
+              <div className="nav-item pointer p-1">
                 <Dropdown overlay={menu} className="nav-component">
-                  <a onClick={(e) => e.preventDefault()}>
+                  <div onClick={(e) => e.preventDefault()}>
                     <img
                       src="https://toppng.com/uploads/preview/donna-picarro-dummy-avatar-115633298255iautrofxa.png"
                       style={{
@@ -189,9 +189,9 @@ const Layout = ({ children }) => {
                         width: "50px",
                       }}
                     ></img>
-                  </a>
+                  </div>
                 </Dropdown>
-              </li>
+              </div>
             )}
             {/* {isAuth() && (
               <li className="nav-item pointer p-1">

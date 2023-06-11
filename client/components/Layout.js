@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import Router from "next/router";
 import { isAuth, logout } from "../helpers/auth";
 import NProgress from "nprogress";
@@ -10,6 +11,7 @@ import UserNotification from "./UserNotification";
 import user from "../public/static/images/user.jpg";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import { Dropdown, Menu, Space } from "antd";
+import { use } from "react";
 
 Router.onRouteChangeStart = (url) => NProgress.start();
 Router.onRouteChangeComplete = (url) => NProgress.done();
@@ -59,6 +61,10 @@ const menu = (
 );
 
 const Layout = ({ children }) => {
+  useEffect(() => {
+    console.log(isAuth());
+  }, []);
+
   const head = () => (
     <>
       <link
@@ -181,14 +187,25 @@ const Layout = ({ children }) => {
               <div className="nav-item pointer p-1">
                 <Dropdown overlay={menu} className="nav-component">
                   <div onClick={(e) => e.preventDefault()}>
-                    <img
-                      src="https://toppng.com/uploads/preview/donna-picarro-dummy-avatar-115633298255iautrofxa.png"
-                      style={{
-                        borderRadius: "50%",
-                        height: "50px",
-                        width: "50px",
-                      }}
-                    ></img>
+                    {isAuth().picture ? (
+                      <img
+                        src={isAuth().picture}
+                        style={{
+                          borderRadius: "50%",
+                          height: "50px",
+                          width: "50px",
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src="https://toppng.com/uploads/preview/donna-picarro-dummy-avatar-115633298255iautrofxa.png"
+                        style={{
+                          borderRadius: "50%",
+                          height: "50px",
+                          width: "50px",
+                        }}
+                      />
+                    )}
                   </div>
                 </Dropdown>
               </div>

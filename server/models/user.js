@@ -21,11 +21,6 @@ const userSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
-    address: {
-      type: String,
-      trim: true,
-      lowercase: true,
-    },
     hashed_password: {
       type: String,
       required: true,

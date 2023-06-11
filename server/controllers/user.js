@@ -79,7 +79,7 @@ exports.update = (req, res) => {
 exports.googleAuth = async (req, res) => {
   try {
     const { jwt_credentials } = req.body;
-    const { email, name } = jwtDecode(jwt_credentials);
+    const { email, name, picture } = jwtDecode(jwt_credentials);
     //user with email eixist
     const userWithEmail = await User.findOne({ email });
     console.log(userWithEmail);
@@ -94,10 +94,10 @@ exports.googleAuth = async (req, res) => {
           expiresIn: "7d",
         }
       );
-      const { _id, name, email, role } = userWithEmail;
+      const { _id, name, email, role, picture } = userWithEmail;
       return res.json({
         token,
-        user: { _id, name, email, role },
+        user: { _id, name, email, role, picture },
       });
     } else {
       // if user not exists
@@ -105,7 +105,14 @@ exports.googleAuth = async (req, res) => {
       const password = "qniqvnq123@";
       const phone = "0310344810";
       const address = "Street 2-A,Lahore";
-      const newUser = new User({ name, email, password, phone, address });
+      const newUser = new User({
+        name,
+        email,
+        password,
+        phone,
+        address,
+        picture,
+      });
       newUser.save((err, result) => {
         if (err) {
           return res.status(400).json({
@@ -116,10 +123,10 @@ exports.googleAuth = async (req, res) => {
         const token = jwt.sign({ _id: result._id }, process.env.JWT_SECRET, {
           expiresIn: "7d",
         });
-        const { _id, name, email, role } = result;
+        const { _id, name, email, role, picture } = result;
         return res.json({
           token,
-          user: { _id, name, email, role },
+          user: { _id, name, email, role, picture },
         });
       });
     }

@@ -7,6 +7,7 @@ import { showSuccessMessage, showErrorMessage } from "../../helpers/alerts";
 import { authenticate, isAuth } from "../../helpers/auth";
 import Head from "next/head";
 import { Button, Space, Table, Tag } from "antd";
+import withAdmin from "../withAdmin";
 
 const Landing = () => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -136,7 +137,7 @@ const Landing = () => {
         <div className="container pt-5 pb-5 bg-col">
           <div className="col-md-6 offset-md-3" style={{ marginTop: "1.2rem" }}>
             <h1 className="text-light text-center m-nav2 text-uppercase text-span">
-              All Registation <span className="text-span">Requests</span>
+              All <span className="text-span">Requests</span>
             </h1>
           </div>
           <div style={{ marginTop: "2rem" }}>
@@ -148,4 +149,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default withAdmin(Landing);

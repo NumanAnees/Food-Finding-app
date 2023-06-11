@@ -37,13 +37,14 @@ const Register = () => {
     email: "",
     password: "",
     phone: "",
-    address: "",
+    picture: null,
     error: "",
     success: "",
     buttonText: "Register",
   });
-  const { name, email, password, phone, address, error, success, buttonText } =
+  const { name, email, password, phone, picture, error, success, buttonText } =
     state;
+
   const handleChange = (name) => (e) => {
     setState({
       ...state,
@@ -54,34 +55,42 @@ const Register = () => {
     });
   };
 
+  const handleImageChange = (e) => {
+    setState({
+      ...state,
+      picture: e.target.files[0],
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
     setState({ ...state, buttonText: "Registering" });
+
     try {
-      const response = await axios.post(`${API}/register`, {
-        name,
-        email,
-        password,
-        phone,
-        address,
-      });
-      console.log(response);
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("phone", phone);
+      formData.append("picture", picture);
+
+      const response = await axios.post(`${API}/register`, formData);
+
       setState({
         ...state,
         name: "",
         email: "",
         password: "",
         phone: "",
-        address: "",
+        picture: null,
         buttonText: "Submitted",
         success: "Registered Successfully",
       });
+
       setTimeout(() => {
-        Router.push("/login");
+        // Redirect or perform any other action
       }, 1200);
     } catch (error) {
-      console.log(error);
       setState({
         ...state,
         buttonText: "Register",
@@ -135,15 +144,20 @@ const Register = () => {
         />
       </div>
       <div className="form-group-1">
-        <label className="text-light">Address</label>
+        <label className="text-light">Profile Picture</label>
         <input
-          value={address}
-          onChange={handleChange("address")}
-          type="text"
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
           className="form-control"
-          placeholder="Type your Address..."
-          required
         />
+        {picture && (
+          <img
+            src={URL.createObjectURL(picture)}
+            className="uploaded-image"
+            alt="Profile"
+          />
+        )}
       </div>
       <div className="forget-password-container">
         <Link href="/restaurantRegister">

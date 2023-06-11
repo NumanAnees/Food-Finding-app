@@ -17,45 +17,31 @@ import { UserAddOutlined, MessageOutlined } from "@ant-design/icons";
 import { Input, QRCode, Space, theme } from "antd";
 const { useToken } = theme;
 
-const Links = ({
-  query,
-  category,
-  links,
-  totalLinks,
-  linksLimit,
-  linkSkip,
-}) => {
+const Links = ({ query, Links, User, followers, following, TotalLinks }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
   const API = "http://localhost:8000/api";
-
+  // console.log("---------quevur------", query);
   const APP_NAME = "Top Dish";
-  const [allLinks, setAllLinks] = useState(links);
-  const [limit, setLimit] = useState(linksLimit);
-  const [skip, setSkip] = useState(0);
-  const [size, setSize] = useState(totalLinks);
-  const [popular, setPopular] = useState([]);
+  const [allLinks, setAllLinks] = useState(Links);
   const [uid, setUid] = useState("");
 
   const stripHTML = (data) => data.replace(/<\/?[^>]+(>|$)/g, "");
   const head = () => (
     <Head>
       <title>
-        {category.name} | {APP_NAME}
+        {User.name} | {APP_NAME}
       </title>
       <link rel="shortcut icon" href="/static/icons/favicon.ico" />
       <meta
         name="description"
         content={stripHTML(
-          `top ${category.name},${category.name},best ${category.name},${category.name} 's ratings,Best ${category.name},top 10 best ${category.name},Best restaurant for ${category.name},best ${category.name} in pakistan,best ${category.name} in lahore`
+          `top ${User.name},${User.name},best ${User.name},${User.name} 's ratings,Best ${User.name},top 10 best ${User.name},Best restaurant for ${User.name},best ${User.name} in pakistan,best ${User.name} in lahore`
         )}
       />
-      <meta property="og:title" content={category.name} />
-      <meta
-        property="og:description"
-        content={stripHTML(category.content.substring(0, 160))}
-      />
-      <meta property="og:image" content={category.image.url} />
-      <meta property="og:image:secure_url" content={category.image.url} />
+      <meta property="og:title" content={User.name} />
+      <meta property="og:description" content={stripHTML(User.name)} />
+      <meta property="og:image" content={User.picture} />
+      <meta property="og:image:secure_url" content={User.picture} />
       <link rel="stylesheet" href="/static/styles/style.css" />
     </Head>
   );
@@ -72,8 +58,8 @@ const Links = ({
     loadUpdatedLinks();
   };
   const loadUpdatedLinks = async () => {
-    const response = await axios.post(`${API}/category/${query.slug}`);
-    setAllLinks(response.data.links);
+    const response = await axios.get(`${API}/links/by/${query.id}`);
+    setAllLinks(response.data.Links);
   };
 
   const handleUpvote = async (linkId, upvArray) => {
@@ -93,10 +79,34 @@ const Links = ({
   };
   const listOfLinks = () => {
     return allLinks.map((l, i) => {
+      if (l.position == 1) {
+        l.position = "1st";
+      } else if (l.position == 2) {
+        l.position = "2nd";
+      } else if (l.position == 3) {
+        l.position = "3rd";
+      } else if (l.position == 4) {
+        l.position = "4th";
+      } else if (l.position == 5) {
+        l.position = "5th";
+      } else if (l.position == 6) {
+        l.position = "6th";
+      } else if (l.position == 7) {
+        l.position = "7th";
+      } else if (l.position == 8) {
+        l.position = "8th";
+      } else if (l.position == 9) {
+        l.position = "9th";
+      } else if (l.position == 10) {
+        l.position = "10th";
+      } else if (l.position > 10) {
+        l.position = `${l.position}th`;
+      }
       return (
         <div key={i}>
           <h2 className="category-heading">
-            4th in <span className="text-span">Zinger Burger</span>
+            {l.position} rank in{" "}
+            <span className="text-span">{l.category.name}</span>
           </h2>
           <div className="row alert alert-light primary-link p-2">
             <div className="col-md-8 d-flex">
@@ -165,7 +175,7 @@ const Links = ({
             </div>
             <div className="col-md-4 d-flex flex-column">
               <span className="pull-right text-center">
-                {moment(l.createdAt).fromNow()} by {l.postedBy.name}
+                {moment(l.createdAt).fromNow()} by {User.name}
               </span>
               <span
                 className="text-secondary text-center"
@@ -179,20 +189,7 @@ const Links = ({
       );
     });
   };
-  const loadMore = async () => {
-    let newSkip = skip + limit;
-    const response = await axios.post(`${API}/category/${query.slug}`, {
-      skip: newSkip,
-      limit,
-    });
-    console.log("----", response);
-    if (response) {
-      setAllLinks([...allLinks, ...response.data.links]);
-    }
-    setSize(response.data.links.length);
-    setSkip(newSkip);
-    return;
-  };
+
   const [text, setText] = useState("https://topdish-client.vercel.app/");
   const { token } = useToken();
 
@@ -203,29 +200,25 @@ const Links = ({
         <div className="container pt-5 pb-5 bg-col">
           <div className="row">
             <div className="col-md-4 mt-4 d-flex">
-              <img
-                src={category.image.url}
-                alt={category.name}
-                className="slug-img"
-              />
+              <img src={User.picture} alt={User.name} className="slug-img" />
             </div>
             <div className="col-md-8">
               <h1 className="display-6 font-weight-bold text-light m-nav3 text-uppercase text-span5">
-                {category.name} - <span className="text-span">Restaurant</span>
+                {User.name} - <span className="text-span">Profile</span>
               </h1>
               <div>
                 <div class="profile-card-inf">
                   <div class="profile-card-inf__item">
-                    <div class="profile-card-inf__title">1598</div>
+                    <div class="profile-card-inf__title">{followers}</div>
                     <div class="profile-card-inf__txt">Followers</div>
                   </div>
                   <div class="profile-card-inf__item">
-                    <div class="profile-card-inf__title">65</div>
+                    <div class="profile-card-inf__title">{following}</div>
                     <div class="profile-card-inf__txt">Following</div>
                   </div>
 
                   <div class="profile-card-inf__item">
-                    <div class="profile-card-inf__title">123</div>
+                    <div class="profile-card-inf__title">{TotalLinks}</div>
                     <div class="profile-card-inf__txt">Categories</div>
                   </div>
                 </div>
@@ -253,39 +246,26 @@ const Links = ({
             </div>
           </div>
           <br />
-          <InfiniteScroll
-            pageStart={0}
-            loadMore={loadMore}
-            hasMore={size > 0 && size >= limit}
-            loader={
-              <img
-                key={0}
-                src="/static/images/load.gif"
-                alt="loading"
-                style={{ height: "60px", width: "60px" }}
+
+          <div className="row">
+            <div className="col-md-8">{listOfLinks()}</div>
+            <div className="col-md-4">
+              <h2
+                className="lead text-light text-span5"
+                style={{ marginLeft: "2rem", marginBottom: "1rem" }}
+              >
+                Scan the QR code to See the{" "}
+                <span className="text-span">Location</span>
+              </h2>
+              <QRCode
+                value={text || "-"}
+                color={token.colorInfoText}
+                bgColor={token.colorBgLayout}
+                size={250}
+                style={{ marginLeft: "4rem" }}
               />
-            }
-          >
-            <div className="row">
-              <div className="col-md-8">{listOfLinks()}</div>
-              <div className="col-md-4">
-                <h2
-                  className="lead text-light text-span5"
-                  style={{ marginLeft: "2rem", marginBottom: "1rem" }}
-                >
-                  Scan the QR code to See the{" "}
-                  <span className="text-span">Location</span>
-                </h2>
-                <QRCode
-                  value={text || "-"}
-                  color={token.colorInfoText}
-                  bgColor={token.colorBgLayout}
-                  size={250}
-                  style={{ marginLeft: "4rem" }}
-                />
-              </div>
             </div>
-          </InfiniteScroll>
+          </div>
         </div>
       </Layout>
       <Footer />
@@ -298,20 +278,15 @@ Links.getInitialProps = async ({ query, req }) => {
   const API = "http://localhost:8000/api";
 
   const APP_NAME = "Top Dish";
-  let skip = 0;
-  let limit = 10;
 
-  const response = await axios.post(`${API}/category/shami-burger`, {
-    skip,
-    limit,
-  });
+  const response = await axios.get(`${API}/links/by/${query.id}`);
   return {
     query,
-    category: response.data.category,
-    links: response.data.links,
-    totalLinks: response.data.links.length,
-    linksLimit: limit,
-    linkSkip: skip,
+    Links: response.data.Links,
+    User: response.data.User,
+    followers: response.data.followers,
+    following: response.data.following,
+    TotalLinks: response.data.TotalLinks,
   };
 };
 

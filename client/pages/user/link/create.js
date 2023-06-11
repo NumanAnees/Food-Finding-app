@@ -7,7 +7,7 @@ import { getCookie, isAuth } from "../../../helpers/auth";
 // import { API,APP_NAME } from '../../../config';
 import { showSuccessMessage, showErrorMessage } from "../../../helpers/alerts";
 import Head from "next/head";
-import React from 'react'
+import React from "react";
 
 const Create = ({ token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -229,7 +229,7 @@ const Create = ({ token }) => {
             <div className="col-md-8">
               {success && showSuccessMessage(success)}
               {error && showErrorMessage(error)}
-              {submitLinkForm()}
+              <div className="mt-2">{submitLinkForm()}</div>
             </div>
           </div>
         </div>

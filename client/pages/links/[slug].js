@@ -8,7 +8,7 @@ import moment from "moment";
 import InfiniteScroll from "react-infinite-scroller";
 import Head from "next/head";
 import { CaretUpFilled } from "@ant-design/icons";
-import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
+// import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Button } from "antd";
 import Router from "next/router";
 import { EyeFilled } from "@ant-design/icons";
@@ -194,9 +194,14 @@ const Links = ({
             </div>
           </div>
           <div className="col-md-4 d-flex flex-column">
-            <span className="pull-right text-center">
-              {moment(l.createdAt).fromNow()} by {l.postedBy.name}
-            </span>
+            <Link href={`/user/${l.postedBy._id}`}>
+              <span
+                className="pull-right text-center"
+                style={{ cursor: "pointer", color: "blue" }}
+              >
+                {moment(l.createdAt).fromNow()} by {l.postedBy.name}
+              </span>
+            </Link>
             <span
               className="text-secondary text-center"
               style={{ marginTop: "auto", fontSize: "14px" }}

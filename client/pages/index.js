@@ -65,9 +65,15 @@ const Home = ({ categories }) => {
           </a>
         </div>
         <div className="col-md-4 pt-2">
-          <span className="pull-right">
-            {moment(l.createdAt).fromNow()} by {l.postedBy.name}
-          </span>
+          <Link href={`/user/${l.postedBy._id}`}>
+            <span
+              className="pull-right"
+              style={{ cursor: "pointer", color: "blue" }}
+            >
+              {moment(l.createdAt).fromNow()} by {l.postedBy.name}
+            </span>
+          </Link>
+
           <br />
           {/* <span className="badge text-secondary pull-right">{l.clicks} clicks</span> */}
         </div>

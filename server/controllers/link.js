@@ -259,6 +259,15 @@ exports.listByUser = async (req, res) => {
         return link;
       })
     );
+    //if current user is following the requested user, add a property to the requested user object called following and set it to true
+    let isFollowing = false;
+    if (
+      requestedUser.followers.some(
+        (follower) => follower.toString() === req.user._id.toString()
+      )
+    ) {
+      isFollowing = true;
+    }
 
     res.json({
       Links: allLinksRanked,
@@ -266,6 +275,7 @@ exports.listByUser = async (req, res) => {
       followers: requestedUser.followers.length,
       following: requestedUser.following.length,
       TotalLinks: allLinksRanked.length,
+      isFollowing,
     });
   } catch (err) {
     console.log(err);

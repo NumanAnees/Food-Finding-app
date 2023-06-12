@@ -1,28 +1,53 @@
 import { useState, useEffect, Fragment } from "react";
 import Layout from "../../components/Layout";
-import Link from "next/link";
 import axios from "axios";
-import renderHTML from "react-render-html";
 import moment from "moment";
 // import { API,APP_NAME } from '../../config';
 import InfiniteScroll from "react-infinite-scroller";
 import Head from "next/head";
 import { CaretUpFilled } from "@ant-design/icons";
-// import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Button, Col } from "antd";
+import { Button as MuiButton } from "@mui/material";
 import Router from "next/router";
 import { EyeFilled } from "@ant-design/icons";
 import Footer from "../../components/Footer";
 import { UserAddOutlined, MessageOutlined } from "@ant-design/icons";
+import withUser from "../withUser";
 import { Input, QRCode, Space, theme } from "antd";
 const { useToken } = theme;
+import { getCookie } from "../../helpers/auth";
 
-const Links = ({ query, Links, User, followers, following, TotalLinks }) => {
+// Within your Next.js API route or server-side code
+const getUserTokenFromCookie = (cookieName) => {
+  const cookies = document.cookie.split(";").reduce((cookiesObj, cookie) => {
+    const [name, value] = cookie.trim().split("=");
+    cookiesObj[name] = decodeURIComponent(value);
+    return cookiesObj;
+  }, {});
+
+  return cookies[cookieName] || null;
+};
+
+const ProfilePage = ({
+  query,
+  Links,
+  User,
+  followers,
+  following,
+  TotalLinks,
+  isFollowing,
+  Usertoken,
+}) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
   const API = "http://localhost:8000/api";
   // console.log("---------quevur------", query);
   const APP_NAME = "Top Dish";
   const [allLinks, setAllLinks] = useState(Links);
+  const [UserDetails, setUserDetails] = useState(User);
+  const [followersCount, setFollowersCount] = useState(followers);
+  const [followingCount, setFollowingCount] = useState(following);
+  const [isFollow, setIsFollow] = useState(isFollowing);
+
   const [uid, setUid] = useState("");
 
   const stripHTML = (data) => data.replace(/<\/?[^>]+(>|$)/g, "");
@@ -58,8 +83,17 @@ const Links = ({ query, Links, User, followers, following, TotalLinks }) => {
     loadUpdatedLinks();
   };
   const loadUpdatedLinks = async () => {
-    const response = await axios.get(`${API}/links/by/${query.id}`);
+    const response = await axios.get(`${API}/links/by/${query.id}`, {
+      headers: {
+        authorization: `Bearer ${Usertoken}`,
+        contentType: "application/json",
+      },
+    });
     setAllLinks(response.data.Links);
+    setFollowersCount(response.data.followers);
+    setFollowingCount(response.data.following);
+    setIsFollow(response.data.isFollowing);
+    setUserDetails(response.data.User);
   };
 
   const handleUpvote = async (linkId, upvArray) => {
@@ -175,7 +209,7 @@ const Links = ({ query, Links, User, followers, following, TotalLinks }) => {
             </div>
             <div className="col-md-4 d-flex flex-column">
               <span className="pull-right text-center">
-                {moment(l.createdAt).fromNow()} by {User.name}
+                {moment(l.createdAt).fromNow()} by {UserDetails.name}
               </span>
               <span
                 className="text-secondary text-center"
@@ -193,6 +227,39 @@ const Links = ({ query, Links, User, followers, following, TotalLinks }) => {
   const [text, setText] = useState("https://topdish-client.vercel.app/");
   const { token } = useToken();
 
+  const handleFollow = async (userId) => {
+    const response = await axios.put(
+      `${API}/user/follow`,
+      {
+        userIdToFollow: userId,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${Usertoken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    loadUpdatedLinks();
+    console.log(response);
+  };
+  const handleUnFollow = async (userId) => {
+    const response = await axios.put(
+      `${API}/user/unfollow`,
+      {
+        userIdToUnfollow: userId,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${Usertoken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    loadUpdatedLinks();
+    console.log(response);
+  };
+
   return (
     <Fragment>
       {head()}
@@ -200,20 +267,24 @@ const Links = ({ query, Links, User, followers, following, TotalLinks }) => {
         <div className="container pt-5 pb-5 bg-col">
           <div className="row">
             <div className="col-md-4 mt-4 d-flex">
-              <img src={User.picture} alt={User.name} className="slug-img" />
+              <img
+                src={UserDetails.picture}
+                alt={UserDetails.name}
+                className="slug-img"
+              />
             </div>
             <div className="col-md-8">
               <h1 className="display-6 font-weight-bold text-light m-nav3 text-uppercase text-span5">
-                {User.name} - <span className="text-span">Profile</span>
+                {UserDetails.name} - <span className="text-span">Profile</span>
               </h1>
               <div>
                 <div class="profile-card-inf">
                   <div class="profile-card-inf__item">
-                    <div class="profile-card-inf__title">{followers}</div>
+                    <div class="profile-card-inf__title">{followersCount}</div>
                     <div class="profile-card-inf__txt">Followers</div>
                   </div>
                   <div class="profile-card-inf__item">
-                    <div class="profile-card-inf__title">{following}</div>
+                    <div class="profile-card-inf__title">{followingCount}</div>
                     <div class="profile-card-inf__txt">Following</div>
                   </div>
 
@@ -224,22 +295,34 @@ const Links = ({ query, Links, User, followers, following, TotalLinks }) => {
                 </div>
                 <row className="follow-row">
                   <div className="follow-button">
-                    <Button
-                      type="primary"
-                      icon={<UserAddOutlined />}
-                      size="large"
-                    >
-                      Follow
-                    </Button>
+                    {isFollow ? (
+                      <MuiButton
+                        variant="contained"
+                        startIcon={<UserAddOutlined />}
+                        size="large"
+                        onClick={() => handleUnFollow(UserDetails._id)}
+                      >
+                        UnFollow
+                      </MuiButton>
+                    ) : (
+                      <MuiButton
+                        startIcon={<UserAddOutlined />}
+                        size="large"
+                        variant="contained"
+                        onClick={() => handleFollow(UserDetails._id)}
+                      >
+                        Follow
+                      </MuiButton>
+                    )}
                   </div>
                   <div className="message-button">
-                    <Button
-                      type="primary"
-                      icon={<MessageOutlined />}
+                    <MuiButton
+                      variant="contained"
+                      startIcon={<MessageOutlined />}
                       size="large"
                     >
                       Message
-                    </Button>
+                    </MuiButton>
                   </div>
                 </row>
               </div>
@@ -273,13 +356,19 @@ const Links = ({ query, Links, User, followers, following, TotalLinks }) => {
   );
 };
 
-Links.getInitialProps = async ({ query, req }) => {
+ProfilePage.getInitialProps = async ({ req, query }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
   const API = "http://localhost:8000/api";
-
+  // Usage in your code
+  const Usertoken = getCookie("token", req);
   const APP_NAME = "Top Dish";
 
-  const response = await axios.get(`${API}/links/by/${query.id}`);
+  const response = await axios.get(`${API}/links/by/${query.id}`, {
+    headers: {
+      authorization: `Bearer ${Usertoken}`,
+      contentType: "application/json",
+    },
+  });
   return {
     query,
     Links: response.data.Links,
@@ -287,7 +376,9 @@ Links.getInitialProps = async ({ query, req }) => {
     followers: response.data.followers,
     following: response.data.following,
     TotalLinks: response.data.TotalLinks,
+    isFollowing: response.data.isFollowing,
+    Usertoken,
   };
 };
 
-export default Links;
+export default withUser(ProfilePage);

@@ -53,6 +53,6 @@ router.put(
   update
 );
 router.delete("/link/:id", requireSignin, authMiddleware, remove);
-router.get("/links/by/:id", listByUser);
+router.get("/links/by/:id", requireSignin, authMiddleware, listByUser);
 
 module.exports = router;

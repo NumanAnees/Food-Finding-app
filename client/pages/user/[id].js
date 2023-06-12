@@ -298,6 +298,7 @@ const ProfilePage = ({
                     {isFollow ? (
                       <MuiButton
                         variant="contained"
+                        color="error"
                         startIcon={<UserAddOutlined />}
                         size="large"
                         onClick={() => handleUnFollow(UserDetails._id)}
@@ -310,6 +311,7 @@ const ProfilePage = ({
                         size="large"
                         variant="contained"
                         onClick={() => handleFollow(UserDetails._id)}
+                        color="info"
                       >
                         Follow
                       </MuiButton>
@@ -320,6 +322,7 @@ const ProfilePage = ({
                       variant="contained"
                       startIcon={<MessageOutlined />}
                       size="large"
+                      color="secondary"
                     >
                       Message
                     </MuiButton>

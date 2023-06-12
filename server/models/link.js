@@ -1,5 +1,26 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
+//------------------------Review Schema-------------------------
+
+const reviewSchema = new mongoose.Schema({
+  text: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  createdBy: {
+    type: ObjectId,
+    ref: "User",
+  },
+});
 
 const linkSchema = new mongoose.Schema(
   {
@@ -42,6 +63,7 @@ const linkSchema = new mongoose.Schema(
     clicks: { type: Number, default: 0 },
     upvotes: { type: Number, default: 0 },
     upvoteIDs: [{ type: ObjectId, ref: "User" }],
+    reviews: [reviewSchema],
   },
   { timestamps: true }
 );

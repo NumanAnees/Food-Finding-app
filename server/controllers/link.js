@@ -282,3 +282,92 @@ exports.listByUser = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+//add new review of a link
+exports.addReview = async (req, res) => {
+  const linkId = req.params.id;
+  const { text, rating } = req.body;
+  try {
+    //find link by id and populate reviews by createdBy
+    const link = await Link.findById(linkId);
+    if (!link) {
+      return res.status(400).json({
+        error: "Link not found",
+      });
+    }
+    //check if user has already reviewed this link
+    const alreadyReviewed = link.reviews.find((review) => {
+      return review.createdBy.toString() === req.user._id.toString();
+    });
+    if (alreadyReviewed) {
+      return res.status(200).json({
+        error: "You have already reviewed this link",
+      });
+    }
+
+    const newReview = {
+      text,
+      rating,
+      createdBy: req.user._id,
+    };
+    link.reviews.push(newReview);
+    link.save();
+    res.json(link);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+//get all reviews of a link
+exports.getReviews = async (req, res) => {
+  const linkId = req.params.id;
+  try {
+    const link = await Link.findById(linkId)
+      .populate("reviews.createdBy", "name picture")
+      .exec();
+    if (!link) {
+      return res.status(400).json({
+        error: "Link not found",
+      });
+    }
+    res.json(link.reviews);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+//delete a review of a link
+exports.deleteReview = async (req, res) => {
+  const linkId = req.params.id;
+  const reviewId = req.params.reviewId;
+  try {
+    const link = await Link.findById(linkId);
+    if (!link) {
+      return res.status(400).json({
+        error: "Link not found",
+      });
+    }
+    const review = link.reviews.find((review) => {
+      return review._id.toString() === reviewId.toString();
+    });
+    if (!review) {
+      return res.status(400).json({
+        error: "Review not found",
+      });
+    }
+    if (review.createdBy.toString() !== req.user._id.toString()) {
+      return res.status(400).json({
+        error: "You are not authorized to delete this review",
+      });
+    }
+    const index = link.reviews.indexOf(review);
+    link.reviews.splice(index, 1);
+    link.save();
+    res.json(link);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};

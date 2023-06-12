@@ -1,9 +1,9 @@
 import React from "react";
-import CardComp from "../../components/CardComp";
+import CardComp from "../../../components/CardComp";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
-import Layout from "../../components/Layout";
+import Layout from "../../../components/Layout";
 import Head from "next/head";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -11,8 +11,14 @@ import Grid from "@mui/material/Grid";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
+import { getCookie } from "../../../helpers/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { showSuccessMessage, showErrorMessage } from "../../../helpers/alerts";
 
-const Review = () => {
+const Review = ({ Linkreviews, query, Usertoken }) => {
+  // console.log("lnkreveiw", Linkreviews);
   const API = "http://localhost:8000/api";
 
   const APP_NAME = "Top Dish";
@@ -52,22 +58,61 @@ const Review = () => {
   }
 
   const [hover, setHover] = useState(-1);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(Linkreviews);
   const [commentVal, setComment] = useState("");
   const [ratingVal, setRating] = useState(1);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newItem = { comment: commentVal, ratings: ratingVal };
-    setReviews([...reviews, newItem]);
+    addReview();
     setComment("");
     setRating(1);
+  };
+  //add review
+  const addReview = async () => {
+    try {
+      const response = await axios.put(
+        `${API}/link/review/${query.id}`,
+        {
+          text: commentVal,
+          rating: ratingVal,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${Usertoken}`,
+            contentType: "application/json",
+          },
+        }
+      );
+      if (response.data.error) {
+        toast.error(response.data.error);
+      } else {
+        setSuccess("Review Added Successfully");
+      }
+      loadNewReview();
+    } catch (err) {
+      console.log(err);
+      toast.error(err);
+    }
+  };
+
+  const loadNewReview = async () => {
+    const response = await axios.get(`${API}/link/review/${query.id}`, {
+      headers: {
+        authorization: `Bearer ${Usertoken}`,
+        contentType: "application/json",
+      },
+    });
+    setReviews(response.data);
   };
 
   return (
     <>
       {head()}
       <Layout>
+        <ToastContainer />
         <div style={{ paddingTop: "60px" }}>
           <Grid container spacing={2} mt={3}>
             <Grid
@@ -145,9 +190,12 @@ const Review = () => {
                   sx={{ display: "flex", justifyContent: "center" }}
                 >
                   <CardComp
-                    text={reviewData.comment}
+                    text={reviewData.text}
                     key={index}
-                    rating={reviewData.ratings}
+                    rating={reviewData.rating}
+                    name={reviewData.createdBy.name}
+                    imageUrl={reviewData.createdBy.picture}
+                    time={reviewData.date}
                   />
                 </Grid>
               );
@@ -157,6 +205,25 @@ const Review = () => {
       </Layout>
     </>
   );
+};
+Review.getInitialProps = async ({ req, query }) => {
+  // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
+  const API = "http://localhost:8000/api";
+
+  const Usertoken = getCookie("token", req);
+
+  const response = await axios.get(`${API}/link/review/${query.id}`, {
+    headers: {
+      authorization: `Bearer ${Usertoken}`,
+      contentType: "application/json",
+    },
+  });
+
+  return {
+    query,
+    Linkreviews: response.data,
+    Usertoken,
+  };
 };
 
 export default Review;

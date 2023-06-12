@@ -26,6 +26,8 @@ const {
   popular,
   popularInCategory,
   listByUser,
+  addReview,
+  getReviews,
 } = require("../controllers/link");
 
 // routes
@@ -54,5 +56,7 @@ router.put(
 );
 router.delete("/link/:id", requireSignin, authMiddleware, remove);
 router.get("/links/by/:id", requireSignin, authMiddleware, listByUser);
+router.put("/link/review/:id", requireSignin, authMiddleware, addReview);
+router.get("/link/review/:id", requireSignin, authMiddleware, getReviews);
 
 module.exports = router;

@@ -17,6 +17,13 @@ import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import FlakyIcon from "@mui/icons-material/Flaky";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Grid from '@mui/material/Grid';
+import { Paper } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import CategoryIcon from '@mui/icons-material/Category';
+import LinkIcon from '@mui/icons-material/Link';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const Admin = ({ token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -250,6 +257,50 @@ const Admin = ({ token }) => {
               </ul>
             </div>
             <div className="col-md-8">
+              <Grid container spacing={1} mb={2}>
+                <Grid item xs={3} p={2} sx={{textAlign : 'center' , color:'white'}}>
+                  <Paper elevation={20} sx={{padding:'10px'}}>
+                    <Typography style={{display: 'flex' ,alignItems: 'center',justifyContent: 'center'}}>
+                      <PeopleAltIcon sx={{marginRight:'2px'}}/> Users
+                    </Typography>
+                    <Typography style={{display: 'flex' ,alignItems: 'center',justifyContent: 'center',fontWeight:'bolder'}}>
+                      255
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={3} p={2} sx={{ textAlign : 'center' , color:'white'}}>
+                  <Paper elevation={20} sx={{padding:'10px'}}>
+                    
+                    <Typography style={{display: 'flex' ,alignItems: 'center',justifyContent: 'center'}}>
+                      <CategoryIcon sx={{marginRight:'2px'}}/> Categories
+                    </Typography>
+                    <Typography style={{display: 'flex' ,alignItems: 'center',justifyContent: 'center',fontWeight:'bolder'}}>
+                      255
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={3} p={2} sx={{ textAlign : 'center' , color:'white'}}>
+                  <Paper elevation={20} sx={{padding:'10px'}}>
+                    <Typography style={{display: 'flex' ,alignItems: 'center',justifyContent: 'center'}}>
+                      <LinkIcon sx={{marginRight:'2px'}}/> Links
+                    </Typography>
+                    <Typography style={{display: 'flex' ,alignItems: 'center',justifyContent: 'center',fontWeight:'bolder'}}>
+                      255
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={3} p={2} sx={{ textAlign : 'center' , color:'white'}}>
+                  <Paper elevation={20} sx={{padding:'10px'}}>
+                    <Typography style={{display: 'flex' ,alignItems: 'center',justifyContent: 'center'}}>
+                      <AttachMoneyIcon sx={{marginRight:'2px'}}/> Earnings
+                    </Typography>
+                    <Typography style={{display: 'flex' ,alignItems: 'center',justifyContent: 'center',fontWeight:'bolder'}}>
+                      255
+                    </Typography>
+                  </Paper>
+                </Grid>
+
+              </Grid>
               <form className="form-group" onSubmit={handleSubmit}>
                 <h2 className="text-light text-span5 text-uppercase display-6">
                   Update <span className="text-span">Locations</span> based on

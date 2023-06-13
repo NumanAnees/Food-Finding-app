@@ -89,6 +89,7 @@ const Review = ({ Linkreviews, query, Usertoken }) => {
       if (response.data.error) {
         toast.error(response.data.error);
       } else {
+        toast.success("Review Added Successfully");
         setSuccess("Review Added Successfully");
       }
       loadNewReview();

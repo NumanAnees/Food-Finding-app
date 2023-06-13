@@ -9,6 +9,8 @@ import withAdmin from "../../withAdmin";
 import "react-quill/dist/quill.snow.css";
 import Head from "next/head";
 // import Footer from "../../../components/Footer"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Create = ({ user, token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -61,6 +63,7 @@ const Create = ({ user, token }) => {
         }
       );
       console.log("CATEGORY CREATE RESPONSE", response);
+      toast.success(`Category ${response.data.name} is created`);
       setState({
         ...state,
         name: "",
@@ -70,6 +73,7 @@ const Create = ({ user, token }) => {
       });
       setContent("");
     } catch (error) {
+      toast.error(error.response.data.error);
       console.log("CATEGORY CREATE ERROR", error);
       setState({
         ...state,
@@ -135,8 +139,8 @@ const Create = ({ user, token }) => {
               <h1 className="text-light m-nav3 text-center text-span5">
                 Create <span className="text-span">New</span> Category
               </h1>
-              {success && showSuccessMessage(success)}
-              {error && showErrorMessage(error)}
+              <ToastContainer />
+
               {createCategoryForm()}
             </div>
           </div>

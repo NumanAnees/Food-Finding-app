@@ -15,6 +15,8 @@ import UpdateIcon from "@mui/icons-material/Update";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import FlakyIcon from "@mui/icons-material/Flaky";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Admin = ({ token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -69,6 +71,7 @@ const Admin = ({ token }) => {
       console.log("ALL links", response.data);
       setState({ ...state, loadedLinks: response.data });
       if (response.data.length < 1) {
+        toast.error("No Links found");
         setState({
           ...state,
           loadedLinks: response.data,
@@ -76,6 +79,7 @@ const Admin = ({ token }) => {
         });
       }
     } catch (error) {
+      toast.error(error.response.data.error);
       console.log("CATEGORY CREATE ERROR", error);
       setState({ ...state, error: error.response.data.error });
     }
@@ -119,9 +123,11 @@ const Admin = ({ token }) => {
         },
       });
       console.log("LINK DELETE SUCCESS ", response);
+      toast.success("Deleted Successfully!");
       setState({ ...state, success: "Deleted Successfully!", loadedLinks: [] });
       Router.replace("/admin");
     } catch (error) {
+      toast.error("Fail to delete");
       console.log("LINK DELETE ", error);
       setState({ ...state, error: "Fail to delete", loadedLinks: [] });
     }
@@ -250,8 +256,8 @@ const Admin = ({ token }) => {
                   Category
                 </h2>
                 <br />
-                {success && showSuccessMessage(success)}
-                {error && showErrorMessage(error)}
+                <ToastContainer />
+
                 <label className="text-light ml-4">‣ Category</label>
                 <ul style={{ maxHeight: "180px", overflowY: "scroll" }}>
                   {showCategories()}

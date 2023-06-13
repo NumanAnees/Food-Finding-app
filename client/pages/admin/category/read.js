@@ -7,6 +7,8 @@ import Layout from "../../../components/Layout";
 import withAdmin from "../../withAdmin";
 import Head from "next/head";
 import Footer from "../../../components/Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Read = ({ user, token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -63,9 +65,11 @@ const Read = ({ user, token }) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Category deleted successfully");
       console.log("CATEGORY DELETE SUCCESS ", response);
       loadCategories();
     } catch (error) {
+      toast.error("Delete failed");
       console.log("CATEGORY DELETE ", error);
     }
   };
@@ -110,6 +114,7 @@ const Read = ({ user, token }) => {
     <>
       {head()}
       <Layout>
+        <ToastContainer />
         <div className="container pt-5 pb-5 bg-col">
           <div className="row">
             <div className="col">

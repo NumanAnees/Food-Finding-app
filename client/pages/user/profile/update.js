@@ -7,6 +7,8 @@ import Router from "next/router";
 import withUser from "../../withUser";
 import Layout from "../../../components/Layout";
 import Head from "next/head";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Update = ({ token, user }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -65,6 +67,7 @@ const Update = ({ token, user }) => {
         }
       );
       updateUser(response.data, () => {
+        toast.success("Profile updated successfully");
         setState({
           ...state,
           name: "",
@@ -75,6 +78,7 @@ const Update = ({ token, user }) => {
         });
       });
     } catch (error) {
+      toast.error(error.response.data.error);
       console.log(error);
       setState({
         ...state,
@@ -132,8 +136,8 @@ const Update = ({ token, user }) => {
               Update <span className="text-span">Profile</span> Info
             </h1>
             <br />
-            {success && showSuccessMessage(success)}
-            {error && showErrorMessage(error)}
+            <ToastContainer />
+
             {UpdateForm()}
           </div>
         </div>

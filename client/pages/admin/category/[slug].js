@@ -9,6 +9,8 @@ import withAdmin from "../../withAdmin";
 import "react-quill/dist/quill.snow.css";
 import Head from "next/head";
 // import Footer from "../../../components/Footer"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Update = ({ oldCategory, token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -62,6 +64,7 @@ const Update = ({ oldCategory, token }) => {
         }
       );
       console.log("CATEGORY Update RESPONSE", response);
+      toast.success("Category Updated");
       setState({
         ...state,
         name: "",
@@ -71,6 +74,7 @@ const Update = ({ oldCategory, token }) => {
       });
       setContent("");
     } catch (error) {
+      toast.error("Sorry,can't update now");
       console.log("CATEGORY Update ERROR", error);
       setState({
         ...state,
@@ -134,8 +138,7 @@ const Update = ({ oldCategory, token }) => {
               <h1 className="text-uppercase text-light text-center m-nav3 text-span5">
                 Update <span className="text-span">Category</span>
               </h1>
-              {success && showSuccessMessage(success)}
-              {error && showErrorMessage(error)}
+              <ToastContainer />
               {UpdateCategoryForm()}
             </div>
           </div>

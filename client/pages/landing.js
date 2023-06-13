@@ -1,11 +1,10 @@
 import { useState, useEffect, Fragment } from "react";
 import Layout from "../components/Layout";
-import Router from "next/router";
-import axios from "axios";
-import { showSuccessMessage, showErrorMessage } from "../helpers/alerts";
-// import { API,APP_NAME} from '../config';
+
 import { authenticate, isAuth } from "../helpers/auth";
 import Head from "next/head";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Landing = () => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";

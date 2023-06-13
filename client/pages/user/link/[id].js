@@ -8,6 +8,8 @@ import { getCookie, isAuth } from "../../../helpers/auth";
 // import { API,APP_NAME } from '../../../config';
 import { showSuccessMessage, showErrorMessage } from "../../../helpers/alerts";
 import Head from "next/head";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Update = ({ oldLink, token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -81,6 +83,7 @@ const Update = ({ oldLink, token }) => {
           },
         }
       );
+      toast.success("Link is Updated");
       setState({
         ...state,
         title: "",
@@ -93,6 +96,7 @@ const Update = ({ oldLink, token }) => {
         gst: "",
       });
     } catch (error) {
+      toast.error(error.response.data.error);
       console.log("LINK UPDATE ERROR", error);
       setState({ ...state, error: error.response.data.error });
     }
@@ -224,8 +228,8 @@ const Update = ({ oldLink, token }) => {
               </div>
             </div>
             <div className="col-md-8">
-              {success && showSuccessMessage(success)}
-              {error && showErrorMessage(error)}
+              <ToastContainer />
+
               {submitLinkForm()}
             </div>
           </div>

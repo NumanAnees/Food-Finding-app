@@ -8,6 +8,8 @@ import { authenticate, isAuth } from "../../helpers/auth";
 import Head from "next/head";
 import { Button, Space, Table, Tag } from "antd";
 import withAdmin from "../withAdmin";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Landing = () => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -71,6 +73,7 @@ const Landing = () => {
       const data = helper(response.data);
       setState(data);
     } else {
+      toast.error(response.data.error);
       showErrorMessage(response.data.error);
     }
   };
@@ -134,6 +137,7 @@ const Landing = () => {
     <Fragment>
       {head()}
       <Layout>
+        <ToastContainer />
         <div className="container pt-5 pb-5 bg-col">
           <div className="col-md-6 offset-md-3" style={{ marginTop: "1.2rem" }}>
             <h1 className="text-light text-center m-nav2 text-uppercase text-span">

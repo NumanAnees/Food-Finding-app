@@ -5,6 +5,8 @@ import { showSuccessMessage, showErrorMessage } from "../helpers/alerts";
 import Router from "next/router";
 import Head from "next/head";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RestaurantRegister = () => {
   const API = "http://localhost:8000/api";
@@ -61,6 +63,7 @@ const RestaurantRegister = () => {
 
     try {
       const response = await axios.post(`${API}/registerRestaurant`, formData);
+      toast.success("Registered Successfully");
       setState({
         ...state,
         restaurantName: "",
@@ -76,6 +79,7 @@ const RestaurantRegister = () => {
         Router.push("/login");
       }, 1200);
     } catch (error) {
+      toast.error(error.response.data.error);
       setState({
         ...state,
         buttonText: "Register",
@@ -194,8 +198,8 @@ const RestaurantRegister = () => {
             <h1 className="text-center text-light m-nav2 text-uppercase text-span5">
               <span className="text-span">Register</span> Here
             </h1>
-            {success && showSuccessMessage(success)}
-            {error && showErrorMessage(error)}
+            <ToastContainer />
+
             {registerForm()}
           </div>
         </div>

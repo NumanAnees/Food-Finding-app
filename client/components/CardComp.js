@@ -46,6 +46,7 @@ const CardComp = (props) => {
               display: "flex",
               alignItems: "center",
               marginBottom: "5px",
+              marginTop: "15px",
             }}
           >
             <Typography variant="body1" mr={2}>

@@ -10,6 +10,8 @@ import Head from "next/head";
 //google auth....
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -70,6 +72,7 @@ const Login = () => {
       });
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.error);
       setState({
         ...state,
         buttonText: "Login",
@@ -149,9 +152,7 @@ const Login = () => {
                 }}
               />
             </div>
-
-            {success && showSuccessMessage(success)}
-            {error && showErrorMessage(error)}
+            <ToastContainer />
             {loginForm()}
           </div>
         </div>

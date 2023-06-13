@@ -9,6 +9,8 @@ import Head from "next/head";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -75,7 +77,7 @@ const Register = () => {
       formData.append("picture", picture);
 
       const response = await axios.post(`${API}/register`, formData);
-
+      toast.success("Registered Successfully");
       setState({
         ...state,
         name: "",
@@ -91,6 +93,7 @@ const Register = () => {
         // Redirect or perform any other action
       }, 1200);
     } catch (error) {
+      toast.error(error.response.data.error);
       setState({
         ...state,
         buttonText: "Register",
@@ -179,8 +182,7 @@ const Register = () => {
             <h1 className="text-center text-light m-nav2 text-uppercase text-span5">
               <span className="text-span">Register</span> Here
             </h1>
-            {success && showSuccessMessage(success)}
-            {error && showErrorMessage(error)}
+            <ToastContainer />
             {registerForm()}
           </div>
         </div>

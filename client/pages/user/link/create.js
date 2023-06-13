@@ -8,6 +8,8 @@ import { getCookie, isAuth } from "../../../helpers/auth";
 import { showSuccessMessage, showErrorMessage } from "../../../helpers/alerts";
 import Head from "next/head";
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Create = ({ token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -81,6 +83,7 @@ const Create = ({ token }) => {
           },
         }
       );
+      toast.success("Link is created");
       setState({
         ...state,
         title: "",
@@ -94,6 +97,7 @@ const Create = ({ token }) => {
       });
     } catch (error) {
       console.log("LINK SUBMIT ERROR", error);
+      toast.error(error.response.data.error);
       setState({ ...state, error: error.response.data.error });
     }
   };
@@ -227,13 +231,12 @@ const Create = ({ token }) => {
               </div>
             </div>
             <div className="col-md-8">
-              {success && showSuccessMessage(success)}
-              {error && showErrorMessage(error)}
               <div className="mt-2">{submitLinkForm()}</div>
             </div>
           </div>
         </div>
       </Layout>
+      <ToastContainer />
       {/* <Footer/> */}
     </>
   );

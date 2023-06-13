@@ -185,7 +185,9 @@ const Review = ({ Linkreviews, query, Usertoken }) => {
               return (
                 <Grid
                   item
-                  xs={4}
+                  xs={12}
+                  sm={6}
+                  md={4}
                   key={index}
                   mt={3}
                   mb={3}

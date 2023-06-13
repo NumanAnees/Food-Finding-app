@@ -179,7 +179,7 @@ const Layout = ({ children }) => {
             {isAuth() && (
               <div className="nav-item p-1 nav-component">
                 <div className="nav-link text-dark  text-center text-top">
-                  <UserNotification />
+                  <UserNotification data={isAuth()._id} />
                 </div>
               </div>
             )}

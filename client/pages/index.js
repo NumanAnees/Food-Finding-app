@@ -85,6 +85,9 @@ const Home = ({ categories }) => {
             {l.price} Rupees / GST {l.gst}
           </span>
           <span className="badge text-success">{l.category.name}</span>
+          <span className="badge text-secondary">
+            <Link href={`/links/reviews/${l._id}`}>See Reviews</Link>
+          </span>
         </div>
         <div className="col-md-4">
           <span

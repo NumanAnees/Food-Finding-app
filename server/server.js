@@ -22,6 +22,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const linkRoutes = require("./routes/link");
+const notificationRoutes = require("./routes/notification");
 
 //app-middlewares
 app.use(cors());
@@ -35,6 +36,7 @@ app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", linkRoutes);
+app.use("/api/notification", notificationRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello!");

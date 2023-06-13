@@ -16,6 +16,7 @@ import { getCookie } from "../../../helpers/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { showSuccessMessage, showErrorMessage } from "../../../helpers/alerts";
+import withUser from "../../withUser";
 
 const Review = ({ Linkreviews, query, Usertoken }) => {
   // console.log("lnkreveiw", Linkreviews);
@@ -227,4 +228,4 @@ Review.getInitialProps = async ({ req, query }) => {
   };
 };
 
-export default Review;
+export default withUser(Review);

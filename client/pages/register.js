@@ -93,11 +93,11 @@ const Register = () => {
         // Redirect or perform any other action
       }, 1200);
     } catch (error) {
-      toast.error(error.response.data.error);
+      toast.error(error);
       setState({
         ...state,
         buttonText: "Register",
-        error: error.response.data.error,
+        error: error,
       });
     }
   };

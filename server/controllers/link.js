@@ -3,6 +3,15 @@ const slugify = require("slugify");
 const Category = require("../models/category");
 const User = require("../models/user");
 
+const { addNotification } = require("./notification");
+// const payload = {
+//   notifier: req.user._id,
+//   receiver: user._id,
+//   message: `${newEvent.title} with matched interest is created`,
+//   category: "newEvent",
+// };
+// const data = addNotification(payload);
+
 exports.create = async (req, res) => {
   const { title, url, category, price, gst } = req.body;
   const slug = slugify(url);
@@ -135,7 +144,21 @@ exports.upvote = (req, res) => {
         error: "Could not update upvote count",
       });
     }
-    res.json(result);
+    User.findById(userId).exec((err, user) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Could not find user",
+        });
+      }
+      const payload = {
+        notifier: userId,
+        receiver: result.postedBy,
+        message: `${user.name} has upvoted your link`,
+        category: "upvoted",
+      };
+      const data = addNotification(payload);
+      res.json(result);
+    });
   });
 };
 

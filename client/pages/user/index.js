@@ -61,8 +61,8 @@ const User = ({ user, userLinks, token }) => {
 
   const listOfLinks = () =>
     userLinks.map((l, i) => (
-      <div key={i} className="row alert alert-primary p-2 primary-link">
-        <div className="col-md-8">
+      <div key={i} className="row alert alert-primary p-2 ml-1 primary-link">
+        <div className="col-md-8" >
           <a href={l.url} target="_blank">
             <h5 className="pt-2">{l.title}</h5>
             <h6 className="pt-2 text-danger" style={{ fontSize: "12px" }}>

@@ -44,6 +44,26 @@ exports.create = async (req, res) => {
               error: "Could not add new Location",
             });
           }
+          //get all followers of this user
+          User.find({ following: req.user._id }).exec(async (err, users) => {
+            if (err) {
+              console.log(err);
+              return res.status(400).json({
+                error: "Could not add new Location",
+              });
+            }
+            const currUserName = await User.findById(req.user._id);
+            console.log("curr", currUserName);
+            users.map((user) => {
+              const payload = {
+                notifier: req.user._id,
+                receiver: user._id,
+                message: `${currUserName.name} added a new location`,
+                category: "added",
+              };
+              const res = addNotification(payload);
+            });
+          });
           res.json(data);
         });
       } else {

@@ -1,7 +1,7 @@
 const {
   getNotificationUnseen,
   seenNotification,
-  seenAllNotification,
+  seenAllNotifications,
 } = require("../controllers/notification");
 const router = require("express").Router();
 
@@ -14,6 +14,6 @@ const {
 
 router.get("/getunseen", requireSignin, authMiddleware, getNotificationUnseen);
 router.put("/seen/:id", requireSignin, authMiddleware, seenNotification);
-router.put("/seenAll", requireSignin, authMiddleware, seenAllNotification);
+router.put("/seenAlls", seenAllNotifications);
 
 module.exports = router;

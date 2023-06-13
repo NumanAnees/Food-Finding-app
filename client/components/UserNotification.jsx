@@ -27,6 +27,14 @@ const UserNotification = ({ data }) => {
   useEffect(() => {
     loadNotification();
   }, []);
+  const handleViewAll = async () => {
+    const userID = data;
+    const response = await axios.put(`${API}/notification/seenAlls`, {
+      userID,
+    });
+    setNotification(response.data);
+    console.log(notification);
+  };
 
   return (
     <>
@@ -35,7 +43,7 @@ const UserNotification = ({ data }) => {
         data={notification}
         header={{
           title: "Notifications",
-          option: { text: "View All", onClick: () => console.log("Clicked") },
+          option: { text: "View All", onClick: () => handleViewAll() },
         }}
       />
     </>

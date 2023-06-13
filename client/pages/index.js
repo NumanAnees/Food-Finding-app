@@ -7,7 +7,7 @@ import moment from "moment";
 import Head from "next/head";
 import { EyeFilled } from "@ant-design/icons";
 import Footer from "../components/Footer";
-// import Chatbot from "../components/Chatbot";
+import Chatbot from "../components/Chatbot";
 
 const Home = ({ categories }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -156,7 +156,9 @@ const Home = ({ categories }) => {
           </div>
         </div>
       </Layout>
-      <div className="chatbot-container">{/* <Chatbot /> */}</div>
+      <div className="chatbot-container">
+        <Chatbot />
+      </div>
       <Footer />
     </Fragment>
   );

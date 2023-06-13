@@ -1,4 +1,6 @@
+const { insertMany } = require("../models/link");
 const notification = require("../models/notification");
+const moment = require("moment");
 
 exports.addNotification = async (body) => {
   try {
@@ -32,7 +34,7 @@ exports.getNotificationUnseen = async (req, res) => {
             ? item.notifier.picture
             : "https://free.toppng.com/uploads/preview/donna-picarro-dummy-avatar-115633298255iautrofxa.png",
           detailPage: `/user/${item.notifier._id}`,
-          receivedTime: "12h ago",
+          receivedTime: moment(item.createdAt).fromNow(),
           _id: item._id,
         };
       });
@@ -60,14 +62,13 @@ exports.seenNotification = async (req, res) => {
 };
 
 //set the seen true of all notifications of a user
-exports.seenAllNotification = async (req, res) => {
+exports.seenAllNotifications = async (req, res) => {
   try {
-    const id = req.user._id;
     const data = await notification.updateMany(
-      { receiver: id },
+      { receiver: req.body.userId },
       { $set: { seen: true } }
     );
-    if (data) return res.send(true).status(200);
+    if (data) return res.send([]).status(200);
     else return res.send(false).status(400);
   } catch (ex) {
     console.log("ex", ex);

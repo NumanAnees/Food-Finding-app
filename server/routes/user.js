@@ -20,6 +20,7 @@ const {
   confirmRestaurant,
   followUser,
   unfollowUser,
+  getStats,
 } = require("../controllers/user");
 
 // routes
@@ -38,5 +39,6 @@ router.get("/user/Pendingrestaurants", Pendingrestaurants);
 router.put("/user/confirmRestaurant/:id", confirmRestaurant);
 router.put("/user/follow", requireSignin, followUser);
 router.put("/user/unfollow", requireSignin, unfollowUser);
+router.get("/user/stats", getStats);
 
 module.exports = router;

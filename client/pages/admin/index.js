@@ -55,10 +55,22 @@ const Admin = ({ token }) => {
     category: "",
     loadedLinks: [],
   });
+  const [stats, setStats] = useState({});
   const { loadedCategories, success, error, category, loadedLinks } = state;
+  const getStats = async () => {
+    try {
+      const response = await axios.get(`${API}/user/stats`);
+      console.log("STATS", response);
+      setStats(response.data);
+    } catch (error) {
+      console.log("ERROR GETTING STATS", error);
+    }
+  };
+
   // load categories when component mounts using useEffect
   useEffect(() => {
     loadCategories();
+    getStats();
   }, [success]);
   const loadCategories = async () => {
     const response = await axios.get(`${API}/categories`);
@@ -264,15 +276,26 @@ const Admin = ({ token }) => {
                   p={2}
                   sx={{ textAlign: "center", color: "white" }}
                 >
-                  <Paper elevation={20} sx={{ padding: "10px" }}>
+                  <Paper
+                    elevation={20}
+                    sx={{ padding: "36px" }}
+                    style={{
+                      color: "white",
+                      backgroundColor: "#04e9ae",
+                    }}
+                  >
                     <Typography
                       style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        fontSize: "1.3rem",
                       }}
                     >
-                      <PeopleAltIcon sx={{ marginRight: "2px" }} /> Users
+                      <PeopleAltIcon
+                        sx={{ marginRight: "2px", fontSize: "1.5rem" }}
+                      />{" "}
+                      Users
                     </Typography>
                     <Typography
                       style={{
@@ -280,9 +303,10 @@ const Admin = ({ token }) => {
                         alignItems: "center",
                         justifyContent: "center",
                         fontWeight: "bolder",
+                        fontSize: "1.5rem",
                       }}
                     >
-                      255
+                      {stats.userCount}
                     </Typography>
                   </Paper>
                 </Grid>
@@ -292,15 +316,26 @@ const Admin = ({ token }) => {
                   p={2}
                   sx={{ textAlign: "center", color: "white" }}
                 >
-                  <Paper elevation={20} sx={{ padding: "10px" }}>
+                  <Paper
+                    elevation={20}
+                    sx={{ padding: "36px" }}
+                    style={{
+                      color: "white",
+                      backgroundColor: "#04e9ae",
+                    }}
+                  >
                     <Typography
                       style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        fontSize: "1.3rem",
                       }}
                     >
-                      <CategoryIcon sx={{ marginRight: "2px" }} /> Categories
+                      <CategoryIcon
+                        sx={{ marginRight: "2px", fontSize: "1.5rem" }}
+                      />{" "}
+                      Categories
                     </Typography>
                     <Typography
                       style={{
@@ -308,9 +343,10 @@ const Admin = ({ token }) => {
                         alignItems: "center",
                         justifyContent: "center",
                         fontWeight: "bolder",
+                        fontSize: "1.5rem",
                       }}
                     >
-                      255
+                      {stats.CategoryCount}
                     </Typography>
                   </Paper>
                 </Grid>
@@ -320,15 +356,26 @@ const Admin = ({ token }) => {
                   p={2}
                   sx={{ textAlign: "center", color: "white" }}
                 >
-                  <Paper elevation={20} sx={{ padding: "10px" }}>
+                  <Paper
+                    elevation={20}
+                    sx={{ padding: "36px" }}
+                    style={{
+                      color: "white",
+                      backgroundColor: "#04e9ae",
+                    }}
+                  >
                     <Typography
                       style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        fontSize: "1.3rem",
                       }}
                     >
-                      <LinkIcon sx={{ marginRight: "2px" }} /> Links
+                      <LinkIcon
+                        sx={{ marginRight: "2px", fontSize: "1.5rem" }}
+                      />{" "}
+                      Links
                     </Typography>
                     <Typography
                       style={{
@@ -336,9 +383,10 @@ const Admin = ({ token }) => {
                         alignItems: "center",
                         justifyContent: "center",
                         fontWeight: "bolder",
+                        fontSize: "1.5rem",
                       }}
                     >
-                      255
+                      {stats.LinkCount}
                     </Typography>
                   </Paper>
                 </Grid>
@@ -348,15 +396,26 @@ const Admin = ({ token }) => {
                   p={2}
                   sx={{ textAlign: "center", color: "white" }}
                 >
-                  <Paper elevation={20} sx={{ padding: "10px" }}>
+                  <Paper
+                    elevation={20}
+                    sx={{ padding: "36px" }}
+                    style={{
+                      color: "white",
+                      backgroundColor: "#04e9ae",
+                    }}
+                  >
                     <Typography
                       style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        fontSize: "1.3rem",
                       }}
                     >
-                      <AttachMoneyIcon sx={{ marginRight: "2px" }} /> Earnings
+                      <AttachMoneyIcon
+                        sx={{ marginRight: "2px", fontSize: "1.5rem" }}
+                      />{" "}
+                      Earnings
                     </Typography>
                     <Typography
                       style={{
@@ -364,6 +423,7 @@ const Admin = ({ token }) => {
                         alignItems: "center",
                         justifyContent: "center",
                         fontWeight: "bolder",
+                        fontSize: "1.5rem",
                       }}
                     >
                       255

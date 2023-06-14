@@ -13,7 +13,12 @@ const { Link, Text, Title } = Typography;
 const AppFooter = () => {
   return (
     <Footer
-      style={{ backgroundColor: "#04e9ae8f", padding: "45px", color: "#fff" }}
+      style={{
+        backgroundColor: "#04e9ae8f",
+        padding: "45px",
+        color: "#fff",
+        boxShadow: "0px -5px 10px rgba(0, 0, 0, 0.2)",
+      }}
     >
       <Row gutter={[24, 24]}>
         <Col span={6}>

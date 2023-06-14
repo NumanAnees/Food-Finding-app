@@ -146,7 +146,6 @@ const Create = ({ user, token }) => {
           </div>
         </div>
       </Layout>
-      <AppFooter />
     </>
   );
 };

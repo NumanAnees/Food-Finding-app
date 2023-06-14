@@ -3,6 +3,8 @@ const Link = require("../models/link");
 const crypto = require("crypto");
 const jwtDecode = require("jwt-decode");
 const jwt = require("jsonwebtoken");
+const Category = require("../models/category");
+
 const expressJwt = require("express-jwt");
 
 exports.read = (req, res) => {
@@ -221,5 +223,23 @@ exports.unfollowUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
+  }
+};
+
+//get stats of how many users, categories,links
+//give total number of users
+exports.getStats = async (req, res) => {
+  try {
+    const userCount = await User.countDocuments({});
+    const LinkCount = await Link.countDocuments({});
+    const CategoryCount = await Category.countDocuments({});
+
+    res.json({
+      userCount: userCount,
+      LinkCount: LinkCount,
+      CategoryCount: CategoryCount,
+    });
+  } catch (err) {
+    console.log(err);
   }
 };

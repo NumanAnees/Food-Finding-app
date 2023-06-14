@@ -71,6 +71,7 @@ const Landing = () => {
     const response = await axios.put(`${API}/user/confirmRestaurant/${cb.key}`);
     if (response.data) {
       const data = helper(response.data);
+      toast.success("Request Accepted");
       setState(data);
     } else {
       toast.error(response.data.error);

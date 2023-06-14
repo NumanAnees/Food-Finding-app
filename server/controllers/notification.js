@@ -23,7 +23,7 @@ exports.getNotificationUnseen = async (req, res) => {
     const id = req.user._id;
     let data = await notification
       .find({ receiver: id, seen: false })
-      .sort({ timestamps: -1 })
+      .sort({ createdAt: -1 })
       .populate("notifier", "picture");
     if (data) {
       //filter data to get only the fields we need of message and seen

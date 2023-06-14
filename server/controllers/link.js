@@ -329,7 +329,8 @@ exports.listByUser = async (req, res) => {
 //add new review of a link
 exports.addReview = async (req, res) => {
   const linkId = req.params.id;
-  const { text, rating } = req.body;
+  const { text, ValueForMoney, Ambience, QualityOfService, Hygiene } = req.body;
+  console.log(req.body);
   try {
     //find link by id and populate reviews by createdBy
     const link = await Link.findById(linkId);
@@ -350,7 +351,10 @@ exports.addReview = async (req, res) => {
 
     const newReview = {
       text,
-      rating,
+      ValueForMoney,
+      Ambience,
+      QualityOfService,
+      Hygiene,
       createdBy: req.user._id,
     };
     link.reviews.push(newReview);

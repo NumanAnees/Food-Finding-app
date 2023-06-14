@@ -6,9 +6,20 @@ const reviewSchema = new mongoose.Schema({
   text: {
     type: String,
     trim: true,
+  },
+  ValueForMoney: {
+    type: Number,
     required: true,
   },
-  rating: {
+  Ambience: {
+    type: Number,
+    required: true,
+  },
+  QualityOfService: {
+    type: Number,
+    required: true,
+  },
+  Hygiene: {
     type: Number,
     required: true,
   },

@@ -61,7 +61,11 @@ const Review = ({ Linkreviews, query, Usertoken }) => {
   const [hover, setHover] = useState(-1);
   const [reviews, setReviews] = useState(Linkreviews);
   const [commentVal, setComment] = useState("");
-  const [ratingVal, setRating] = useState(1);
+  const [ValueForMoney, setValueForMoney] = useState(1);
+  const [Ambience, setAmbience] = useState(1);
+  const [QualityOfService, setQualityOfService] = useState(1);
+  const [Hygiene, setHygiene] = useState(1);
+
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
@@ -69,7 +73,10 @@ const Review = ({ Linkreviews, query, Usertoken }) => {
     e.preventDefault();
     addReview();
     setComment("");
-    setRating(1);
+    setValueForMoney(1);
+    setAmbience(1);
+    setQualityOfService(1);
+    setHygiene(1);
   };
   //add review
   const addReview = async () => {
@@ -78,7 +85,10 @@ const Review = ({ Linkreviews, query, Usertoken }) => {
         `${API}/link/review/${query.id}`,
         {
           text: commentVal,
-          rating: ratingVal,
+          ValueForMoney: ValueForMoney,
+          Ambience: Ambience,
+          QualityOfService: QualityOfService,
+          Hygiene: Hygiene,
         },
         {
           headers: {
@@ -150,15 +160,15 @@ const Review = ({ Linkreviews, query, Usertoken }) => {
                     marginBottom: "5px",
                   }}
                 >
-                  <Typography variant="body1" mr={2}>
-                    Rating:
+                  <Typography variant="body1" mr={6.7}>
+                    VOM:
                   </Typography>
                   <Rating
                     name="hover-feedback"
-                    value={ratingVal}
+                    value={ValueForMoney}
                     precision={0.5}
                     getLabelText={getLabelText}
-                    onChange={(e) => setRating(e.target.value)}
+                    onChange={(e) => setValueForMoney(e.target.value)}
                     onChangeActive={(event, newHover) => {
                       setHover(newHover);
                     }}
@@ -166,9 +176,96 @@ const Review = ({ Linkreviews, query, Usertoken }) => {
                       <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
                     }
                   />
-                  {ratingVal !== null && (
+                  {ValueForMoney !== null && (
                     <Box sx={{ ml: 1 }}>
-                      {labels[hover !== -1 ? hover : ratingVal]}
+                      {labels[hover !== -1 ? hover : ValueForMoney]}
+                    </Box>
+                  )}
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "5px",
+                  }}
+                >
+                  <Typography variant="body1" mr={2}>
+                    Ambience:
+                  </Typography>
+                  <Rating
+                    name="hover-feedback"
+                    value={Ambience}
+                    precision={0.5}
+                    getLabelText={getLabelText}
+                    onChange={(e) => setAmbience(e.target.value)}
+                    onChangeActive={(event, newHover) => {
+                      setHover(newHover);
+                    }}
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
+                  />
+                  {Ambience !== null && (
+                    <Box sx={{ ml: 1 }}>
+                      {labels[hover !== -1 ? hover : Ambience]}
+                    </Box>
+                  )}
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "5px",
+                  }}
+                >
+                  <Typography variant="body1" mr={4.6}>
+                    Service:
+                  </Typography>
+                  <Rating
+                    name="hover-feedback"
+                    value={QualityOfService}
+                    precision={0.5}
+                    getLabelText={getLabelText}
+                    onChange={(e) => setQualityOfService(e.target.value)}
+                    onChangeActive={(event, newHover) => {
+                      setHover(newHover);
+                    }}
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
+                  />
+                  {QualityOfService !== null && (
+                    <Box sx={{ ml: 1 }}>
+                      {labels[hover !== -1 ? hover : QualityOfService]}
+                    </Box>
+                  )}
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "5px",
+                  }}
+                >
+                  <Typography variant="body1" mr={4}>
+                    Hygiene:
+                  </Typography>
+                  <Rating
+                    name="hover-feedback"
+                    value={Hygiene}
+                    precision={0.5}
+                    getLabelText={getLabelText}
+                    onChange={(e) => setHygiene(e.target.value)}
+                    onChangeActive={(event, newHover) => {
+                      setHover(newHover);
+                    }}
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
+                  />
+                  {Hygiene !== null && (
+                    <Box sx={{ ml: 1 }}>
+                      {labels[hover !== -1 ? hover : Hygiene]}
                     </Box>
                   )}
                 </Box>
@@ -196,7 +293,10 @@ const Review = ({ Linkreviews, query, Usertoken }) => {
                   <CardComp
                     text={reviewData.text}
                     key={index}
-                    rating={reviewData.rating}
+                    ValueForMoney={reviewData.ValueForMoney}
+                    Ambience={reviewData.Ambience}
+                    QualityOfService={reviewData.QualityOfService}
+                    Hygiene={reviewData.Hygiene}
                     name={reviewData.createdBy.name}
                     imageUrl={reviewData.createdBy.picture}
                     time={reviewData.date}

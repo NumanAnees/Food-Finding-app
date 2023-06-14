@@ -49,12 +49,78 @@ const CardComp = (props) => {
               marginTop: "15px",
             }}
           >
-            <Typography variant="body1" mr={2}>
-              Rating:
+            <Typography variant="body1" mr={6.7}>
+              VOM:
             </Typography>
             <Rating
               name="hover-feedback"
-              value={props.rating}
+              value={props.ValueForMoney}
+              precision={0.5}
+              getLabelText={getLabelText}
+              readOnly
+              emptyIcon={
+                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+              }
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "5px",
+              marginTop: "15px",
+            }}
+          >
+            <Typography variant="body1" mr={2}>
+              Ambience:
+            </Typography>
+            <Rating
+              name="hover-feedback"
+              value={props.Ambience}
+              precision={0.5}
+              getLabelText={getLabelText}
+              readOnly
+              emptyIcon={
+                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+              }
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "5px",
+              marginTop: "15px",
+            }}
+          >
+            <Typography variant="body1" mr={4.6}>
+              Service:
+            </Typography>
+            <Rating
+              name="hover-feedback"
+              value={props.QualityOfService}
+              precision={0.5}
+              getLabelText={getLabelText}
+              readOnly
+              emptyIcon={
+                <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+              }
+            />
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "5px",
+              marginTop: "15px",
+            }}
+          >
+            <Typography variant="body1" mr={4}>
+              Hygiene:
+            </Typography>
+            <Rating
+              name="hover-feedback"
+              value={props.Hygiene}
               precision={0.5}
               getLabelText={getLabelText}
               readOnly

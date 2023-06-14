@@ -10,7 +10,13 @@ import { EyeFilled } from "@ant-design/icons";
 import Head from "next/head";
 import Button from "@mui/material/Button";
 import UpdateIcon from "@mui/icons-material/Update";
+import SendIcon from "@mui/icons-material/Send";
 import PublishIcon from "@mui/icons-material/Publish";
+import PaidIcon from "@mui/icons-material/Paid";
+import StripeCheckout from "react-stripe-checkout";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const User = ({ user, userLinks, token }) => {
   // const API = "https://puzzled-gabardine-clam.cyclic.app/api";
@@ -44,6 +50,7 @@ const User = ({ user, userLinks, token }) => {
     }
   };
 
+  const [totalAmount, setTotalAmount] = useState(500);
   const handleDelete = async (id) => {
     console.log("delete link > ", id);
     try {
@@ -58,6 +65,25 @@ const User = ({ user, userLinks, token }) => {
       console.log("LINK DELETE ", error);
     }
   };
+  const onToken = async (token, id) => {
+    const reqObj = {
+      linkId: token,
+    };
+
+    const res = await axios
+      .put(`${API}/link/setIsPayed/${token}`)
+      .then((res) => {
+        console.log("res", res);
+        toast.success("Payment Successful");
+      })
+      .catch(
+        (err) => {
+          toast.error("Payment Failed");
+          console.log("err", err);
+        }
+        // Router.push("/user");
+      );
+  };
 
   const listOfLinks = () =>
     userLinks.map((l, i) => (
@@ -71,9 +97,22 @@ const User = ({ user, userLinks, token }) => {
           </a>
         </div>
         <div className="col-md-4 pt-2">
-          <span className="pull-right">
-            {moment(l.createdAt).fromNow()} by {l.postedBy.name}
-          </span>
+          {!l.isPayed && (
+            <span className="pull-right">
+              <StripeCheckout
+                token={() => onToken(l._id)}
+                shippingAddress
+                billingAddress={true}
+                currency="pkr"
+                amount={totalAmount * 100}
+                stripeKey="pk_test_51K8lJeSGkXsHpk6s64EtVo37lQmikIps217LhE2fmpwRMj2Ro0iKQvYXcFkMBHjjM4Z6BC5uvxV8XsTbKQFfbQ5y000eSg9RUb"
+              >
+                <Button variant="contained" endIcon={<PaidIcon />} color="info">
+                  Promote
+                </Button>
+              </StripeCheckout>
+            </span>
+          )}
         </div>
 
         <div
@@ -114,6 +153,7 @@ const User = ({ user, userLinks, token }) => {
     <>
       {head()}
       <Layout>
+        <ToastContainer />
         <div className="container pt-5 pb-5 bg-col">
           <h1 className="text-light m-nav2 text-span5">
             <span className="text-span">{user.name}</span> 's Dashboard{" "}

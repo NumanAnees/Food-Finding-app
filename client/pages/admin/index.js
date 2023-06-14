@@ -423,10 +423,10 @@ const Admin = ({ token }) => {
                         alignItems: "center",
                         justifyContent: "center",
                         fontWeight: "bolder",
-                        fontSize: "1.5rem",
+                        fontSize: "1.4rem",
                       }}
                     >
-                      255
+                      Rs. {stats.Revenue}
                     </Typography>
                   </Paper>
                 </Grid>

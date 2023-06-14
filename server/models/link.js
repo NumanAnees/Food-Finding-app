@@ -60,6 +60,10 @@ const linkSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "User",
     },
+    isPayed: {
+      type: Boolean,
+      default: false,
+    },
     category: {
       type: ObjectId,
       ref: "Category",

@@ -129,6 +129,11 @@ const Links = ({
     return allLinks.map((l, i) => {
       return (
         <div key={i} className="row alert alert-light primary-link p-2">
+          {l.isPayed && (
+            <div class="ribbon ribbon-top-right">
+              <span>Recommended</span>
+            </div>
+          )}
           <div className="col-md-8 d-flex">
             <div className="col-md-2 mt-auto">
               {l.upvoteIDs.includes(uid) ? (

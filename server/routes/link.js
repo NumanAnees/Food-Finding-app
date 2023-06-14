@@ -28,6 +28,7 @@ const {
   listByUser,
   addReview,
   getReviews,
+  setIsPayed,
 } = require("../controllers/link");
 
 // routes
@@ -58,5 +59,6 @@ router.delete("/link/:id", requireSignin, authMiddleware, remove);
 router.get("/links/by/:id", requireSignin, authMiddleware, listByUser);
 router.put("/link/review/:id", requireSignin, authMiddleware, addReview);
 router.get("/link/review/:id", requireSignin, authMiddleware, getReviews);
+router.put("/link/setIsPayed/:id", setIsPayed);
 
 module.exports = router;

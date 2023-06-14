@@ -233,11 +233,14 @@ exports.getStats = async (req, res) => {
     const userCount = await User.countDocuments({});
     const LinkCount = await Link.countDocuments({});
     const CategoryCount = await Category.countDocuments({});
+    //all links count where isPayed is true
+    const payedLinks = await Link.countDocuments({ isPayed: true });
 
     res.json({
       userCount: userCount,
       LinkCount: LinkCount,
       CategoryCount: CategoryCount,
+      Revenue: payedLinks * 500,
     });
   } catch (err) {
     console.log(err);

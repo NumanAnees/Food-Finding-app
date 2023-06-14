@@ -418,3 +418,22 @@ exports.deleteReview = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+
+//set isPayed to true
+exports.setIsPayed = async (req, res) => {
+  const linkId = req.params.id;
+  try {
+    const link = await Link.findById(linkId);
+    if (!link) {
+      return res.status(400).json({
+        error: "Link not found",
+      });
+    }
+    link.isPayed = true;
+    link.save();
+    res.json(link);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};

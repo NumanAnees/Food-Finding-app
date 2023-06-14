@@ -17,7 +17,7 @@ import { WechatOutlined } from "@ant-design/icons";
 //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 kashir
 //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 moeez2
 
-const API_KEY = "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";
+const API_KEY = "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";
 const systemMessage = {
   //  Explain things like you're talking to a software professional with 5 years of experience.
   role: "system",
@@ -118,7 +118,9 @@ const Chatbot = () => {
         <Modal.Header closeButton>
           <Modal.Title>
             <h1>
-              <b>TopDish</b>
+              <span style={{ color: "#04e9ae" }}>
+                <b>TopDish</b>
+              </span>
             </h1>
           </Modal.Title>
         </Modal.Header>

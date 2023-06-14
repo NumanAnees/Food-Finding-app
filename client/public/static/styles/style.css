@@ -483,3 +483,11 @@ input[type="radio"]:checked:before {
 .message-button {
   margin-left: 24px;
 }
+/* chatbot-fix */
+body > div.fade.modal.show > div > div > div.modal-body > div > div > div {
+  height: 95% !important;
+}
+
+body > div.fade.modal.show > div > div > div.modal-body > div > div {
+  height: 545px !important;
+}

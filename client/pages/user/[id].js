@@ -10,7 +10,7 @@ import { Button, Col } from "antd";
 import { Button as MuiButton } from "@mui/material";
 import Router from "next/router";
 import { EyeFilled } from "@ant-design/icons";
-import Footer from "../../components/Footer";
+import AppFooter from "../../components/Footer";
 import { UserAddOutlined, MessageOutlined } from "@ant-design/icons";
 import withUser from "../withUser";
 import { Input, QRCode, Space, theme } from "antd";
@@ -354,7 +354,7 @@ const ProfilePage = ({
           </div>
         </div>
       </Layout>
-      <Footer />
+      <AppFooter />
     </Fragment>
   );
 };

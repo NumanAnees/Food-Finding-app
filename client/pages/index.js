@@ -6,7 +6,7 @@ import { useState, useEffect, Fragment } from "react";
 import moment from "moment";
 import Head from "next/head";
 import { EyeFilled } from "@ant-design/icons";
-import Footer from "../components/Footer";
+import AppFooter from "../components/Footer";
 import Chatbot from "../components/Chatbot";
 
 const Home = ({ categories }) => {
@@ -159,7 +159,7 @@ const Home = ({ categories }) => {
       <div className="chatbot-container">
         <Chatbot />
       </div>
-      <Footer />
+      <AppFooter />
     </Fragment>
   );
 };

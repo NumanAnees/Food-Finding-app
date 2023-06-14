@@ -6,7 +6,7 @@ import { showSuccessMessage, showErrorMessage } from "../../../helpers/alerts";
 import Layout from "../../../components/Layout";
 import withAdmin from "../../withAdmin";
 import Head from "next/head";
-import Footer from "../../../components/Footer";
+import AppFooter from "../../../components/Footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -127,7 +127,7 @@ const Read = ({ user, token }) => {
           <div className="row">{listCategories()}</div>
         </div>
       </Layout>
-      {/* <Footer/> */}
+      <AppFooter />
     </>
   );
 };

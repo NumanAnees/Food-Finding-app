@@ -1,7 +1,7 @@
 // imports
 import { useState, useEffect } from "react";
 import Layout from "../../../components/Layout";
-import Footer from "../../../components/Footer";
+import AppFooter from "../../../components/Footer";
 import axios from "axios";
 import { getCookie, isAuth } from "../../../helpers/auth";
 // import { API,APP_NAME } from '../../../config';
@@ -238,6 +238,7 @@ const Create = ({ token }) => {
       </Layout>
       <ToastContainer />
       {/* <Footer/> */}
+      {/* <AppFooter /> */}
     </>
   );
 };

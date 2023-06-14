@@ -8,7 +8,7 @@ import Layout from "../../../components/Layout";
 import withAdmin from "../../withAdmin";
 import "react-quill/dist/quill.snow.css";
 import Head from "next/head";
-// import Footer from "../../../components/Footer"
+import AppFooter from "../../../components/Footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -144,7 +144,7 @@ const Update = ({ oldCategory, token }) => {
           </div>
         </div>
       </Layout>
-      {/* <Footer/> */}
+      <AppFooter />
     </>
   );
 };

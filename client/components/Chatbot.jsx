@@ -10,6 +10,7 @@ import {
   MessageInput,
   TypingIndicator,
 } from "@chatscope/chat-ui-kit-react";
+import { WechatOutlined } from "@ant-design/icons";
 
 //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 maaz
 //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 moeez1
@@ -106,9 +107,10 @@ const Chatbot = () => {
         <Button
           key={idx}
           className="me-2 mb-2 button1"
+          style={{ marginRight: "1.5rem" }}
           onClick={() => handleShow(v)}
         >
-          <i class="ri-robot-fill"></i>
+          <WechatOutlined style={{ fontSize: "48px" }} />
           {typeof v === "string" && `below ${v.split("-")[0]}`}
         </Button>
       ))}

@@ -1,7 +1,7 @@
 // imports
 import { useState, useEffect } from "react";
 import Layout from "../../../components/Layout";
-import Footer from "../../../components/Footer";
+import AppFooter from "../../../components/Footer";
 import axios from "axios";
 import withUser from "../../withUser";
 import { getCookie, isAuth } from "../../../helpers/auth";
@@ -235,7 +235,7 @@ const Update = ({ oldLink, token }) => {
           </div>
         </div>
       </Layout>
-      {/* <Footer/> */}
+      <AppFooter />
     </>
   );
 };

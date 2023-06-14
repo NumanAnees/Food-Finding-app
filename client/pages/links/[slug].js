@@ -12,7 +12,7 @@ import { CaretUpFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import Router from "next/router";
 import { EyeFilled } from "@ant-design/icons";
-import Footer from "../../components/Footer";
+import AppFooter from "../../components/Footer";
 
 const Links = ({
   query,
@@ -280,7 +280,7 @@ const Links = ({
           </InfiniteScroll>
         </div>
       </Layout>
-      <Footer />
+      <AppFooter />
     </Fragment>
   );
 };
